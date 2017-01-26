@@ -10,10 +10,11 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Console.Beep(); //why does beep only work when placed before WriteLine and ReadLine
+            //why does beep only work when placed before WriteLine and ReadLine
             Console.WriteLine("bye, world");
             Console.ReadLine();
             //types describe what sort of data you're talking about   
+            Console.Beep();
         }
     }
 }
