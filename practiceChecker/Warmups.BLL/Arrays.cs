@@ -7,31 +7,77 @@ namespace Warmups.BLL
 
         public bool FirstLast6(int[] numbers)
         {
-            throw new NotImplementedException();
+            if (numbers[0] == 6 || numbers[numbers.Length - 1] == 6)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool SameFirstLast(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool same = false;
+            if (numbers.Length > 1 && numbers[0] == numbers[numbers.Length - 1])
+            {
+                same = true;
+            }
+            return same;
+
+
+
+
+
         }
         public int[] MakePi(int n)
         {
-            throw new NotImplementedException();
+            char[] charResult = new char[n];
+            string pi = "314159265358979323846";
+            int[] numResult = new int[n];
+
+            for (int i = 0; i < numResult.Length; i++)
+            {
+                charResult[i] = pi[i];
+            }
+            for (int i = 0; i < numResult.Length; i++)
+            {
+                numResult[i] = int.Parse(charResult[i].ToString());
+            }
+            return numResult;
         }
-        
+
         public bool CommonEnd(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            if (a[0] == b[0] || a[a.Length -1] == b[b.Length - 1])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         public int Sum(int[] numbers)
         {
-            throw new NotImplementedException();
+            int sumAdder = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                sumAdder += numbers[i];
+            }
+            return sumAdder;
         }
         
         public int[] RotateLeft(int[] numbers)
         {
-            throw new NotImplementedException();
+            int firstOne = numbers[0];
+            int[] shifted = new int[numbers.Length];
+            for (int i = 1; i < numbers.Length; i++)
+            {
+
+            }
         }
         
         public int[] Reverse(int[] numbers)
