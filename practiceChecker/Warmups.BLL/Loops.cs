@@ -38,72 +38,233 @@ namespace Warmups.BLL
 
         public int CountXX(string str)
         {
-            
+            int xCounter = 0;
+
+            for (int i = 0; i < str.Length - 1; i++)
+            {
+                if (str[i] == 'x' && str[i+1] == 'x')
+                {
+                    xCounter++;
+                }             
+            }
+            return xCounter;
         }
 
         public bool DoubleX(string str)
         {
-            throw new NotImplementedException();
-        }s
+            bool firstDouble = false;
+
+            for (int i = 0; i < str.Length - 1; i++)
+            {
+                if (str[i] == 'x' && str[i + 1] == 'x')
+                {
+                    firstDouble = true;
+                    break;
+                }
+                else if (str[i] == 'x' && str[i + 1] != 'x')
+                {
+                    firstDouble = false;
+                    break;
+                }
+                else
+                {
+                    firstDouble = false;
+                }
+            }
+            return firstDouble;
+        }
 
         public string EveryOther(string str)
         {
-            throw new NotImplementedException();
+            string everyOther = "";
+
+            for (int i = 0; i < str.Length; i+=2)
+            {
+                everyOther += str[i];
+            }
+            return everyOther;
         }
 
         public string StringSplosion(string str)
         {
-            throw new NotImplementedException();
+            string sploder = "";
+            int i = 0;
+
+            for (i = 0; i < str.Length; i++)
+            {
+                sploder += str[i];
+                for (i = 0; i < str.Length; i++)
+                {
+                    sploder += str[i];
+                }
+                
+            }
+            return sploder;
         }
 
         public int CountLast2(string str)
         {
-            throw new NotImplementedException();
+            int counter = 0;
+
+            for (int i = 0; i < str.Length - 2; i++)
+            {
+                if (str[i] == 'x' && str[1+i] == 'x')
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         public int Count9(int[] numbers)
         {
-            throw new NotImplementedException();
+            int nineCount = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] == 9)
+                {
+                    nineCount++;
+                }
+
+            }
+            return nineCount;
         }
 
         public bool ArrayFront9(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool nine = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (numbers[i] == 9)
+                {
+                    nine = true;
+                }
+            }
+            return nine;
         }
 
         public bool Array123(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool is123 = false;
+
+            for (int i = 0; i < numbers.Length - 2; i++)
+            {
+                if (numbers[i] == 1 && numbers[i+1] == 2 && numbers[i+2] == 3)
+                {
+                    is123 = true;
+                }
+            }
+            return is123;
         }
 
         public int SubStringMatch(string a, string b)
         {
-            throw new NotImplementedException();
+            int matchCount = 0;
+            int loopLength;
+
+            if (a.Length > b.Length)
+            {
+                loopLength = b.Length;
+            }
+            else
+            {
+                loopLength = a.Length;
+            }
+
+            for (int i = 0; i < loopLength - 1; i++)
+            {
+                if (a[i] == b[i] && a[i+1] == b[i+1])
+                {
+                    matchCount++;
+                }
+            }
+            return matchCount;
         }
 
         public string StringX(string str)
         {
-            throw new NotImplementedException();
+            string lessX = "";
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i == 0 || i == str.Length - 1)
+                {
+                    lessX += str[i];
+                }
+                else if (str[i] != 'x')
+                {           
+                    lessX += str[i];
+                } 
+            }
+            return lessX;
         }
 
         public string AltPairs(string str)
         {
-            throw new NotImplementedException();
+            string skipper = "";
+
+            for (int i = 0; i < str.Length - 1; i+=4)
+            {
+                skipper += str[i];
+                skipper += str[i + 1];
+            }
+            return skipper;
         }
 
         public string DoNotYak(string str)
         {
-            throw new NotImplementedException();
+            string noYak = "";
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] != 'y' && str[i+2] != 'k')
+                {
+                    noYak += str[i];
+                }
+                else
+                {
+                    i += 2;
+                }
+
+            }
+            return noYak;
         }
 
         public int Array667(int[] numbers)
         {
-            throw new NotImplementedException();
+            int count66 = 0;
+            int count67 = 0;
+            int totalCount;
+
+            for (int i = 0; i < numbers.Length -1; i++)
+            {
+                if (numbers[i] == 6 && numbers[i+1] == 6)
+                {
+                    count66++;
+                }
+                if (numbers[i] == 6 && numbers[i + 1] == 7)
+                {
+                    count67++;
+                }
+            }
+            totalCount = count66 + count67;
+            return totalCount;
         }
 
         public bool NoTriples(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool noTrips = true;
+
+            for (int i = 0; i < numbers.Length - 2; i++)
+            {
+                if (numbers[i] == numbers[i+1] && numbers[i+1] == numbers[i+2])
+                {
+                    noTrips = false;
+                }
+            }
+            return noTrips;
         }
 
         public bool Pattern51(int[] numbers)

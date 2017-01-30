@@ -182,7 +182,8 @@ namespace Warmups.BLL
 
         public bool StartHi(string str)
         {
-            if (str[0] == 'h' && str[1] == 'i')
+
+            if (str[0] == 'h' && str[1] == 'i' && str[2] == ' ' && str.Length <= 2)
             {
                 return true;
             }
@@ -194,17 +195,45 @@ namespace Warmups.BLL
         
         public bool IcyHot(int temp1, int temp2)
         {
-            throw new NotImplementedException();
+            bool hotCold;
+
+            if (temp1 > 100 && temp2 < 0 || temp1 < 0 && temp2 > 100)
+            {
+                hotCold = true;
+            }
+            else
+            {
+                hotCold = false;
+            }
+            return hotCold;
         }
         
         public bool Between10and20(int a, int b)
         {
-            throw new NotImplementedException();
+            if (a >= 10 && a <= 20 || b >= 10 && b <= 20)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         public bool HasTeen(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            int[] teens = new int[] {a, b, c };
+            bool isTeen = false;
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (teens[i] > 12 && teens[i] < 20)
+                {
+                    isTeen = true;
+                }  
+            }
+            return isTeen;
+
         }
         
         public bool SoAlone(int a, int b)
