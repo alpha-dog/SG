@@ -72,47 +72,119 @@ namespace Warmups.BLL
         
         public int[] RotateLeft(int[] numbers)
         {
-            int firstOne = numbers[0];
+            int firstToLast = numbers[0];                  //get the first value out of the array
             int[] shifted = new int[numbers.Length];
-            for (int i = 1; i < numbers.Length; i++)
-            {
+            shifted[numbers.Length - 1] = firstToLast;
 
+            for (int i = 0; i < numbers.Length - 1; i++)    //for loop
+            {
+                shifted[i] = numbers[i + 1];
             }
+            return shifted;
         }
         
         public int[] Reverse(int[] numbers)
         {
-            throw new NotImplementedException();
+            int[] reverso = new int[numbers.Length];
+            int iUp = 0;
+
+            for (int iDown = numbers.Length - 1; iDown >= 0; iDown--)
+            {
+                reverso[iUp] = numbers[iDown];
+                iUp++;
+            }
+            return reverso;
         }
         
         public int[] HigherWins(int[] numbers)
         {
-            throw new NotImplementedException();
+            int hiCount = numbers[0];
+            int[] hiArray = new int[numbers.Length];
+
+            for (int i = 0; i <= numbers.Length - 1; i++) //set hiCount = to highest array element in this loop
+            {
+                if (numbers[i] > hiCount)
+                {
+                    hiCount = numbers[i];
+                }
+            }
+
+            for (int i = 0; i <= numbers.Length - 1; i++) //reaplce all elements with hiCount in this loop
+            {
+                hiArray[i] = hiCount;
+            }
+            return hiArray;
         }
         
         public int[] GetMiddle(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            int[] middles = new int[2];
+            middles[0] = a[1];
+            middles[1] = b[1];
+
+            return middles;
+             
         }
         
         public bool HasEven(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool even = false;
+            for (int i = 0; i <= numbers.Length - 1; i ++)
+            {
+                if (numbers[i] % 2 == 0)
+                {
+                    even = true;
+                }
+            }
+            return even;
         }
-        
+
+
         public int[] KeepLast(int[] numbers)
         {
-            throw new NotImplementedException();
+            int[] bigLast = new int[numbers.Length * 2];
+            int lastNum = numbers[numbers.Length - 1];
+            bigLast[bigLast.Length - 1] = lastNum;
+
+            return bigLast;
         }
+
         
         public bool Double23(int[] numbers)
         {
-            throw new NotImplementedException();
+            int twoCount = 0, threeCount = 0;
+
+            for (int i = 0; i <= numbers.Length - 1; i++)
+            {
+                if (numbers[i] == 2)
+                {
+                    twoCount++;
+                }
+                if (numbers[i] == 3)
+                {
+                    threeCount++;
+                }
+            }
+            if (twoCount == 2 || threeCount == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         public int[] Fix23(int[] numbers)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i <= numbers.Length - 1; i++)
+            {
+                if (numbers[i] == 2 && numbers[i + 1] == 3)
+                {
+                    numbers[i + 1] -= 3;
+                }
+            }
+            return numbers;
         }
         
         public bool Unlucky1(int[] numbers)

@@ -230,7 +230,7 @@ namespace Warmups.Tests
 
         [TestCase("xHix", "Hi")]
         [TestCase("xHi", "Hi")]
-        [TestCase("Hxix", "Hxi")]
+        [TestCase("Hxix", "Hi")]
         [TestCase("x", "")]
         [TestCase("", "")]
         public void StripXTest(string s, string expected)
