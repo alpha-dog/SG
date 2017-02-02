@@ -7,3 +7,5 @@ Pattern51({2, 7, 1}) -> true
 public boolean Pattern51(int[] numbers) {
 
 }
+
+	num[5] -[num

@@ -101,14 +101,9 @@ namespace Warmups.BLL
             int hiCount = numbers[0];
             int[] hiArray = new int[numbers.Length];
 
-            for (int i = 0; i <= numbers.Length - 1; i++) //set hiCount = to highest array element in this loop
-            {
-                if (numbers[i] > hiCount)
-                {
-                    hiCount = numbers[i];
-                }
-            }
-
+            if (numbers[0] < numbers[numbers.Length - 1])
+                hiCount = numbers[numbers.Length -1];
+            
             for (int i = 0; i <= numbers.Length - 1; i++) //reaplce all elements with hiCount in this loop
             {
                 hiArray[i] = hiCount;
@@ -189,12 +184,37 @@ namespace Warmups.BLL
         
         public bool Unlucky1(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool bLuck = false;
+            for (int i = 0; i < numbers.Length -1; i++)
+            {
+                if (numbers[i] == 1&&numbers[i+1] ==3)
+                {
+                    bLuck = true;
+                }
+            }
+            return bLuck;
         }
         
         public int[] Make2(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            int[] new2 = new int[2];
+            int loopCount;
+            int aCount = a.Length;
+
+            for (loopCount = 0; loopCount < 2; loopCount++, aCount--)
+            {
+                if (aCount == 0)
+                    break;
+                else
+                    new2[loopCount] = a[loopCount];
+            }
+            if (loopCount != 2)
+                {
+                for (int i = 0; loopCount < 2; loopCount++, i++)
+                    new2[loopCount] = b[i];
+            }
+            return new2;
+
         }
 
     }

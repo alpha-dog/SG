@@ -8,7 +8,7 @@ namespace Warmups.BLL
         public string StringTimes(string str, int n)
         {
             string blah = str;
-            for (int i = 0; i < n - 1 ; i++)
+            for (int i = 0; i < n - 1; i++)
             {
                 blah += str;
             }
@@ -42,10 +42,10 @@ namespace Warmups.BLL
 
             for (int i = 0; i < str.Length - 1; i++)
             {
-                if (str[i] == 'x' && str[i+1] == 'x')
+                if (str[i] == 'x' && str[i + 1] == 'x')
                 {
                     xCounter++;
-                }             
+                }
             }
             return xCounter;
         }
@@ -78,7 +78,7 @@ namespace Warmups.BLL
         {
             string everyOther = "";
 
-            for (int i = 0; i < str.Length; i+=2)
+            for (int i = 0; i < str.Length; i += 2)
             {
                 everyOther += str[i];
             }
@@ -88,16 +88,10 @@ namespace Warmups.BLL
         public string StringSplosion(string str)
         {
             string sploder = "";
-            int i = 0;
 
-            for (i = 0; i < str.Length; i++)
+            for (int i = 0; i < str.Length + 1; i++)
             {
-                sploder += str[i];
-                for (i = 0; i < str.Length; i++)
-                {
-                    sploder += str[i];
-                }
-                
+                sploder += str.Substring(0, i);
             }
             return sploder;
         }
@@ -108,7 +102,7 @@ namespace Warmups.BLL
 
             for (int i = 0; i < str.Length - 2; i++)
             {
-                if (str[i] == 'x' && str[1+i] == 'x')
+                if (str[i] == 'x' && str[1 + i] == 'x')
                 {
                     counter++;
                 }
@@ -151,7 +145,7 @@ namespace Warmups.BLL
 
             for (int i = 0; i < numbers.Length - 2; i++)
             {
-                if (numbers[i] == 1 && numbers[i+1] == 2 && numbers[i+2] == 3)
+                if (numbers[i] == 1 && numbers[i + 1] == 2 && numbers[i + 2] == 3)
                 {
                     is123 = true;
                 }
@@ -175,7 +169,7 @@ namespace Warmups.BLL
 
             for (int i = 0; i < loopLength - 1; i++)
             {
-                if (a[i] == b[i] && a[i+1] == b[i+1])
+                if (a[i] == b[i] && a[i + 1] == b[i + 1])
                 {
                     matchCount++;
                 }
@@ -194,9 +188,9 @@ namespace Warmups.BLL
                     lessX += str[i];
                 }
                 else if (str[i] != 'x')
-                {           
+                {
                     lessX += str[i];
-                } 
+                }
             }
             return lessX;
         }
@@ -205,9 +199,19 @@ namespace Warmups.BLL
         {
             string skipper = "";
 
-            for (int i = 0; i < str.Length - 1; i+=4)
+            //int i = 0 ;
+            //while (true)
+            //{
+            //    skipper += str[i];
+            //    skipper += str[i + 1];
+            //}
+
+
+            for (int i = 0; i <= str.Length - 1; i += 4)
             {
                 skipper += str[i];
+                if (i >= str.Length - 1)
+                    break;
                 skipper += str[i + 1];
             }
             return skipper;
@@ -217,15 +221,24 @@ namespace Warmups.BLL
         {
             string noYak = "";
 
-            for (int i = 0; i < str.Length; i++)
+            for (int i = 0; i < str.Length; i++)//str.length
             {
-                if (str[i] != 'y' && str[i+2] != 'k')
+                if (i < str.Length - 2 && str[i] == 'y' && str[i + 2] == 'k')
                 {
-                    noYak += str[i];
+                    i += 2;
                 }
                 else
                 {
-                    i += 2;
+                    if (i == str.Length)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        noYak += str[i];
+                    }
+
+
                 }
 
             }
@@ -238,9 +251,9 @@ namespace Warmups.BLL
             int count67 = 0;
             int totalCount;
 
-            for (int i = 0; i < numbers.Length -1; i++)
+            for (int i = 0; i < numbers.Length - 1; i++)
             {
-                if (numbers[i] == 6 && numbers[i+1] == 6)
+                if (numbers[i] == 6 && numbers[i + 1] == 6)
                 {
                     count66++;
                 }
@@ -259,7 +272,7 @@ namespace Warmups.BLL
 
             for (int i = 0; i < numbers.Length - 2; i++)
             {
-                if (numbers[i] == numbers[i+1] && numbers[i+1] == numbers[i+2])
+                if (numbers[i] == numbers[i + 1] && numbers[i + 1] == numbers[i + 2])
                 {
                     noTrips = false;
                 }
@@ -269,7 +282,21 @@ namespace Warmups.BLL
 
         public bool Pattern51(int[] numbers)
         {
-            throw new NotImplementedException();
+            bool isDumbPattern = false;
+            int loopLength = numbers.Length;
+
+            for (int i = 0; i < loopLength - 2; i++)
+            {
+                if (numbers[i] == numbers[i + 1] - 5 && numbers[i + 2] == numbers[i] - 1)
+                {
+                    isDumbPattern = true;
+                    break;
+                }
+                else
+                    isDumbPattern = false;
+            }
+            return isDumbPattern;
+
         }
 
     }

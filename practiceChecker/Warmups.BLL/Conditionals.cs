@@ -1,4 +1,4 @@
-﻿using System; 
+﻿using System;
 
 namespace Warmups.BLL
 {
@@ -183,14 +183,14 @@ namespace Warmups.BLL
         public bool StartHi(string str)
         {
 
-            if (str[0] == 'h' && str[1] == 'i' && str[2] == ' ' && str.Length <= 2)
-            {
-                return true;
-            }
-            else
-            {
+            if (str.Length < 2)
                 return false;
-            }
+            else if (str.Length == 2 && str[0] == 'h' && str[1] == 'i')
+                return true;
+            else if (str.Length > 2 && str[0] == 'h' && str[1] == 'i' && str[2] == ' ' || str[2] == ',')
+                return true;
+            else
+                return false;
         }
         
         public bool IcyHot(int temp1, int temp2)
@@ -238,47 +238,157 @@ namespace Warmups.BLL
         
         public bool SoAlone(int a, int b)
         {
-            throw new NotImplementedException();
+            bool aTeen = false; 
+            bool bTeen = false;
+            bool result;
+
+            if (a > 12 && a < 20)
+            {
+                aTeen = true;
+            }
+            if (b > 12 && b < 20)
+            {
+                bTeen = true;
+            }
+
+            if (aTeen && bTeen || !aTeen && !bTeen)
+            {
+                result = false;
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
         }
-        
+
         public string RemoveDel(string str)
         {
-            throw new NotImplementedException();
+            if (str[1] == 'd' && str[2] == 'e' && str[3] == 'l')
+            {
+                string lastPart = str.Substring(4);
+                string result = str[0] + lastPart;
+                return result;
+            }
+            else
+            {
+                return str;
+            }
         }
-        
         public bool IxStart(string str)
         {
-            throw new NotImplementedException();
+            if (str[1] == 'i' && str[2] == 'x')
+                return true;
+            else
+            {
+                return false;
+            }
         }
         
         public string StartOz(string str)
         {
-            throw new NotImplementedException();
+            string result;
+      
+            if (str[0] != 'o' && str.Length < 2)
+            {
+                result = "";
+            }
+            else if (str[0] == 'o' && str[1] == 'z')
+            {
+                result = "oz";
+            }
+            else if (str[0] == 'o')
+            {
+                result = "o";
+            }
+            else
+            {
+                result = "z";     
+            }
+            return result;  
         }
         
         public int Max(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            int max;
+            if (a > b && a > c)
+            {
+                max = a;
+            }
+            else if (b > c)
+            {
+                max = b;
+            }
+            else
+            {
+                max = c;
+            }
+            return max;
         }
         
         public int Closer(int a, int b)
         {
-            throw new NotImplementedException();
+            int result;
+            if ( Math.Abs(a - 10) == Math.Abs(b - 10))
+            {
+                result = 0;
+            }
+            else if (Math.Abs(a - 10) > Math.Abs(b - 10))
+            {
+                result = b;
+            }
+            else
+            {
+                result = a;
+            }
+            return result;
         }
         
         public bool GotE(string str)
         {
-            throw new NotImplementedException();
+            bool betweenOneAndThreeEs = false;
+            int eCounter = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == 'e')
+                {
+                    eCounter++;
+                }
+            }
+            if (eCounter > 0 && eCounter <= 3)
+            {
+                betweenOneAndThreeEs = true;
+            }
+            return betweenOneAndThreeEs;
         }
         
         public string EndUp(string str)
         {
-            throw new NotImplementedException();
+            string upperLast3;
+
+            if (str.Length < 3)
+            {
+                upperLast3 = str.ToUpper();
+            }
+            else
+            {
+                string firstPart = str.Remove(str.Length - 3);
+                string last3 = str.Substring(str.Length - 3);
+                upperLast3 = firstPart + last3.ToUpper(); 
+            }
+            return upperLast3;
+
         }
         
         public string EveryNth(string str, int n)
         {
-            throw new NotImplementedException();
+            string nth = "";
+            for (int i = 0; i < str.Length; i+=n)
+            {
+                nth += str[i];
+            }
+            return nth;
         }
     }
 }
