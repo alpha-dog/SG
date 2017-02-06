@@ -10,18 +10,20 @@ namespace BattleShip.UI
     {
         public void SetUp()
         {
-            Player p1 = new Player();
-            Player p2 = new Player();
-
             ConsoleOut.SplashPage();
-            PlayerInput.Player1Name(); //PlayerInput or Player
-            PlayerInput.Player2Name();
 
-            Player.RandomPlayerPicker();
+            string player1 = PlayerInput.GetPlayer1Name();
+            string player2 = PlayerInput.GetPlayer2Name();
 
-
+            bool player1First = RandomPlayerAssign();
+            GameFlow game = new GameFlow(player1First);
+            game.
         }
 
+        private bool RandomPlayerAssign()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

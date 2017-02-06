@@ -9,6 +9,7 @@ namespace BattleShip.UI
     class Player
 
     {
+        
     }
 }
                                                                                                                                                                                                                                                                                                                                                                                                                                             

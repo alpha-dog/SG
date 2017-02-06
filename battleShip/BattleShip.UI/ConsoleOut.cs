@@ -8,6 +8,11 @@ namespace BattleShip.UI
 {
     class ConsoleOut
     {
+        internal static void SplashPage()
+        {
+            Console.WriteLine("start menu / splash screen");
+            Console.ReadLine();
+        }
     }
 }
                                                                                                                                                                                                                                                                                                                                                                       
