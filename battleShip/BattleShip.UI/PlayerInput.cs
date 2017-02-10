@@ -22,7 +22,7 @@ namespace BattleShip.UI
             string p2 = Console.ReadLine();
             return p2;
         }
-        public static Coordinate GetUserCoord()
+        public static Coordinate GetUserCoord()//input validation
         {
             Console.WriteLine("give me a coordinate");
             string coordInput = Console.ReadLine();
@@ -37,7 +37,30 @@ namespace BattleShip.UI
             Coordinate coordReturn = new Coordinate(x,y);
             return coordReturn;
         }
+        public static ShipDirection GetUserDirection()
+        {
+            Console.WriteLine("what direction do you want your ship to go");
+            string inputDirection = Console.ReadLine();
+            ShipDirection userShipDirection = ShipDirection.Down;
+            if (inputDirection == "up")
+            {
+                userShipDirection = ShipDirection.Up;
+            }
+            else if (inputDirection == "down")
+            {
+                userShipDirection = ShipDirection.Down;
+            }
+            else if (inputDirection == "left")
+            {
+                userShipDirection = ShipDirection.Left;
+            }
+            else
+            {
+                userShipDirection = ShipDirection.Right;
+            }
 
+            return userShipDirection ;
+        }
 
     }
 }

@@ -9,13 +9,17 @@ namespace BattleShip.UI
 {
     class GameFlow
     {
-        public Board b1 { get; } = new Board();
-        public Board b2 { get; } = new Board();
+        Player _player1 = null;
+        Player _player2 = null;
+        
+
         bool _isPlayerOneTurn;
 
-        public GameFlow(bool isPlayerOne)
+        public GameFlow(bool isPlayerOne, Player p1, Player p2)
         {
             _isPlayerOneTurn = isPlayerOne;
+            _player1 = p1;
+            _player2 = p2;
         }
         public void PlayTheGame()
         {

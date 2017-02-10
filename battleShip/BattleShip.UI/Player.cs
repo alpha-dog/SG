@@ -1,3 +1,4 @@
+using BattleShip.BLL.GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,13 @@ namespace BattleShip.UI
     class Player
 
     {
+        public Board PlayerBoard { get; } = new Board();
         
+        public string PlayerName {get ; }
+        public Player (string playerName)
+        {
+            PlayerName = playerName;
+        }  
     }
 }
                                                                                                                                                                                                                                                                                                                                                                                                                                             
