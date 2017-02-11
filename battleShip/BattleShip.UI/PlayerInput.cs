@@ -39,7 +39,7 @@ namespace BattleShip.UI
         }
         public static ShipDirection GetUserDirection()
         {
-            Console.WriteLine("what direction do you want your ship to go");
+            Console.WriteLine("what direction do you want your ship to go");//maybe a tooLower and a loop
             string inputDirection = Console.ReadLine();
             ShipDirection userShipDirection = ShipDirection.Down;
             if (inputDirection == "up")

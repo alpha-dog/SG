@@ -23,7 +23,7 @@ namespace BattleShip.UI
             Player playerOne = new Player(player1Name);
             Player playerTwo = new Player(player2Name);
 
-            bool player1First = RandomPlayerAssign();
+            bool player1Turn = RandomPlayerAssign();
 
             Console.WriteLine($"hi {player1Name}, it's time to place your ships");
             SetupBoard(playerOne.PlayerBoard);
@@ -34,7 +34,7 @@ namespace BattleShip.UI
             Console.WriteLine($"hi {player2Name}, it's your turn to place ships");
             SetupBoard(playerTwo.PlayerBoard);
 
-            GameFlow game = new GameFlow(player1First, playerOne, playerTwo); //this probably doesn't work                  
+            GameFlow game = new GameFlow(player1Turn, playerOne, playerTwo); //this probably doesn't work                  
 
             return game;
         }
@@ -53,6 +53,7 @@ namespace BattleShip.UI
 
         public void PlaceShip (Board board1or2 , ShipType ship)
         {
+            ConsoleOut.ShipPromptPlacement(ship);
             ShipPlacement shipSpot = ShipPlacement.NotEnoughSpace;
             while (shipSpot != ShipPlacement.Ok)
             {
@@ -60,9 +61,10 @@ namespace BattleShip.UI
                 {
                     Coordinate = PlayerInput.GetUserCoord(),
                     Direction = PlayerInput.GetUserDirection(),
-                    ShipType = ship                   //Only sets up carrier
+                    ShipType = ship                 
                 };
-                shipSpot = board1or2.PlaceShip(request);
+                shipSpot = board1or2.PlaceShip(request);//input validation
+                ConsoleOut.IsShipPlaceValid(shipSpot);
             }
         }
 

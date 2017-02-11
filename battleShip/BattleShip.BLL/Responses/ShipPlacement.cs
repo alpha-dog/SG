@@ -9,7 +9,7 @@ namespace BattleShip.BLL.Responses
     public enum ShipPlacement
     {
         NotEnoughSpace,
-        Overlap,
+        Overlap,                         
         Ok
     }
 }

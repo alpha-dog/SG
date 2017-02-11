@@ -11,7 +11,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise3();
+            Exercise4();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -131,6 +131,18 @@ namespace LINQ
         /// </summary>
         static void Exercise4()
         {
+            //var prods = DataLoader.LoadProducts();
+            //var pn = from name in prods
+            //         select new
+            //         {
+            //             pName = name.ProductName
+            //         };
+            //foreach (var p in pn)
+            //{
+            //    Console.WriteLine(p);
+              
+            //}
+
 
         }
 
