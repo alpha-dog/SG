@@ -455,9 +455,7 @@ static void Exercise20()
         /// </summary>
         static void Exercise21()
         {
-            var kustomers = DataLoader.LoadCustomers();
-
-            var 
+            
         }
 
         /// <summary>
@@ -465,7 +463,7 @@ static void Exercise20()
         /// </summary>
         static void Exercise22()
         {
-
+            
         }
 
         /// <summary>
