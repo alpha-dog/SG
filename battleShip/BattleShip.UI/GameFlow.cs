@@ -17,12 +17,15 @@ namespace BattleShip.UI
         Player _player2 = null;
         private bool _player1Turn;
         bool _isGameOver = false;
+        ConsoleOut test = new ConsoleOut();
 
         public GameFlow(bool player1Turn, Player p1, Player p2)
         {  
             _player1 = p1;
             _player2 = p2;
             bool _player1Turn = player1Turn;
+            Console.Clear();
+            Console.WriteLine("lets start the game");
             
         }
         public void PlayTheGame()
@@ -34,10 +37,17 @@ namespace BattleShip.UI
 
                 if (_player1Turn)
                 {
+                    Console.Clear();
+                    Console.WriteLine($"{_player1.PlayerName}, its your turn");
+                    test.BoardViewer(_player2.PlayerBoard.ShotHistory);
                     targetPlayer = _player2;
+
                 }
                 else
                 {
+                    Console.Clear();
+                    Console.WriteLine($"{_player2.PlayerName}, your turn");
+                    test.BoardViewer(_player1.PlayerBoard.ShotHistory);
                     targetPlayer = _player1;
                 }
 
@@ -56,10 +66,10 @@ namespace BattleShip.UI
                             Console.WriteLine("off the board");
                             break;
                         case ShotStatus.Hit:
-                            Console.WriteLine($"its a hit{fireResponse.ShipImpacted}");
+                            Console.WriteLine($"nice, you hit a {fireResponse.ShipImpacted}");
                             break;
                         case ShotStatus.HitAndSunk:
-                            Console.WriteLine($"you sunk a {fireResponse.ShipImpacted}");
+                            Console.WriteLine($"whoa, you sunk a {fireResponse.ShipImpacted}");
                             break;
                         case ShotStatus.Miss:
                             Console.WriteLine("you missed");

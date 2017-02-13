@@ -11,7 +11,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise4();
+            Exercise20();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -140,9 +140,15 @@ namespace LINQ
             //foreach (var p in pn)
             //{
             //    Console.WriteLine(p);
-              
-            //}
 
+            //}
+            var prods = DataLoader.LoadProducts();
+
+            var pn = prods.Select(p => new { p.ProductName });
+            foreach (var p in pn)
+            {
+                Console.WriteLine(p);
+            }
 
         }
 
@@ -152,6 +158,31 @@ namespace LINQ
         static void Exercise5()
         {
 
+            var prods = DataLoader.LoadProducts();
+
+            var marco = from pStuff in prods
+                        select new
+                        {
+                            pStuff.ProductName,
+                            newPrice = pStuff.UnitPrice * 1.25M,
+                            pStuff.UnitsInStock,
+                            pStuff.ProductID,
+                            pStuff.Category
+                        };
+            foreach (var blahblah in marco)
+            {
+                Console.WriteLine(blahblah);
+            }
+
+            //var pn = prods.Select(p => new
+            //{
+            //    p.ProductName, p.ProductID, p.UnitsInStock, newPrice = p.UnitPrice * 1.25M, p.Category //only the one we modify needs a name
+            //});
+
+            //foreach (var p in pn)
+            //{
+            //    Console.WriteLine(p);
+            //}
         }
 
         /// <summary>
@@ -159,7 +190,25 @@ namespace LINQ
         /// </summary>
         static void Exercise6()
         {
+            var products = DataLoader.LoadProducts();
 
+            //var PRODUCTS = products.Select(allCaps => new
+            //{
+            //    bigName = allCaps.ProductName.ToUpper(),      //lambda or method syntax
+            //    bigCat = allCaps.Category.ToUpper()
+            //});
+
+            var PRODUCTS = from allCap in products
+                           select new
+                           {
+                               bigName = allCap.ProductName.ToUpper(),  //querry syntax
+                               bigCat = allCap.Category.ToUpper()
+                           };                     
+
+            foreach (var dsntMattr in PRODUCTS)
+            {
+                Console.WriteLine(dsntMattr);
+            }
         }
 
         /// <summary>
@@ -167,9 +216,39 @@ namespace LINQ
         /// be set to true if the Units in Stock is less than 3
         /// 
         /// Hint: use a ternary expression
+        /// 
         /// </summary>
+        /// 
+        // if input is > than 0, classify is positive, otherwise its negative  
+        //classify = (input > 0) ? "positive" : "negative";
         static void Exercise7()
         {
+            var productz = DataLoader.LoadProducts();
+
+            //var threeInStock = productz.Select(three => new                       lambda or method syntax
+            //{
+            //    three.ProductName,
+            //    three.UnitPrice,
+            //    three.UnitsInStock,
+            //    ReOrder = (three.UnitsInStock < 3 ? true : false)
+            //});
+
+            var threeInStock = from frankIsDumb in productz
+                               select new
+                               {
+                                   ReOrder = (frankIsDumb.UnitsInStock < 3 ? true : false),
+                                   frankIsDumb.UnitsInStock,
+                                   frankIsDumb.ProductName,                                 //querry syntax
+                                   frankIsDumb.ProductID,
+                                   frankIsDumb.Category,
+                                   frankIsDumb.UnitPrice
+                               };
+
+            foreach (var aligator in threeInStock)
+            {
+                Console.WriteLine(aligator);
+            }
+           
 
         }
 
@@ -179,7 +258,22 @@ namespace LINQ
         /// </summary>
         static void Exercise8()
         {
+            var productz = DataLoader.LoadProducts();
 
+            var withStocks = productz.Select(p => new
+            {
+                p.Category,
+                p.ProductID,
+                p.ProductName,
+                p.UnitPrice,
+                p.UnitsInStock,
+                StockValue = p.UnitPrice*p.UnitsInStock
+            });
+
+            foreach (var stokz in withStocks)
+            {
+                Console.WriteLine(stokz);
+            }
         }
 
         /// <summary>
@@ -201,7 +295,12 @@ namespace LINQ
 
         static void Exercise10() //use 'any' I think i overheard
         {
-            
+            var customerInfo = DataLoader.LoadCustomers();
+
+            var under500 = customerInfo.Where(c => c.Orders.Any(o => o.Total < 500));
+            foreach (var whatever in under500)
+            PrintCustomerInformation(under500);
+                          
         }
 
         /// <summary>
@@ -209,7 +308,11 @@ namespace LINQ
         /// </summary>
         static void Exercise11()
         {
-
+            var nums = DataLoader.NumbersC.Where(n => n % 2 == 1).Take(3);
+            foreach (var dog in nums)
+            {
+                Console.WriteLine(dog);
+            } 
         }
 
         /// <summary>
@@ -217,7 +320,11 @@ namespace LINQ
         /// </summary>
         static void Exercise12()
         {
-
+            var nums = DataLoader.NumbersB.Skip(3);
+            foreach (var cat in nums)
+            {
+                Console.WriteLine(cat);
+            }
         }
 
         /// <summary>
@@ -225,7 +332,9 @@ namespace LINQ
         /// </summary>
         static void Exercise13()
         {
-
+            var orderInfo = DataLoader.LoadCustomers();
+            var recentWAorders = orderInfo.Where(cstmr => cstmr.Region == "WA");
+            PrintCustomerInformation(recentWAorders);
         }
 
         /// <summary>
@@ -233,6 +342,11 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
+            var until6 = DataLoader.NumbersC.SkipWhile(n => n != 6);
+            foreach (var blah in until6)
+            {
+                Console.WriteLine(blah);
+            }
 
         }
 
@@ -241,7 +355,11 @@ namespace LINQ
         /// </summary>
         static void Exercise15()
         {
-
+            var divis3 = DataLoader.NumbersC.SkipWhile(d=> d % 3 != 0).Skip(1);
+            foreach (var whatevs in divis3)
+            {
+                Console.WriteLine(whatevs);
+            }
         }
 
         /// <summary>
@@ -249,7 +367,10 @@ namespace LINQ
         /// </summary>
         static void Exercise16()
         {
-
+            var productz = DataLoader.LoadProducts();
+            var alfabet = productz.OrderBy(a => a.ProductName);
+            foreach (var alf in alfabet)
+                Console.WriteLine(alf.ProductName);
         }
 
         /// <summary>
@@ -257,7 +378,12 @@ namespace LINQ
         /// </summary>
         static void Exercise17()
         {
-
+            var productz = DataLoader.LoadProducts();
+            var bakwerds = productz.OrderByDescending(b => b.UnitsInStock);
+            foreach (var bName in bakwerds)
+            {
+                Console.WriteLine(bName.ProductName + bName.UnitsInStock);
+            } 
         }
 
         /// <summary>
@@ -265,15 +391,24 @@ namespace LINQ
         /// </summary>
         static void Exercise18()
         {
+            var productz = DataLoader.LoadProducts();
+            var byCat = productz.OrderBy(cat => cat.Category);
+            var byPrice = productz.OrderByDescending(p => p.UnitPrice);
 
+            PrintProductInformation(byCat);
+            PrintProductInformation(byPrice);
         }
 
         /// <summary>
         /// Print NumbersB in reverse order
         /// </summary>
-        static void Exercise19()
+        static void  Exercise19()
         {
-
+            var reverso = DataLoader.NumbersB.Reverse();
+            foreach (var r in reverso)
+            {
+                Console.WriteLine(r);
+            }
         }
 
         /// <summary>
@@ -288,9 +423,23 @@ namespace LINQ
         /// Turkey
         /// Ham
         /// </summary>
-        static void Exercise20()
+        /// 
+static void Exercise20()
         {
+            var prods = DataLoader.LoadProducts();
 
+            var result = from p in prods
+                         //orderby p.Category, p.ProductName
+                         group p by p.Category;
+
+            foreach (var g in result)
+            {
+                Console.WriteLine(g.Key);
+                foreach (var p in g)
+                {
+                    Console.WriteLine ($"\t{p.ProductName}");
+                }
+            }
         }
 
         /// <summary>
@@ -306,7 +455,9 @@ namespace LINQ
         /// </summary>
         static void Exercise21()
         {
+            var kustomers = DataLoader.LoadCustomers();
 
+            var 
         }
 
         /// <summary>

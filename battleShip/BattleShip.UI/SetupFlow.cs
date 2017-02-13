@@ -41,10 +41,11 @@ namespace BattleShip.UI
 
         public Board SetupBoard (Board someBoard)
         {
-            for (ShipType ship = ShipType.Destroyer ; ship < ShipType.Carrier; ship++)
+            for (ShipType ship = ShipType.Destroyer ; ship <= ShipType.Carrier; ship++)
             {
                 PlaceShip(someBoard, ship); 
             }
+            Console.Clear();
            
 
             return someBoard;

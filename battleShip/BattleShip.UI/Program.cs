@@ -9,7 +9,7 @@ namespace BattleShip.UI
     class Program
     {
         static void Main(string[] args)
-        {
+        { 
             SetupFlow setUp = new SetupFlow();
             //setUp.SetUp();
 
