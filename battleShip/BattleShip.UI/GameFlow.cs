@@ -67,12 +67,15 @@ namespace BattleShip.UI
                             break;
                         case ShotStatus.Hit:
                             Console.WriteLine($"nice, you hit a {fireResponse.ShipImpacted}");
+                            Console.ReadKey(); //attempt to keep hit response displayed
                             break;
                         case ShotStatus.HitAndSunk:
                             Console.WriteLine($"whoa, you sunk a {fireResponse.ShipImpacted}");
+                            Console.ReadKey(); // attempt to keep hit response displayed
                             break;
                         case ShotStatus.Miss:
                             Console.WriteLine("you missed");
+                            Console.ReadKey(); // """"""""""""""""""
                             break;
                         case ShotStatus.Victory:
                             Console.WriteLine("WINNER");

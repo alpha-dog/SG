@@ -15,6 +15,7 @@ namespace BattleShip.UI
 
             GameFlow playGame = setUp.SetUp();
             playGame.PlayTheGame();
+            Console.ReadKey();
         }
     }
 }//I HAVE MADE CHANGES TO BATTLESHIP

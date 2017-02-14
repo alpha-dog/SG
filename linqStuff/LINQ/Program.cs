@@ -11,7 +11,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise20();
+            Exercise18();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -392,11 +392,12 @@ namespace LINQ
         static void Exercise18()
         {
             var productz = DataLoader.LoadProducts();
-            var byCat = productz.OrderBy(cat => cat.Category);
-            var byPrice = productz.OrderByDescending(p => p.UnitPrice);
+            var byCat = productz.OrderBy(cat => cat.Category).ThenByDescending(p => p.UnitPrice);
+            //var kat = productz.OrderByDescending(p => p.UnitPrice).OrderBy(cat => cat.Category);
+            //var byPrice = productz.OrderByDescending(p => p.UnitPrice);
 
             PrintProductInformation(byCat);
-            PrintProductInformation(byPrice);
+            
         }
 
         /// <summary>
@@ -463,7 +464,13 @@ static void Exercise20()
         /// </summary>
         static void Exercise22()
         {
-            
+            var prods = DataLoader.LoadProducts();
+            var unique = prods.Select(p => p.Category).Distinct();
+           
+            foreach (var p in unique)
+            {
+                Console.WriteLine(p);
+            }
         }
 
         /// <summary>
@@ -485,7 +492,7 @@ static void Exercise20()
         /// <summary>
         /// Print a list of categories that have no products out of stock
         /// </summary>
-        static void Exercise25()
+        static void Exercise25() //google: "linq all" and go to msdn
         {
 
         }

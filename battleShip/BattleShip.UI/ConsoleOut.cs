@@ -30,9 +30,9 @@ namespace BattleShip.UI
         public void BoardViewer(Dictionary<Coordinate, ShotHistory> shotHist)
         {
 
-            for (int x = 0; x < 10; x++)
+            for (int x = 1; x <= 10; x++)
             {
-                for (int y = 0; y < 10; y++)
+                for (int y = 1; y <= 10; y++)
                 {
                     Coordinate coord = new Coordinate(x,y);
                     ShotHistory shotHistResult;
@@ -41,18 +41,21 @@ namespace BattleShip.UI
                         shotHist.TryGetValue(coord, out shotHistResult);
                         if (shotHistResult == ShotHistory.Hit)
                         {
-                            Console.Write("H");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(" H ");
                         }
                         else if (shotHistResult == ShotHistory.Miss)
                         {
-                            Console.Write("M");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write(" M ");
                         }
 
 
                     }
                     else
                     {
-                        Console.Write("*" + " ");
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(" * ");
                     }
                 }
                 Console.WriteLine();   
