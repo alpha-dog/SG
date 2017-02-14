@@ -25,6 +25,7 @@ namespace BattleShip.UI
 
             bool player1Turn = RandomPlayerAssign();
 
+
             Console.WriteLine($"hi {player1Name}, it's time to place your ships");
             SetupBoard(playerOne.PlayerBoard);
 
@@ -72,7 +73,7 @@ namespace BattleShip.UI
         private bool RandomPlayerAssign()
         {
             Random rng = new Random();
-
+            
             return rng.NextDouble() > 0.5;
             
         }

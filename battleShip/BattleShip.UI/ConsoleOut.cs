@@ -13,7 +13,7 @@ namespace BattleShip.UI
     {
         internal static void SplashPage()
         {
-            Console.WriteLine("start menu / splash screen");
+            Console.WriteLine("You are about to play battleship start menu / splash screen");
             Console.ReadLine();
         }
 
@@ -43,11 +43,13 @@ namespace BattleShip.UI
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write(" H ");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         else if (shotHistResult == ShotHistory.Miss)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write(" M ");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
 
 
@@ -56,6 +58,7 @@ namespace BattleShip.UI
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.Write(" * ");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 Console.WriteLine();   

@@ -23,10 +23,9 @@ namespace BattleShip.UI
         {  
             _player1 = p1;
             _player2 = p2;
-            bool _player1Turn = player1Turn;
+            _player1Turn = player1Turn;
             Console.Clear();
             Console.WriteLine("lets start the game");
-            
         }
         public void PlayTheGame()
         {
@@ -79,6 +78,7 @@ namespace BattleShip.UI
                             break;
                         case ShotStatus.Victory:
                             Console.WriteLine("WINNER");
+
                             _isGameOver = true;
                             break;
 
