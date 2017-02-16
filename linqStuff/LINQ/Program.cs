@@ -11,7 +11,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise31();
+            Exercise30();
             
 
             Console.WriteLine("Press any key to continue...");
@@ -352,7 +352,7 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
-            var until6 = DataLoader.NumbersC.TakeWhile(n => n <= 6);
+            var until6 = DataLoader.NumbersC.TakeWhile(n => n < 6);
             foreach (var blah in until6)
             {
                 Console.WriteLine(blah);
@@ -650,6 +650,7 @@ static void Exercise20()
                                       .Select(g => new
                                       {
                                           g.Key,
+                                          product = g.First(p => p.UnitPrice == g.Min(p2 => p2.UnitPrice)).ProductName,
                                           lowPrice = g.Min(p => p.UnitPrice)
                                       });
             foreach (var g in catAndLowPrice)
