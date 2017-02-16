@@ -11,7 +11,8 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise18();
+            Exercise31();
+            
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -333,8 +334,17 @@ namespace LINQ
         static void Exercise13()
         {
             var orderInfo = DataLoader.LoadCustomers();
-            var recentWAorders = orderInfo.Where(cstmr => cstmr.Region == "WA");
-            PrintCustomerInformation(recentWAorders);
+            var recentWAorders = from p in orderInfo
+                                 where p.Region == "WA"
+                                 select new
+                                 {
+                                     name = p.CompanyName,
+                                     newOrder = p.Orders.OrderByDescending(oD => oD.OrderDate).First()
+                                 };
+            foreach (var whatever  in recentWAorders)
+            {
+                Console.WriteLine(whatever.name +", "+ whatever.newOrder.OrderDate);
+            }
         }
 
         /// <summary>
@@ -342,7 +352,7 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
-            var until6 = DataLoader.NumbersC.SkipWhile(n => n != 6);
+            var until6 = DataLoader.NumbersC.TakeWhile(n => n <= 6);
             foreach (var blah in until6)
             {
                 Console.WriteLine(blah);
@@ -453,10 +463,38 @@ static void Exercise20()
         ///     3 -  $750.00
         /// 2016
         ///     2 - $1000.00
+        ///     
+        /// David indicated we'd be doing a groupBy on an anonymous type made up of more than one property (e.g. day,month,year)
         /// </summary>
         static void Exercise21()
         {
-            
+            var cstmr = DataLoader.LoadCustomers();
+            var custOrderDate = from c in cstmr
+                                select new
+                                {
+                                    c.CompanyName,
+                                    orderTotals = c.Orders.GroupBy(o => new
+                                    {
+                                        year = o.OrderDate.Year,
+                                        month = o.OrderDate.Month
+                                    })
+                                    .Select(g => new
+                                    {
+                                        year = g.Key.year,
+                                        month = g.Key.month,
+                                        orderTotal = g.Sum(o => o.Total)
+                                    })
+                                    
+                                };
+            foreach (var whatever in custOrderDate)
+            {
+                Console.WriteLine(whatever.CompanyName);
+
+                foreach (var orderData in whatever.orderTotals)
+                {
+                    Console.WriteLine(orderData);
+                }
+            }
         }
 
         /// <summary>
@@ -478,7 +516,9 @@ static void Exercise20()
         /// </summary>
         static void Exercise23()
         {
-
+            var prods = DataLoader.LoadProducts();
+            var prod789 = prods.FirstOrDefault(p => p.ProductID == 789); //switch Where to FirstorDefault
+            Console.WriteLine($"products with that ID: {prod789}");
         }
 
         /// <summary>
@@ -486,7 +526,21 @@ static void Exercise20()
         /// </summary>
         static void Exercise24()
         {
+            var prods = DataLoader.LoadProducts();
+            var catOutofStock = (from p in prods
+                                 where p.UnitsInStock == 0  //u => {return UnitsInStock > 0;}
+                                 select new
+                                 {
+                                     category = p.Category,
+                                    
+                                 }).Distinct();
 
+            foreach (var p in catOutofStock)
+
+
+            {
+                Console.WriteLine(p.category);
+            }
         }
 
         /// <summary>
@@ -494,7 +548,28 @@ static void Exercise20()
         /// </summary>
         static void Exercise25() //google: "linq all" and go to msdn
         {
+            var prods = DataLoader.LoadProducts();
+            var AllStock = from p in prods
+                           group p by p.Category into pGroup
+                           where pGroup.All(p => p.UnitsInStock > 0)
+                           select
 
+                               pGroup.Key;
+                           
+
+            foreach (var p in AllStock)
+            {
+                Console.WriteLine(p);
+            }
+            /*var*/
+            AllStock = prods.GroupBy(p => p.Category)
+                                .Where(g => g.All(p => p.UnitsInStock > 0))
+                                .Select(g => g.Key);
+
+            foreach (var p in AllStock)
+            {
+                Console.WriteLine(p);           
+            }
         }
 
         /// <summary>
@@ -502,7 +577,8 @@ static void Exercise20()
         /// </summary>
         static void Exercise26()
         {
-
+            int occCount = DataLoader.NumbersA.Count(a => a % 2 == 1);
+            Console.WriteLine(occCount);
         }
 
         /// <summary>
@@ -510,7 +586,17 @@ static void Exercise20()
         /// </summary>
         static void Exercise27()
         {
-
+            var customers = DataLoader.LoadCustomers();
+            var orderAndID = customers.Select(c => new
+            {
+                Company = c.CompanyName,
+                ID = c.CustomerID,
+                orders = c.Orders.Count()
+            });
+            foreach (var c in orderAndID)
+            {
+                Console.WriteLine(c);
+            }
         }
 
         /// <summary>
@@ -518,6 +604,19 @@ static void Exercise20()
         /// </summary>
         static void Exercise28()
         {
+            var prods = DataLoader.LoadProducts();
+            var catProds = prods.GroupBy(p => p.Category)
+                                .Select(g => new
+                                {
+                                    g.Key,
+                                    productsCount = g.Count()
+                                });
+
+            foreach (var c in catProds)
+            {
+                Console.WriteLine(c);
+            }
+
 
         }
 
@@ -526,7 +625,18 @@ static void Exercise20()
         /// </summary>
         static void Exercise29()
         {
+            var prods = DataLoader.LoadProducts();
+            var catProds = prods.GroupBy(p => p.Category)
+                                .Select(g => new
+                                {
+                                    g.Key,
+                                    productsSum = g.Sum(p => p.UnitsInStock)
+                                });
 
+            foreach (var c in catProds)
+            {
+                Console.WriteLine(c);
+            }
         }
 
         /// <summary>
@@ -534,7 +644,18 @@ static void Exercise20()
         /// </summary>
         static void Exercise30()
         {
+            var prods = DataLoader.LoadProducts();
 
+            var catAndLowPrice = prods.GroupBy(p => p.Category)
+                                      .Select(g => new
+                                      {
+                                          g.Key,
+                                          lowPrice = g.Min(p => p.UnitPrice)
+                                      });
+            foreach (var g in catAndLowPrice)
+            {
+                Console.WriteLine(g);
+            }
         }
 
         /// <summary>
@@ -542,7 +663,20 @@ static void Exercise20()
         /// </summary>
         static void Exercise31()
         {
+            var prods = DataLoader.LoadProducts();
 
+            var topAv3 = prods.GroupBy(p => p.Category)
+                              .Select(g => new
+                              {
+                                  g.Key,
+                                  AvPrice = g.Average(p => p.UnitPrice)
+                              })
+                              .OrderByDescending(g => g.AvPrice).Take(3);
+
+            foreach (var expnsv in topAv3)
+            {
+                Console.WriteLine(expnsv);
+            }
         }
     }
 }
