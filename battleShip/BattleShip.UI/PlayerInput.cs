@@ -41,7 +41,7 @@ namespace BattleShip.UI
                 string xCoord = coordInput.Substring(0, 1);
                 string yCoord = coordInput.Substring(1);
 
-                                bool isNum = int.TryParse(yCoord, out y);//do input validation
+                                bool isNum = int.TryParse(yCoord, out y);
                 if (!isNum)
                 {
                     Console.WriteLine("not the right format");
@@ -73,24 +73,24 @@ namespace BattleShip.UI
             while (badDirection)
             {
                 Console.WriteLine("what direction do you want your ship to go");//maybe a tooLower and a loop
-                string inputDirection = Console.ReadLine();
+                string inputDirection = Console.ReadLine().ToUpper();
                 
-                if (inputDirection == "up" || inputDirection == "UP" || inputDirection == "Up")
+                if (inputDirection == "UP")
                 {
                     userShipDirection = ShipDirection.Up;
                     badDirection = false;
                 }
-                else if (inputDirection == "down" || inputDirection == "DOWN" || inputDirection == "Down")
+                else if (inputDirection == "DOWN")
                 {
                     userShipDirection = ShipDirection.Down;
                     badDirection = false;
                 }
-                else if (inputDirection == "left" || inputDirection == "LEFT" || inputDirection == "Left")
+                else if (inputDirection == "LEFT")
                 {
                     userShipDirection = ShipDirection.Left;
                     badDirection = false;
                 }
-                else if (inputDirection == "right" || inputDirection == "RIGHT" || inputDirection == "Right")
+                else if (inputDirection == "RIGHT")
                 {
                     userShipDirection = ShipDirection.Right;
                     badDirection = false;

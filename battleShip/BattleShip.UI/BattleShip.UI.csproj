@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ConsoleOut.cs" />
     <Compile Include="GameFlow.cs" />
-    <Compile Include="GameState.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerInput.cs" />
     <Compile Include="Program.cs" />

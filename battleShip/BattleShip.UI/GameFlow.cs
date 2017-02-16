@@ -17,7 +17,6 @@ namespace BattleShip.UI
         Player _player2 = null;
         private bool _player1Turn;
         bool _isGameOver = false;
-        ConsoleOut test = new ConsoleOut();
 
         public GameFlow(bool player1Turn, Player p1, Player p2)
         {  
@@ -33,22 +32,21 @@ namespace BattleShip.UI
             {
                 ShotStatus checkShot = ShotStatus.Invalid;
                 Player targetPlayer = null;
+                Player currentPlayer = null;
 
                 if (_player1Turn)
                 {
-                    Console.Clear();
-                    Console.WriteLine($"{_player1.PlayerName}, its your turn");
-                    test.BoardViewer(_player2.PlayerBoard.ShotHistory);
                     targetPlayer = _player2;
-
+                    currentPlayer = _player1;
                 }
                 else
                 {
-                    Console.Clear();
-                    Console.WriteLine($"{_player2.PlayerName}, your turn");
-                    test.BoardViewer(_player1.PlayerBoard.ShotHistory);
                     targetPlayer = _player1;
+                    currentPlayer = _player2; 
                 }
+                Console.Clear();
+                Console.WriteLine($"{currentPlayer.PlayerName}, its your turn");
+                ConsoleOut.BoardViewer(targetPlayer.PlayerBoard.ShotHistory);
 
                 while (checkShot == ShotStatus.Invalid || checkShot == ShotStatus.Duplicate)
                 {
@@ -88,16 +86,6 @@ namespace BattleShip.UI
                 }
                 _player1Turn = !_player1Turn;
             }
-            //get shot coordinate
-
-
-
-
-
-
-            //send shot to other players board
-            //check to see if valid shot spot
-            //check to see what shot does (endGame etc.)
         }
     }
 }

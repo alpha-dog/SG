@@ -18,7 +18,7 @@ namespace BattleShip.UI
             ConsoleOut.SplashPage();
 
             string player1Name = PlayerInput.GetPlayer1Name();
-            string player2Name = PlayerInput.GetPlayer2Name();//names aren't used yet
+            string player2Name = PlayerInput.GetPlayer2Name();
 
             Player playerOne = new Player(player1Name);
             Player playerTwo = new Player(player2Name);
@@ -35,7 +35,7 @@ namespace BattleShip.UI
             Console.WriteLine($"hi {player2Name}, it's your turn to place ships");
             SetupBoard(playerTwo.PlayerBoard);
 
-            GameFlow game = new GameFlow(player1Turn, playerOne, playerTwo); //this probably doesn't work                  
+            GameFlow game = new GameFlow(player1Turn, playerOne, playerTwo);                  
 
             return game;
         }

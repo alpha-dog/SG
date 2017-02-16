@@ -9,7 +9,7 @@ using BattleShip.BLL.Requests;
 
 namespace BattleShip.UI
 {
-    class ConsoleOut
+    static class ConsoleOut
     {
         internal static void SplashPage()
         {
@@ -27,7 +27,7 @@ namespace BattleShip.UI
         //gotta display the board
 
         //Array[,] shotDisplay = new Array[10,10];
-        public void BoardViewer(Dictionary<Coordinate, ShotHistory> shotHist)
+        public static void BoardViewer(Dictionary<Coordinate, ShotHistory> shotHist)
         {
 
             for (int x = 1; x <= 10; x++)
