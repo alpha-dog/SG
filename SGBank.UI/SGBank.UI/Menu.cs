@@ -23,7 +23,7 @@ namespace SGBank.UI
                 Console.WriteLine("\nQ to quit");
                 Console.Write("\nenter selection: ");
 
-                string userInput = Console.ReadLine().ToUpper();
+                string userInput = Console.ReadLine().ToUpper();//why toUpper?
 
                 switch(userInput)
                 {

@@ -43,8 +43,8 @@ namespace SGBank.Data
                     {
                         newAccount.Type = AccountType.Free;
                     }
-                    if (accountLetter == "B")
-                    {
+                    else if (accountLetter == "B")          //if I this "else if" to "if", the first account gets initially marked as AccountType.Free (correct)
+                    {                                       //but then gets reset to to premium once it reaches the "else" statement. Whats up with that?
                         newAccount.Type = AccountType.Basic;
                     }
                     else
@@ -60,26 +60,57 @@ namespace SGBank.Data
                 return accounts;
         }
 
-        public void AddAccount(Account account)
+        public void AccountWrite(Account account)
         {
-            using (StreamWriter sw = new StreamWriter(_filePath, true))
-            {
-                string line = string.Format($"{account.AccountNumber}{account.Name}{account.Balance}{account.Type}");
-
-                sw.WriteLine(line);
-            }
+            
         }
 
 
-
-        public Account LoadAccount(string AccountNumber)
+        Account currentAccount = new Account();
+        public Account LoadAccount(string accountNumber)
         {
-            throw new NotImplementedException();
+            var loadAccount = AccountList();
+            currentAccount = loadAccount.SingleOrDefault(a => a.AccountNumber == accountNumber);
+            if (accountNumber == currentAccount.AccountNumber)
+            {
+                return currentAccount;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void SaveAccount(Account account)
         {
-            throw new NotImplementedException();
+            var accountNow = AccountList();
+            int index = -1;
+            for (int i = 0; i < accountNow.Count; i++)
+            {
+                if (account.AccountNumber == accountNow[i].AccountNumber)
+                {
+                    index = i;
+                }
+            }
+            if (index == -1)
+            {
+                throw new Exception("something went wrong. couldn't find account");
+            }
+            accountNow[index] = account;
+
+            using (StreamWriter sw = new StreamWriter(_filePath, false))
+            {
+                sw.WriteLine("AccountNumber, Name, Balance, Type");
+                foreach (var item in accountNow)
+                {
+                    string line = string.Format($"{item.AccountNumber},{item.Name},{item.Balance},{item.Type}");
+
+                    sw.WriteLine(line);
+
+                }
+                
+            }
+
         }
     }
 }
