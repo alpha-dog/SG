@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FlooringModels
 {
-    class Taxes
+    public class Taxes
     {
+        public string State { get; set; }
+        public string StateAbbreviation {get; set;}
+        public decimal taxRate { get; set; }
     }
 }

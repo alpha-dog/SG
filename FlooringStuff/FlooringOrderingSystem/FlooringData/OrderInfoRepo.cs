@@ -23,7 +23,13 @@ namespace FlooringData
             string fileNameDate = String.Format(userInputDate.ToString("MMddyyyy"));
             string dirPathFile = ($"{_dirPath}\\Orders_{fileNameDate}.txt");
             
-            DisplayResponse response = new DisplayResponse() { Success = false, Message = "something went wrong in the orderInfoRepo", OrderInfoList = null};
+            DisplayResponse response = new DisplayResponse()
+            {
+                Success = false,
+                Message = "something went wrong in the orderInfoRepo",
+                OrderInfoList = null
+            };
+
             if (File.Exists(dirPathFile))
             {
                 List<OrderInfo> orders = new List<OrderInfo>();

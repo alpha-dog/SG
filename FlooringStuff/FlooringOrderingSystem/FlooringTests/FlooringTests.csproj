@@ -45,9 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlooringData\FlooringData.csproj">
+      <Project>{C01CFB6E-56CC-4A11-A902-05E86FC8BC8A}</Project>
+      <Name>FlooringData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlooringModels\FlooringModels.csproj">
+      <Project>{779E5A88-FFC7-43EE-B37C-5C0D268D35B6}</Project>
+      <Name>FlooringModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

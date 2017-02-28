@@ -31,6 +31,12 @@ namespace FlooringOrderingSystem
                         DisplayFlow displayFlow = new DisplayFlow();
                         displayFlow.Execute();
                         break;
+                    case "2":
+                        AddOrderFlow addOrder = new AddOrderFlow();
+                        addOrder.Execute();
+                        break;
+                    case "q": case "Q":
+                        return;
                 }
             }
 

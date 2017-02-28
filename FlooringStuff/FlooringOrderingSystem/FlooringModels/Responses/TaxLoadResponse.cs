@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlooringModels.Responses
 {
-    public class DisplayResponse : Response
+    public class TaxLoadResponse : Response
     {
-        public List<OrderInfo> OrderInfoList { get; set; }
+        public List<Taxes> TaxList { get; set; }
     }
 }

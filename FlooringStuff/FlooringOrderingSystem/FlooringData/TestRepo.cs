@@ -9,29 +9,29 @@
 //{
 //    class TestRepo : IOrderRepo
 //    {
-//        //private static Order _testOrder = new Order()
-//        //{
-//        //    OrderNumber = 666,
-//        //    CustomerName = "fred",
-//        //    State = "OH",
-//        //    TaxRate,
-//        //    ProductType,
-//        //    Area,
-//        //    CostPerSquareFoot,
-//        //    LaborCostPerSquareFoot,
-//        //    MaterialCost,
-//        //    LaborCost,
-//        //    Tax,
-//        //    Total,
-//        //};
+//        private static Order _testOrder = new Order()
+//        {
+//            OrderNumber = 666,
+//            CustomerName = "fred",
+//            State = "OH",
+//            TaxRate,
+//            ProductType,
+//            Area,
+//            CostPerSquareFoot,
+//            LaborCostPerSquareFoot,
+//            MaterialCost,
+//            LaborCost,
+//            Tax,
+//            Total,
+//        };
 
 
-//        public Order LoadOrder(string OrderNumber)
+//        List<OrderInfo> IOrderRepo.LoadOrders(DateTime userDateInput)
 //        {
 //            throw new NotImplementedException();
 //        }
 
-//        public void SaveOrder(Order order)
+//        void IOrderRepo.SaveOrder(OrderInfo order)
 //        {
 //            throw new NotImplementedException();
 //        }
