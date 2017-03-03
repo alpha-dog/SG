@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FlooringData
 {
-    public class OrderInfoRepo : IOrderRepo
+    public class OrderInfoRepo : IOrderRepo //I think this may be a dumb spot for this if I'm going to make a seperate OrderRepo
     {
         string _dirPath; //this constructor forces any call to Repo to include a directoryPath argument
         public OrderInfoRepo(string dirPath)//directotryPath

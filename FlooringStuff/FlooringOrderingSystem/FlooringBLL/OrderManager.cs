@@ -39,7 +39,7 @@ namespace FlooringBLL
 
 
         //LoadOrders checks to see if the order exists in repository and loads it if it does
-        public DisplayResponse LoadOrders(DateTime date) //this might be an int, not a string
+        public DisplayResponse LoadOrders(DateTime date) 
         {
             DisplayResponse response = new DisplayResponse();
 

@@ -21,9 +21,6 @@ namespace FlooringOrderingSystem
 
             DateTime userDateInput = manager.StringToDate(Console.ReadLine());
 
-            //I converted the the code on the line below to the StringToDate method above so that a proper DateTime would be gauranteed
-            //DateTime userDateInput = DateTime.Parse(Console.ReadLine()); 
-
             DisplayResponse response = manager.LoadOrders(userDateInput);
 
             if (response.Success)

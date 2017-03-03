@@ -58,6 +58,10 @@
       <Project>{1F096E08-B8AC-4010-962C-793F7874EB10}</Project>
       <Name>FlooringBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlooringData\FlooringData.csproj">
+      <Project>{C01CFB6E-56CC-4A11-A902-05E86FC8BC8A}</Project>
+      <Name>FlooringData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlooringModels\FlooringModels.csproj">
       <Project>{779E5A88-FFC7-43EE-B37C-5C0D268D35B6}</Project>
       <Name>FlooringModels</Name>

@@ -1,5 +1,4 @@
 ﻿using FlooringModels;
-using FlooringModels.Responses;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,19 +12,21 @@ namespace FlooringData
     {
 
         string filePath = (@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff\Taxes.txt");
-        //maybe set up a new display response with bad values here that can be changed further down
 
-        TaxLoadResponse response = new TaxLoadResponse()
+        //I was confused and thought that responses were a good idea. I was wrong
+        //TaxLoadResponse response = new TaxLoadResponse()
+        //{
+        //    TaxList = null,
+        //    Success = false,
+        //    Message = "something is messed up in the TaxesRepo"
+        //};
+        public List<Taxes> TaxLoader() 
         {
-            TaxList = null,
-            Success = false,
-            Message = "something is messed up in the TaxesRepo"
-        };
-        public List<Taxes> TaxLoader(string filePath)
-        {
+            List<Taxes> taxList = new List<Taxes>();
+
             if (File.Exists(filePath))
             {
-                List<Taxes> taxList = new List<Taxes>();
+                
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     sr.ReadLine();
@@ -43,21 +44,24 @@ namespace FlooringData
 
                         taxList.Add(newTaxInfo);
                     }
-                    response.TaxList = taxList;
-                    response.Success = true;
-                    response.Message = "taxes added from file";
+                    //response.TaxList = taxList;
+                    //response.Success = true;
+                    //response.Message = "taxes added from file";
 
 
 
                     
                 }
+                
             }
-            else
-            {
-                response.Message = "something might be wrong with the file or the programmer messed up somewhere in TaxesRepo";
-            }
-            return response.TaxList;
-            
+            return taxList;
+
+            //else
+            //{
+            //    response.Message = "something might be wrong with the file or the programmer messed up somewhere in TaxesRepo";
+            //}
+            //return response.TaxList;
+
         }
     }
 }
