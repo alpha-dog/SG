@@ -38,12 +38,13 @@ namespace FlooringData
                     sr.ReadLine();
                     string line;
 
-                    while ((line = sr.ReadLine()) != null)
+                    while ((line = sr.ReadLine()) != null)//calculate the vals here from tax/products repo
                     {
                         OrderInfo newOrderInfo = new OrderInfo();
 
                         string[] columns = line.Split(',');
 
+                        //add date todo
                         newOrderInfo.OrderNumber = int.Parse(columns[0]);
                         newOrderInfo.CustomerName = columns[1];
                         newOrderInfo.State = columns[2];

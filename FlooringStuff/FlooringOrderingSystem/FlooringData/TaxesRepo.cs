@@ -12,14 +12,6 @@ namespace FlooringData
     {
 
         string filePath = (@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff\Taxes.txt");
-
-        //I was confused and thought that responses were a good idea. I was wrong
-        //TaxLoadResponse response = new TaxLoadResponse()
-        //{
-        //    TaxList = null,
-        //    Success = false,
-        //    Message = "something is messed up in the TaxesRepo"
-        //};
         public List<Taxes> TaxLoader() 
         {
             List<Taxes> taxList = new List<Taxes>();
@@ -56,11 +48,7 @@ namespace FlooringData
             }
             return taxList;
 
-            //else
-            //{
-            //    response.Message = "something might be wrong with the file or the programmer messed up somewhere in TaxesRepo";
-            //}
-            //return response.TaxList;
+            
 
         }
     }

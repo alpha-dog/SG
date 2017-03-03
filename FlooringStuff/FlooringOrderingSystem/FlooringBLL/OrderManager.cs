@@ -48,13 +48,17 @@ namespace FlooringBLL
             if (response.OrderInfoList == null)
             {
                 response.Success = false;
-                response.Message = $"an order for {date} could not be found.";
+                response.Message = $"an order for {date} could not be found.";//another message prints if no orders are found. Maybe this only prints in the case 
             }
             else
             {
                 response.Success = true;
             }
             return response;
+        }
+        public void AddOrder(OrderInfo newOrder)
+        {
+
         }
     }
 }

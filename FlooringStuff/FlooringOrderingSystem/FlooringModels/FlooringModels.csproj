@@ -47,7 +47,6 @@
     <Compile Include="Responses\AddOrderResponse.cs" />
     <Compile Include="Responses\DisplayResponse.cs" />
     <Compile Include="Responses\Response.cs" />
-    <Compile Include="Responses\TaxLoadResponse.cs" />
     <Compile Include="Taxes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
