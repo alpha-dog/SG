@@ -10,12 +10,11 @@ namespace FlooringData
 {
     public class ProductsRepo
     {
+        List<Products> productsList = new List<Products>();
         string filePath = (@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff\Products.txt");
 
-        public List<Products> ProductsLoader()
+        public ProductsRepo()
         {
-            List<Products> productsList = new List<Products>();
-
             if (File.Exists(filePath))
             {
 
@@ -44,7 +43,14 @@ namespace FlooringData
                 }
 
             }
-            return productsList;
+        }
+
+        public Products GetProduct(string prodType)
+        {
+            Products orderProds = new Products();
+            orderProds = productsList.SingleOrDefault(p => p.ProductType == prodType);
+
+            return orderProds;
         }
     }
 }

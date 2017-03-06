@@ -21,7 +21,7 @@ namespace FlooringOrderingSystem
                 Console.WriteLine("2.Add an Order");
                 Console.WriteLine("3.Edit an Order");
                 Console.WriteLine("4.Remove an Order");
-                Console.WriteLine("5.Quit");
+                Console.WriteLine("Enter 'Q' to Quit");
 
                 string userInput = Console.ReadLine();
 
@@ -34,6 +34,14 @@ namespace FlooringOrderingSystem
                     case "2":
                         AddOrderFlow addOrder = new AddOrderFlow();
                         addOrder.Execute();
+                        break;
+                    case "3":
+                        EditOrderFlow editOrder = new EditOrderFlow();
+                        editOrder.Execute();
+                        break;
+                    case "4":
+                        RemoveOrderFlow removeOrder = new RemoveOrderFlow();
+                        removeOrder.Execute();
                         break;
                     case "q": case "Q":
                         return;

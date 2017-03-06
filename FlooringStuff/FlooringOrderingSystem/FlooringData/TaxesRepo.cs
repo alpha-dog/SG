@@ -10,15 +10,14 @@ namespace FlooringData
 {
     public class TaxesRepo
     {
+        List<Taxes> taxList = new List<Taxes>();
 
         string filePath = (@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff\Taxes.txt");
-        public List<Taxes> TaxLoader() 
+        public TaxesRepo()
         {
-            List<Taxes> taxList = new List<Taxes>();
-
             if (File.Exists(filePath))
             {
-                
+
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     sr.ReadLine();
@@ -32,25 +31,23 @@ namespace FlooringData
 
                         newTaxInfo.StateAbbreviation = columns[0];
                         newTaxInfo.State = columns[1];
-                        newTaxInfo.taxRate = decimal.Parse(columns[2]);
+                        newTaxInfo.TaxRate = decimal.Parse(columns[2]);
 
                         taxList.Add(newTaxInfo);
                     }
                     //response.TaxList = taxList;
                     //response.Success = true;
-                    //response.Message = "taxes added from file";
-
-
-
-                    
+                    //response.Message = "taxes added from file";        
                 }
-                
             }
-            return taxList;
+        }
 
-            
+        public Taxes GetStateTax(string stateabrv)
+        {
+            Taxes stateTax = new Taxes();
+            stateTax = taxList.SingleOrDefault(t => t.StateAbbreviation == stateabrv);
 
+            return stateTax;
         }
     }
 }
-//dictionaries where key is the state abbreviation and value is tax data object

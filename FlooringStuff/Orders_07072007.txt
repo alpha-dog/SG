@@ -1,0 +1,6 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,tim,PA,6.75,Tile,10,3.50,3.50,4.15,35.00,41.50,5.163750,81.663750
+2,wolverine,MI,5.75,Carpet,30,2.25,2.25,2.10,67.50,63.00,7.503750,138.003750
+3,deleted,OH,0,Wood,0,0,0,0,0,0,0,0
+4,toby,PA,6.75,Wood,10,5.15,5.15,4.75,51.50,47.50,6.682500,105.682500
+5,ben,IN,6.00,Wood,25,1.75,1.75,2.10,43.75,52.50,5.7750,102.0250

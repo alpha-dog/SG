@@ -10,6 +10,6 @@ namespace FlooringModels
     {
         public string State { get; set; }
         public string StateAbbreviation {get; set;}
-        public decimal taxRate { get; set; }
+        public decimal TaxRate { get; set; }
     }
 }

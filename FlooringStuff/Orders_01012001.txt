@@ -1,0 +1,4 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,der,Ohio,6.25,Wood,555,5.15,5.15,4.75,2858.25,2636.25,343.406250,5837.906250
+1,dennis,Michigan,5.75,Tile,543,3.50,3.50,4.15,1900.50,2253.45,238.852125,4392.802125
+2,dean,Ohio,6.25,Wood,456,5.15,5.15,4.75,2348.40,2166.00,282.150000,4796.550000

@@ -1,0 +1,12 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+
+0,dateformat,Michigan5.75,Wood,345,5.15,5.15,4.75,1776.75,1638.75,196.391250,3611.891250
+
+3,Fred Dorkenson,Michigan,5.75,Wood,456,5.15,5.15,4.75,2348.40,2166.00,259.578000,4773.978000
+
+0,danny McChicken,Pennsylvania,6.75,Tile,234,3.50,3.50,4.15,819.00,971.10,120.831750,1910.931750
+
+6,valerie,Ohio,6.25,Wood,555,5.15,5.15,4.75,2858.25,2636.25,343.406250,5837.906250
+
+8,gregory,Michigan,5.75,Tile,45,3.50,3.50,4.15,157.50,186.75,19.794375,364.044375
+10,fafy,Ohio,6.25,Wood,777,5.15,5.15,4.75,4001.55,3690.75,480.768750,8173.068750

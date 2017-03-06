@@ -18,7 +18,7 @@ namespace FlooringBLL
             switch (mode)
             {
                 case "prod":
-                    return new OrderManager(new OrderInfoRepo(@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff"));
+                    return new OrderManager(new OrderInfoRepo(@"C:\Users\Tom\Documents\SoftwareGuild\Repositories\david-evans-individual-work\FlooringStuff", new TaxesRepo(), new ProductsRepo()));
 
                 default:
                     throw new Exception("the mode value in App.Config isn't set to any of your cases");

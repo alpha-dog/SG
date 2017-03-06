@@ -46,9 +46,11 @@
     <Compile Include="AddOrderFlow.cs" />
     <Compile Include="ConsoleIO.cs" />
     <Compile Include="DisplayFlow.cs" />
+    <Compile Include="EditOrderFlow.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoveOrderFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

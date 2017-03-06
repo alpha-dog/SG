@@ -12,9 +12,14 @@ namespace FlooringData
     public class OrderInfoRepo : IOrderRepo //I think this may be a dumb spot for this if I'm going to make a seperate OrderRepo
     {
         string _dirPath; //this constructor forces any call to Repo to include a directoryPath argument
-        public OrderInfoRepo(string dirPath)//directotryPath
+        TaxesRepo _taxStuff;
+        ProductsRepo _productStuff;
+        public OrderInfoRepo(string dirPath, TaxesRepo taxStuff, ProductsRepo productStuff)//directotryPath
         {
             _dirPath = dirPath;
+            _taxStuff = taxStuff;
+            _productStuff = productStuff;
+            
         }
         // this checks to see if a file exists. If it does it returns a list of OrderInfos
         public List<OrderInfo> LoadOrders (DateTime userInputDate)
@@ -45,18 +50,19 @@ namespace FlooringData
                         string[] columns = line.Split(',');
 
                         //add date todo
+                        newOrderInfo.OrderDate = userInputDate;
                         newOrderInfo.OrderNumber = int.Parse(columns[0]);
                         newOrderInfo.CustomerName = columns[1];
-                        newOrderInfo.State = columns[2];
-                        newOrderInfo.TaxRate = decimal.Parse(columns[3]);
-                        newOrderInfo.ProductType = columns[4];
+                        newOrderInfo.StateTax = _taxStuff.GetStateTax(columns[2]);
+                        //newOrderInfo.TaxRate = decimal.Parse(columns[3]);
+                        newOrderInfo.OrderProduct = _productStuff.GetProduct(columns[4]);
                         newOrderInfo.Area = decimal.Parse(columns[5]);
-                        newOrderInfo.CostPerSquareFoot = decimal.Parse(columns[6]);
-                        newOrderInfo.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
-                        newOrderInfo.MaterialCost = decimal.Parse(columns[8]);
-                        newOrderInfo.LaborCost = decimal.Parse(columns[9]);
-                        newOrderInfo.Tax = decimal.Parse(columns[10]);
-                        newOrderInfo.Total = decimal.Parse(columns[11]);
+                        //newOrderInfo.CostPerSquareFoot = decimal.Parse(columns[6]);
+                        //newOrderInfo.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
+                        //newOrderInfo.MaterialCost = decimal.Parse(columns[8]); ALREADY CALCULATED IN CLASS DEFINITION
+                        //newOrderInfo.LaborCost = decimal.Parse(columns[9]);
+                        //newOrderInfo.Tax = decimal.Parse(columns[10]);
+                        //newOrderInfo.Total = decimal.Parse(columns[11]);
 
                         orders.Add(newOrderInfo);
                     }

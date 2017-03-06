@@ -1,0 +1,7 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Billy,MI,6.25,Tile,123,5.15,5.15,4.75,633.45,584.25,76.106250,1293.806250
+2,charles,OH,6.25,Wood,123,5.15,5.15,4.75,633.45,584.25,76.106250,1293.806250
+
+4,X-man,PA,6.75,Carpet,122,2.25,2.25,2.10,274.50,256.20,35.822250,566.522250
+6,ricky,IN,6.00,Tile,10,3.50,3.50,4.15,35.00,41.50,4.5900,81.0900
+7,dummy,MI,5.75,Wood,33,5.15,5.15,4.75,169.95,156.75,18.785250,345.485250
