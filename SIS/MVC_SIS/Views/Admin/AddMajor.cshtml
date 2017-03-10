@@ -4,7 +4,6 @@
     ViewBag.Title = "Add Major";
 }
 
-
 <div class="row">
     <div class="col-xs-12">
         <h3>Add Major</h3>
@@ -17,7 +16,7 @@
         {
             <div class="form-group">
                 <label>Major</label>
-                @Html.TextBoxFor(m => m.MajorName, new {@class = "form-control", placeholder = "Major"})
+                @Html.TextBoxFor(m => m.MajorName , new {@class = "form-control", placeholder = "Major"})
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

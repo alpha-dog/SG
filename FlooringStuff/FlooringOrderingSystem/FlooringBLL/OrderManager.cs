@@ -62,7 +62,7 @@ namespace FlooringBLL
                         if (line == orderNumberToRemove)
                         {
                             //sw.WriteLine(lineToEdit);
-                            sw.WriteLine($"{orderToRemove.OrderNumber},deleted,OH,0,Wood,0,0,0,0,0,0,0,0");
+                            //sw.WriteLine($"{orderToRemove.OrderNumber},deleted,OH,0,Wood,0,0,0,0,0,0,0,0");
 
                         }
                         else
@@ -125,18 +125,20 @@ namespace FlooringBLL
             }
             else
             {
-                using (StreamReader sr = new StreamReader(file))
-                {
-                    //sr.ReadLine();
-                    string line;
-                    int counter = 0;
+                var list = _orderRepo.LoadOrders(userDate);
+                ord.OrderNumber = list.Max(l => l.OrderNumber) + 1;
+                //using (StreamReader sr = new StreamReader(file))
+                //{
+                //    //sr.ReadLine();
+                //    string line;
+                //    int counter = 0;
 
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        counter++;
-                    }
-                    ord.OrderNumber = counter;
-                }
+                //    while ((line = sr.ReadLine()) != null)
+                //    {
+                //        counter++;
+                //    }
+                //    ord.OrderNumber = counter;
+                //}
 
             }
             using (StreamWriter sw = File.AppendText(file))
@@ -222,6 +224,8 @@ namespace FlooringBLL
         {
             var orderDate = editedOrder.OrderDate;
 
+            var orderList = _orderRepo.LoadOrders(orderDate);
+
             string fileName = $"Orders_{orderDate.ToString("MMddyyyy")}.txt";
             string file = dirPath + fileName;
             int orderNumberToEdit = editedOrder.OrderNumber;
@@ -231,19 +235,31 @@ namespace FlooringBLL
             //overwrite
             using (StreamWriter sw = new StreamWriter(file))
             {
-                for (int line = 0; line < oldFile.Length; line++)
+                sw.WriteLine(oldFile[0]);
+                foreach (var order in orderList)
                 {
-                    if (line == orderNumberToEdit)
+                    var orderToWrite = order;
+                    if (order.OrderNumber == editedOrder.OrderNumber)
                     {
-                        //sw.WriteLine(lineToEdit);
-                        sw.WriteLine($"{editedOrder.OrderNumber},{editedOrder.CustomerName},{editedOrder.StateTax.StateAbbreviation},{editedOrder.StateTax.TaxRate},{editedOrder.OrderProduct.ProductType},{editedOrder.Area},{editedOrder.OrderProduct.CostPerSquareFoot},{editedOrder.OrderProduct.CostPerSquareFoot},{editedOrder.OrderProduct.LaborCostPerSquareFoot},{editedOrder.MaterialCost},{editedOrder.LaborCost},{editedOrder.Tax},{editedOrder.Total}");
-
+                        orderToWrite = editedOrder;
                     }
-                    else
-                    {
-                        sw.WriteLine(oldFile[line]);
-                    }
+                    sw.WriteLine($"{orderToWrite.OrderNumber},{orderToWrite.CustomerName},{orderToWrite.StateTax.StateAbbreviation},{orderToWrite.StateTax.TaxRate},{orderToWrite.OrderProduct.ProductType},{orderToWrite.Area},{orderToWrite.OrderProduct.CostPerSquareFoot},{orderToWrite.OrderProduct.CostPerSquareFoot},{orderToWrite.OrderProduct.LaborCostPerSquareFoot},{orderToWrite.MaterialCost},{orderToWrite.LaborCost},{orderToWrite.Tax},{orderToWrite.Total}");
+                    //orderToWrite
                 }
+
+                //for (int line = 0; line < oldFile.Length; line++)
+                //{
+                //    if (line == orderNumberToEdit)
+                //    {
+                //        //sw.WriteLine(lineToEdit);
+                //        sw.WriteLine($"{editedOrder.OrderNumber},{editedOrder.CustomerName},{editedOrder.StateTax.StateAbbreviation},{editedOrder.StateTax.TaxRate},{editedOrder.OrderProduct.ProductType},{editedOrder.Area},{editedOrder.OrderProduct.CostPerSquareFoot},{editedOrder.OrderProduct.CostPerSquareFoot},{editedOrder.OrderProduct.LaborCostPerSquareFoot},{editedOrder.MaterialCost},{editedOrder.LaborCost},{editedOrder.Tax},{editedOrder.Total}");
+
+                //    }
+                //    else
+                //    {
+                //        sw.WriteLine(oldFile[line]);
+                //    }
+                //}
             }
         }
         

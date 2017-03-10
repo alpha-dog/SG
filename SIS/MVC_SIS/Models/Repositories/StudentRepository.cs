@@ -80,6 +80,7 @@ namespace Exercises.Models.Repositories
 
         public static void Add(Student state)
         {
+            state.StudentId = _students.Max(s => s.StudentId) + 1;
             _students.Add(state);
         }
 
@@ -92,6 +93,7 @@ namespace Exercises.Models.Repositories
             selectedStudent.GPA = student.GPA;
             selectedStudent.Major = student.Major;
             selectedStudent.Courses = student.Courses;
+           
         }
 
         public static void Delete(int studentId)

@@ -48,5 +48,39 @@ namespace Exercises.Controllers
 
             return RedirectToAction("List");
         }
+        public ActionResult EditStudent(int id)
+        {
+            var student = StudentRepository.Get(id);
+            return View(student);
+        }
+        [HttpPost]
+        public ActionResult EditStudent(Student student)
+        {
+            StudentRepository.Edit(student);
+            return RedirectToAction("Students");
+        }
+        public ActionResult Delete(int id)
+        {
+            var student = StudentRepository.Get(id);
+            return View(student);
+        }
+        [HttpPost]
+        public ActionResult Delete(Student student)
+        {
+            StudentRepository.Delete(student.StudentId);
+            return RedirectToAction("Students");
+        }
+        
+        //public ActionResult DeleteCourse(int id)
+        //{
+        //    var course = CourseRepository.Get(id);
+        //    return View(course);
+        //}
+        //[HttpPost]
+        //public ActionResult DeleteCourse(Course course)
+        //{
+        //    CourseRepository.Delete(course.CourseId);
+        //    return RedirectToAction("Courses");
+        //}
     }
 }
