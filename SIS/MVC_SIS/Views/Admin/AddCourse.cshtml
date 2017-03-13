@@ -1,13 +1,13 @@
 ﻿@model Exercises.Models.Data.Course
 
 @{
-    ViewBag.Title = "Add Course";
+    ViewBag.Title = "Add Course";//this is just the tab title
 }
 
-<div class="row">
+<div class="row"> <!--this div is just a link to go back to courses-->
     <div class="col-xs-12">
         <h3>Add Course</h3>
-        @Html.ActionLink("Return to List", "Courses", "Admin")
+        @Html.ActionLink("Return to List", "Courses", "Admin") @*this is just an href*@
     </div>
 </div>
 <div class="row">

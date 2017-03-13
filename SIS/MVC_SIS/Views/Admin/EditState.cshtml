@@ -1,6 +1,6 @@
 ﻿@model Exercises.Models.Data.State
 @{
-    ViewBag.Title = "EditState";
+    ViewBag.Title = "Edit State";
 }
 
 <div class="row">
@@ -16,7 +16,7 @@
             @Html.HiddenFor(s => s.StateAbbreviation)
             <div class="form-group">
                 <label>State</label>
-                @Html.TextBoxFor(s => s.StateName, new { @class = "form-control", placeholder = "State" }) <!--MAKE THIS PLACEHOLDER say the state being edited--> 
+                @Html.TextBoxFor(s => s.StateName, new { @class = "form-control", placeholder = "State" }) 
                 @*@Html.TextBoxFor(s => s.StateAbbreviation, new { @class = "form-control", placeholder = "State" })*@
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>

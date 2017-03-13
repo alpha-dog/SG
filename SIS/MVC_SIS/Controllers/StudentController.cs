@@ -48,15 +48,18 @@ namespace Exercises.Controllers
 
             return RedirectToAction("List");
         }
-        public ActionResult EditStudent(int id)
+        public ActionResult Edit(int id)
         {
-            var student = StudentRepository.Get(id);
-            return View(student);
+            // new view model instance and assignment
+            var studentVM = new StudentVM();
+            studentVM.Student = StudentRepository.Get(id);
+            return View(studentVM);
         }
         [HttpPost]
-        public ActionResult EditStudent(Student student)
+        public ActionResult Edit(StudentVM studentVM)
         {
-            StudentRepository.Edit(student);
+            // include studentVM stuff
+            StudentRepository.Edit(studentVM.Student);
             return RedirectToAction("Students");
         }
         public ActionResult Delete(int id)
