@@ -9,7 +9,7 @@ namespace Exercises.Models.Data
     public class Major
     {
         public int MajorId { get; set; }
-        [Required]
+
         public string MajorName { get; set; }
     }
 }

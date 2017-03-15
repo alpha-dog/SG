@@ -48,10 +48,13 @@ namespace Exercises.Controllers
 
                 StudentRepository.Add(studentVM.Student);
 
+
                 return RedirectToAction("List");
             }
             else
             {
+                studentVM.SetCourseItems(CourseRepository.GetAll());
+                studentVM.SetMajorItems(MajorRepository.GetAll());
                 return View("Add", studentVM);
             }
            
@@ -63,7 +66,9 @@ namespace Exercises.Controllers
             studentVM.SetCourseItems(CourseRepository.GetAll());
             studentVM.SetMajorItems(MajorRepository.GetAll());
             studentVM.Student = StudentRepository.Get(id);
-            //studentVM.Student.Address = StudentRepository.SaveAddress(id,);
+            studentVM.SelectedCourseIds.AddRange(studentVM.Student.Courses.Select(c => c.CourseId));
+            //studentVM.Student.Address.State = StateRepository.Get(studentVM.Student.Address.State.StateAbbreviation);
+            //studentVM.Student.Address = StudentRepository.SaveAddress(id);
             return View(studentVM);
         }
         [HttpPost]
@@ -84,6 +89,8 @@ namespace Exercises.Controllers
             }
             else
             {
+                studentVM.SetCourseItems(CourseRepository.GetAll());
+                studentVM.SetMajorItems(MajorRepository.GetAll());
                 return View("Edit", studentVM);
             }
             

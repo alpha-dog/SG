@@ -22,7 +22,7 @@ namespace Exercises.Models.Data
 
         [Required(ErrorMessage = "Please enter a Major")]
         public Major Major { get; set; }
-        public List<Course> Courses { get; set; }
+        public List<Course> Courses { get; set; } = new List<Course>();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         { 
@@ -32,7 +32,8 @@ namespace Exercises.Models.Data
             {
                 errors.Add(new ValidationResult("Your GPA needs to be between 0 and 4", new[] { "GPA" }));
             }
-            if (Address.State.StateAbbreviation.Length != 2)
+
+            if (Address != null && Address.State.StateAbbreviation.Length != 2)
             {
                 errors.Add(new ValidationResult("Please enter a two character state abbreviation", new[] { "Address" }));
             }

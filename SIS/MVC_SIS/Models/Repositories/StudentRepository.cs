@@ -81,6 +81,7 @@ namespace Exercises.Models.Repositories
         public static void Add(Student state)
         {
             state.StudentId = _students.Max(s => s.StudentId) + 1;// i added this line i think
+
             _students.Add(state);
         }
 

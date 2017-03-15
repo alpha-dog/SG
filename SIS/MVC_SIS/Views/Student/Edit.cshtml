@@ -48,9 +48,11 @@
                                         </div>
                                         <h4>Courses</h4>
                                         <div class="form-group">
-                                            @Html.ListBoxFor(m => m.SelectedCourseIds, Model.CourseItems, new { @class = "form-control" })
+                                            @* product.Categories = new MultiSelectList(list, "ID", "Name", cat.CategorySelected.Select(c => c.ID).ToArray()); *@
+                                            @* @Html.ListBoxFor(model => Model.propertynameforselectedid, (MultiSelectList)Model.propertyname) *@
+                                            @Html.ListBoxFor(m => m.SelectedCourseIds, new MultiSelectList(Model.CourseItems, "Value", "Text", Model.SelectedCourseIds), new { @class = "form-control" })
                                         </div>
-                                        <hr />
+                                        @*<hr />
                                         <div class="form-group">
                                             <label>Address 1</label>
                                             @Html.TextBoxFor(a => a.Student.Address.Street1, new { @class = "form-control" })
@@ -71,8 +73,8 @@
                                             <label>State</label>
                                             @Html.TextBoxFor(a => a.Student.Address.State, new { @class = "form-control" })
                                             <span class="text-danger">@Html.ValidationMessageFor(s => s.Student.Address.State.StateAbbreviation)</span>
-                                            @* this one doesn't work *@
-                                        </div>
+                                           
+                                        <@*/div>*@
                                         @*ListBoxFor with a MultiSelectList will be used*@
                                         <button class="btn btn-primary">Save</button>
                                         @Html.ActionLink("Cancel", "List", "Student", null, new { @class = "btn btn-sm btn-info" })
@@ -104,7 +106,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>State</label>
-                                            @Html.TextBoxFor(a => a.Student.Address.State, new { @class = "form-control" })
+                                            @Html.TextBoxFor(a => a.Student.Address.State.StateAbbreviation, new { @class = "form-control" })
                                             <span class="text-danger">@Html.ValidationMessageFor(s => s.Student.Address.State.StateAbbreviation)</span>
                                             @* this one doesn't work *@
 
