@@ -23,6 +23,7 @@ namespace Exercises.Models.ViewModels
             StateItems = new List<SelectListItem>();
             SelectedCourseIds = new List<int>();
             Student = new Student();
+
         }
 
         public void SetCourseItems(IEnumerable<Course> courses)

@@ -17,7 +17,8 @@ namespace Exercises.Models.Repositories
                 {
                     new Major { MajorId=1, MajorName="Art" },
                     new Major { MajorId=2, MajorName="Business" },
-                    new Major { MajorId=3, MajorName="Computer Science" }
+                    new Major { MajorId=3, MajorName="Computer Science" },
+                    new Major { MajorId=4, MajorName="Undeclared" }
                 }; 
         }
 

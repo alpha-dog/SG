@@ -19,17 +19,17 @@ function loadSnacks(){
                 var name = snack.name;
                 var price = snack.price;
                 var quantity = snack.quantity;
-
+                            //make it even more dynamic and add an id for button that uses the index to number it
                     //    var newSnack = '<div class="panel panel-default" id="snack"> <button> <div class="panel-heading">';
-                    //        newSnack += '<h4>' + name + '</h4>'; 
-                    //        newSnack += '</div> <div class="panel-body pheat-body">';
-                    //        newSnack += '<h4>' + price + '</h4>'; 
-                    //        newSnack += '</div> <div class="panel-footer">';
-                    //        newSnack += '<h4>' + quantity + '</h4>'; 
-                    //        newSnack += '</div> </button> </div>';
+                      var  newSnack = '<button> <div class="panel-heading"> <h4>' + name + '</h4>'; 
+                           newSnack += '</div> <div class="panel-body pheat-body">';
+                           newSnack += '<h4>' + price + '</h4>'; 
+                           newSnack += '</div> <div class="panel-footer">';
+                           newSnack += '<h4>' + quantity + '</h4>'; 
+                           newSnack += '</div> </button> </div>';
                 
                 
-                 var newSnack = '<h4>' + name + index + '<h4>';
+                //  var newSnack = '<h4>' + name + index + '<h4>';
 
                 snackStuff.append(newSnack);
             });

@@ -71,8 +71,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddState(State state)
         {
-            StateRepository.Add(state);
-            return RedirectToAction("States");
+            if (ModelState.IsValid)
+            {
+                StateRepository.Add(state);
+                return RedirectToAction("States");
+            }
+            else
+            {
+                return View("AddState", state);
+            }
+            
         }
 
         public ActionResult EditState(string stateAbbreviation)
@@ -83,8 +91,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditState(State state)
         {
-            StateRepository.Edit(state);
-            return RedirectToAction("States");
+            if (ModelState.IsValid)
+            {
+                StateRepository.Edit(state);
+                return RedirectToAction("States");
+            }
+            else
+            {
+                return View("EditState", state);
+            }
+            
         }
         public ActionResult DeleteState(string stateAbbreviation)
         {
@@ -111,8 +127,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddCourse(Course course)
         {
-            CourseRepository.Add(course.CourseName);
-            return RedirectToAction("Courses");
+            if (ModelState.IsValid)
+            {
+                CourseRepository.Add(course.CourseName);
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View("AddCourse", course);
+            }
+            
         }
         public ActionResult EditCourse (int id)
         {
@@ -122,8 +146,15 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditCourse(Course course)
         {
-            CourseRepository.Edit(course);
-            return RedirectToAction("Courses");
+            if (ModelState.IsValid)
+            {
+                CourseRepository.Edit(course);
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View("EditCourse", course);
+            }
         }
         public ActionResult DeleteCourse(int id)
         {

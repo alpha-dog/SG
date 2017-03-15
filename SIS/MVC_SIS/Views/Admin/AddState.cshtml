@@ -18,6 +18,7 @@
                 <label>State</label>
                 @Html.TextBoxFor(s => s.StateName , new { @class = "form-control", placeholder = "State" })
                 @Html.TextBoxFor(s => s.StateAbbreviation, new { @class = "form-control", placeholder = "Abbreviation"})
+                <span class="text-danger">@Html.ValidationMessageFor(s => s.StateAbbreviation)</span>
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

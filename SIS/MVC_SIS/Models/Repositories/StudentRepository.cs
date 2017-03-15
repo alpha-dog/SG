@@ -93,6 +93,12 @@ namespace Exercises.Models.Repositories
             selectedStudent.GPA = student.GPA;
             selectedStudent.Major = student.Major;
             selectedStudent.Courses = student.Courses;
+            selectedStudent.Address = student.Address;
+            //selectedStudent.Address.Street1 = student.Address.Street1;
+            //selectedStudent.Address.Street2 = student.Address.Street2;
+            //selectedStudent.Address.City = student.Address.City;
+            //selectedStudent.Address.State = student.Address.State;
+            //selectedStudent.Address.PostalCode = student.Address.PostalCode;
            
         }
 
