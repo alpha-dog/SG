@@ -86,6 +86,19 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddState(State state)
         {
+    //        public void AddModelError(
+    //string key,
+    //string errorMessage
+
+
+            if (string.IsNullOrWhiteSpace(state.StateName))
+            {
+                ModelState.AddModelError("StateName", "A state name needs to be entered");
+            }
+            if (string.IsNullOrWhiteSpace(state.StateAbbreviation))
+            {
+                ModelState.AddModelError("StateAbbreviation", "A state abbreviation needs to be entered");
+            }
             if (ModelState.IsValid)
             {
                 StateRepository.Add(state);

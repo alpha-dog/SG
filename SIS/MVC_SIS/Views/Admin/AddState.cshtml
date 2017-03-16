@@ -17,6 +17,7 @@
             <div class="form-group">
                 <label>State</label>
                 @Html.TextBoxFor(s => s.StateName , new { @class = "form-control", placeholder = "State" })
+                <span class="text-danger">@Html.ValidationMessageFor(s => s.StateName)</span>
                 @Html.TextBoxFor(s => s.StateAbbreviation, new { @class = "form-control", placeholder = "Abbreviation"})
                 <span class="text-danger">@Html.ValidationMessageFor(s => s.StateAbbreviation)</span>
             </div>
