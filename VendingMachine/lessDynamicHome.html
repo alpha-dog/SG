@@ -13,11 +13,11 @@
     <!-- HEADER START-->
     <div class="container-fluid">
         <div class="row" style="vertical-align: middle">
-            <div class="col-xs-4"><strong>text left</strong></div>
+            <div class="col-xs-4"><strong></strong></div>
             <div class="col-xs-4" style="text-align: center">
-                <h2>TEST</h2>
+                <h2>Vending Machine</h2>
             </div>
-            <div class="col-xs-4" style="text-align: right">text right</div>
+            <div class="col-xs-4" style="text-align: right"></div>
         </div>
     </div>
     <!-- END HEADER -->
@@ -27,10 +27,10 @@
         <div class="row first-row text-center">
             <div class="col-md-3 col-sm-4 col-xs-6 bottom-gutter">
                 <div class="panel panel-default" id="snack1">
-                    
+                    <!-- snack panels ceated in js-->
 
                 </div>
-            </div>
+            </div> 
             <div class="col-md-3 col-sm-4 col-xs-6 bottom-gutter">
                 <div class="panel panel-default" id="snack2">
                     
@@ -45,15 +45,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         TOTAL $ IN
-                        <form> <input type="text" name="totalIn" value="totalIn" readonly></form>
+                        <form> <input type="text" name="totalIn" id="totalMoney" readonly></form>
                     </div>
                     <div class="panel-body">
-                        <button>Add Dollar</button>
-                        <button>Add Quarter</button>
+                        <button id="addDollar">Add Dollar</button>
+                        <button id="addQuarter">Add Quarter</button>
                     </div>
                     <div class="panel-footer">
-                        <button>Add Dime</button>
-                        <button>Add Nickel</button>
+                        <button id="addDime">Add Dime</button>
+                        <button id="addNickel">Add Nickel</button>
                     </div>
                 </div>
             </div>
@@ -78,15 +78,15 @@
                     <div class="panel-heading">
                         Messages
                         <form>
-                            <textarea rows="2" cols="30" readonly></textarea>
+                            <textarea rows="2" cols="30" readonly id="snackMessage"></textarea>
                             <!--<input type="text" name="Messages" value="value">-->
                         </form>
                     </div>
                     <div class="panel-body">
-                        item: <input type="text">
+                        <form>Item: <input type="text" id="snackSelection" placeholder="make selection" readonly></form> 
                     </div>
                     <div class="panel-footer">
-                        <button type="submit">Make Purchase</button>
+                        <button type="submit" id="makePurchase">Make Purchase</button>
                     </div>
                 </div>
             </div>
@@ -111,10 +111,10 @@
                         Change
                     </div>
                     <div class="panel-body">
-                        <form><input type="text" readonly></form>
+                        <form><input type="text" id="changeDisplay" readonly></form>
                     </div>
                     <div class="panel-footer">
-                        <button type="submit">change return</button>
+                        <button type="submit" id="getChange">change return</button>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
     <!-- FOOTER START -->
     <footer class="footer">
         <div class="navbar-default navbar-fixed-bottom">
-            <p class="text-muted">Place sticky footer content here.</p>
+            <p class="text-muted">.</p>
         </div>
     </footer>
     <!-- END FOOTER -->
