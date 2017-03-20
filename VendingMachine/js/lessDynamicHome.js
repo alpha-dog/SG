@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     loadSnacks();
     $('#makePurchase').click(vendSnack);
-    
+
 });
 
 function loadSnacks() {
@@ -56,20 +56,21 @@ function loadSnacks() {
         }
     });
 }
-function vendSnack(){
+function vendSnack() {
 
     $.ajax({
         type: 'GET',
         ///money/{amount}/item/{id}
-        url: 'http://localhost:8080/money/'+total+'/item/'+itemSelected+'',
-        success: function(change, status) {
-            $('#changeDisplay').text('Q:'+change.quarters + 'D:' + change.dimes + 'N:' + change.nickels + 'P:' + change.pennies);
+        url: 'http://localhost:8080/money/' + total + '/item/' + itemSelected + '',
+        success: function (change, status) {
+            $('#changeDisplay').text('Q:' + change.quarters + 'D:' + change.dimes + 'N:' + change.nickels + 'P:' + change.pennies);
             $('#snackMessage').val('enjoy your snack');
             total = 0;
             $('#totalMoney').val(total);
         },
-        error: function(){
-            $('#snackMessage').text(change.message); 
+        error: function (xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
         }
     })
 }
