@@ -8,6 +8,7 @@ $(document).ready(function () {
 
     loadSnacks();
     $('#makePurchase').click(vendSnack);
+   // $('#getChange').click(changeReturn);
 
 });
 
@@ -69,11 +70,18 @@ function vendSnack() {
             $('#totalMoney').val(total);
         },
         error: function (xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
+            var err = eval("(" + xhr.responseText + ")"); //responseJson with a .message property
             alert(err.Message);
         }
     })
 }
+
+// function changeReturn (){
+//     //total is my money var
+//     if (total == 5){
+//         var nickel
+//     }
+// }
 
 $('#addDollar').click(function () {
     total += 1;

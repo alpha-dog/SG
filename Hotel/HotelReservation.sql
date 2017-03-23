@@ -22,19 +22,12 @@ create table Customer
 	CardNumber varchar (20) not null,
 )
 
-create table Guest
-(
-	GuestID int identity(1,1) primary key,
-	FirstName nvarchar(30) not null,
-	LastName nvarchar(30) not null,
-	CustomerID int foreign key references Customer(CustomerID) not null
-)
-
 
 create table Promotions
 (
 	PromoCode int identity(1,1) primary key,
-	PromoRate int not null,
+	PromoPercentage int null,
+	PromoFlat money null,
 	PromoExpDate datetime2 not null,
 	PromoType varchar(30) not null
 )
@@ -51,12 +44,20 @@ create table Reservation
 	BillID int not null
 )
 
+create table Guest
+(
+	GuestID int identity(1,1) primary key,
+	FirstName nvarchar(30) not null,
+	LastName nvarchar(30) not null,
+	ReservationID int foreign key references Reservation(ReservationID) not null
+)
+
 create table Bill
 (
 	BillID int identity primary key,
 	ReservationID int foreign key references Reservation(ReservationID),
 	Taxes money not null,
-	Details money null,
+	--Details money null,
 	Total money not null,
 )
 
@@ -68,39 +69,58 @@ create table Room
 	[Floor] int not null,
 	Occupants int not null,
 	RoomTypeID int not null,
-	ReservationID int foreign key references Reservation(ReservationID),
 	AddOnID int null,
-	AmmenityID int null
+	--AmenityID int null
 )
 
-create table Ammenity
+create table ReservationRoom
 (
-	AmmenityID int identity primary key,
-	AmmenityName varchar(10) not null,
-	RoomID int foreign key references Room(RoomID),
+	ReservationID int not null,
+	RoomID int not null,
+	constraint PK_ReservationRoom 
+		primary key(ReservationID, RoomID),
+	constraint FK_Room_Reservation 
+		foreign key (RoomID) references Room(RoomID),
+	constraint FK_Reservation_Room 
+		foreign key (ReservationID) references Reservation(ReservationID) 
+)
+
+create table Amenity
+(
+	AmenityID int identity primary key,
+	AmenityName varchar(10) not null,
+	--RoomID int foreign key references Room(RoomID),
+)
+
+create table RoomAmenity
+(
+	RoomID int not null,
+	AmenityID int not null,
+	constraint PK_RoomAmenity primary key(RoomID, AmenityID),
+	constraint FK_Amenity_Room foreign key(AmenityID) references Amenity(AmenityID),
+	constraint FK_Room_Amenity foreign key(RoomID) references Room(RoomID)
 )
 
 create table RoomType
 (
 	RoomTypeID int identity primary key,
 	[Type] VarChar(10) not null,
-	RoomID int foreign key references Room(RoomID),
 	RateID int not null
 )
 
 create table Rate
 (
 	RateID int identity primary key,
-	RoomTypeID int foreign key references RoomType(RoomTypeID),
+	--RoomTypeID int foreign key references RoomType(RoomTypeID),
+	DateRange datetime2 not null,
 	BaseRate money not null,
-	EventRate money null,
-	SeasonalRate money null,
 )
 
 create table AddOn
 (
-	AddOnID int identity primary key,
-	AddOnType varchar (10) not null,
+	--David said the two atributes comented out below shouldn't be in there but i dont know what to reaplsve them with
+	--AddOnID int identity primary key,
+	--AddOnType varchar (10) not null,
 	RoomID int foreign key references Room(RoomID),
 	RateID int foreign key references Rate(RateID),
 )
@@ -109,8 +129,9 @@ create table Details
 (
 	DetailID int identity primary key,
 	BillID int foreign key references Bill(BillID),
+	Subtotal money not null,
 	DetailType int not null,
-	AddOnID int foreign key references AddOn(AddOnID)
+	--AddOnID int foreign key references AddOn(AddOnID)
 )
 
 --SET NOCOUNT ON
