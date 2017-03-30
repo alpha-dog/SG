@@ -2,14 +2,13 @@
 "use strict";
 
 var total = 0;
-var itemSelected;
+var itemSelected = -1;
 
 $(document).ready(function () {
 
     loadSnacks();
     $('#makePurchase').click(vendSnack);
-   // $('#getChange').click(changeReturn);
-
+    $('#getChange').click(changeReturn);
 });
 
 function loadSnacks() {
@@ -22,6 +21,7 @@ function loadSnacks() {
             $.each(contactArray, function (index, items) {
 
                 var contentRows = $('#snack' + snackNum);
+                $('#snack' + snackNum).empty();
 
                 var name = items.name;
                 var price = items.price;
@@ -58,30 +58,40 @@ function loadSnacks() {
     });
 }
 function vendSnack() {
+    if (itemSelected != -1) {
+        $.ajax({
+            type: 'GET',
+            ///money/{amount}/item/{id}
+            url: 'http://localhost:8080/money/' + total + '/item/' + itemSelected + '',
+            success: function (change, status) {
+                $('#changeDisplay').val('Q:' + change.quarters + ' D:' + change.dimes + ' N:' + change.nickels + ' P:' + change.pennies);
+                $('#snackMessage').val('enjoy your snack');
+                //$('changeDisplay').val('q' + change.responseJSON.quarters, change.responseJSON.dimes. change.responseJSON.nickels, change.responseJSON.pennies)
 
-    $.ajax({
-        type: 'GET',
-        ///money/{amount}/item/{id}
-        url: 'http://localhost:8080/money/' + total + '/item/' + itemSelected + '',
-        success: function (change, status) {
-            $('#changeDisplay').text('Q:' + change.quarters + 'D:' + change.dimes + 'N:' + change.nickels + 'P:' + change.pennies);
-            $('#snackMessage').val('enjoy your snack');
-            total = 0;
-            $('#totalMoney').val(total);
-        },
-        error: function (xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")"); //responseJson with a .message property
-            alert(err.Message);
-        }
-    })
+                total = 0;
+                $('#totalMoney').val(total);
+            },
+            error: function (xhr, status, error) {
+                $('#snackMessage').val(xhr.responseJSON.message);
+            }
+        })
+    }
+    else{
+        $('#snackMessage').text('please select a snack');
+    }
+
+
 }
 
-// function changeReturn (){
-//     //total is my money var
-//     if (total == 5){
-//         var nickel
-//     }
-// }
+function changeReturn (){
+     
+     loadSnacks();
+     $('#changeDisplay').val('');
+     $('#snackMessage').val('');
+     $('#snackSelection').val('');
+}
+    
+
 
 $('#addDollar').click(function () {
     total += 1;
