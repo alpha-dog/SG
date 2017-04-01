@@ -61,19 +61,19 @@ create table Bill
 	Total money not null
 )
 
-create table Rate
-(
-	RateID int identity primary key,
-	StartDate datetime2 not null,
-	EndDate datetime2 not null,
-	Rate money not null
-)
-
 create table RoomType
 (
 	RoomTypeID int identity primary key,
-	RateID int foreign key references Rate(RateID),
 	[Description] varchar(10) not null
+)
+
+create table Rate
+(
+	RateID int identity primary key,
+	RoomTypeID int foreign key references RoomType(RoomTypeID),
+	StartDate datetime2 not null,
+	EndDate datetime2 not null,
+	Rate money not null
 )
 
 create table Room
@@ -120,9 +120,15 @@ create table AddOn
 	AddOnID int identity primary key,
 	RoomID int foreign key references Room(RoomID),
 	Rate money not null,
-	[Description] varchar(30) not null,
-	Startdate datetime2 not null,
-	enddate datetime2 not null
+	[Description] varchar(30) not null
+)
+
+create table AddOnRate
+(
+	AddOnRateID int identity primary key,
+	AddOnID int foreign key references AddOn(AddOnID),
+	StartDate datetime2 not null,
+	EndDate datetime2 not null
 )
 
 create table Details
