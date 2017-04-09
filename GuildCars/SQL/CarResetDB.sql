@@ -14,7 +14,7 @@ begin
 	delete from SalesPerson;
 	delete from PurchaseLog;
 
-	--dbcc checkident ('PurchaseLog', reseed, 1)
+	dbcc checkident ('Customer', reseed, 1)
 
 	set identity_insert Vehicle on;
 	
@@ -39,5 +39,7 @@ begin
 	(2, 'Tom', 'Cruise');
 
 	set identity_insert SalesPerson off;
+
+	exec CarReset
 
 end

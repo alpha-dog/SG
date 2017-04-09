@@ -13,8 +13,8 @@ namespace GuildCars.Data.DAL.Interfaces
         Customer GetCustomer(int customerId);
 
         // bools for inserts, deletes, and updates so we can see if they worked
-        bool InsertCustomer(Customer customer);
-        bool DeleteCustomer(int customerId);
-        bool UpdateCustomer(Customer customer);
+        void InsertCustomer(Customer customer);
+        void DeleteCustomer(int customerId);
+        void UpdateCustomer(Customer customer);
     }
 }

@@ -55,3 +55,50 @@ begin
 end
 
 go
+
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'CustomerSelectById')
+	drop procedure CustomerSelectById
+go
+
+create proc CustomerSelectById
+(
+	@CustomerId int
+) as 
+begin
+	select CustomerId, FirstName, LastName
+	from Customer
+	where CustomerId = @CustomerId
+end
+go
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'CustomerUpdate')
+      DROP PROCEDURE CustomerUpdate
+GO
+
+CREATE PROCEDURE CustomerUpdate (
+	@CustomerId int,
+	@FirstName nvarchar(20),
+	@LastName nvarchar(20)
+) As
+BEGIN
+	UPDATE Customer SET 
+		FirstName = @FirstName,
+		LastName = @LastName
+	WHERE CustomerId = @CustomerId
+END
+GO
+if EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'CustomerDelete')
+      DROP PROCEDURE CustomerDelete
+GO
+
+CREATE PROCEDURE CustomerDelete (
+	@CustomerId int
+) AS
+BEGIN
+	BEGIN TRANSACTION
+	DELETE FROM Customer WHERE CustomerId = @CustomerId;
+	COMMIT TRANSACTION
+END

@@ -13,38 +13,46 @@ namespace GuildCars.Controllers
     {
         private CustomerRepo _customerRepo;
 
-        public CustomerController()
+        public CustomerController() //I can overload this method if i want to get back a specific number or sort it in some dumb way
         {
             _customerRepo = new CustomerRepo();
         }
         // GET: api/Customer
-        public IEnumerable<string> Get()
+        [Route("Customers")]
+        public IEnumerable<Customer> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _customerRepo.GetCustomers();
         }
 
         // GET: api/Customer/5
-        public string Get(int id)
+        [Route("Customer/{id}")]
+        public Customer Get(int id)
         {
-            return "value";
+            return _customerRepo.GetCustomer(id);
         }
 
         // POST: api/Customer
         [Route("Customer")]
         [HttpPost]
-        public bool Post([FromBody]Customer customer)
+        public void Post([FromBody]Customer customer)
         {
-           return _customerRepo.InsertCustomer(customer);
+           _customerRepo.InsertCustomer(customer);
         }
 
         // PUT: api/Customer/5
-        public void Put(int id, [FromBody]string value)
+        [Route("Customer")]
+        [HttpPut]
+        public void Put([FromBody]Customer customer)
         {
+            _customerRepo.UpdateCustomer(customer);
         }
 
+        [Route("Customer/{id}")]
+        [HttpDelete]
         // DELETE: api/Customer/5
         public void Delete(int id)
         {
+            _customerRepo.DeleteCustomer(id);
         }
     }
 }

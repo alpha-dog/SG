@@ -28,7 +28,18 @@ create table Vehicle
 	VehicleId int identity primary key,
 	Make varchar(15) not null,
 	Model varchar(15) not null,
-	[Year] varchar(4) not null		
+	[Type] varchar(4) not null,
+	Body Style varchar(10) not null,
+	[Year] varchar(4) not null,
+	Transmission varchar(10) not null,
+	Color varchar(10) not null,
+	Interior varchar(10) not null,
+	Mileage int not null,
+	VIN int varchar (17) not null,
+	MSRP money not null,
+	SalePrice money not null,
+	[Description] varchar(500) not null,
+	Picture file null
 )
 
 create table Customer
