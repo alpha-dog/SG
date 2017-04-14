@@ -29,5 +29,7 @@ namespace GuildCars.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<GuildCars.Models.Tables.Vehicle> Vehicles { get; set; }
     }
 }

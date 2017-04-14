@@ -10,7 +10,7 @@ namespace GuildCars.Data.DAL.Interfaces
     interface ISalesPersonRepo
     {
         IEnumerable<SalesPerson> GetSalesPeople();
-        Customer GetSalesPerson(int SalesPersonId);
+        SalesInfo GetSalesPerson(int SalesPersonId);
 
         // bools for inserts, deletes, and updates so we can see if they worked
         bool InsertSalesPerson(SalesPerson salesPerson);

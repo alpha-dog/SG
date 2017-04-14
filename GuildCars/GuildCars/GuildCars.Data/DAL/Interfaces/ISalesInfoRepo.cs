@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace GuildCars.Data.DAL.Interfaces
 {
-    interface ICustomerRepo
+    interface ISalesInfoRepo
     {
-        IEnumerable<Customer> GetCustomers();
-        Customer GetCustomer(int customerId);
+        IEnumerable<SalesInfo> GetSalesInfos();
+        SalesInfo GetSalesInfo(int SalesInfoId);
 
         // bools for inserts, deletes, and updates so we can see if they worked
-        void InsertCustomer(Customer customer);
-        void DeleteCustomer(int customerId);
-        void UpdateCustomer(Customer customer);
+        void InsertSalesInfo(SalesInfo SalesInfo);
+        void DeleteSalesInfo(int SalesInfoId);
+        void UpdateSalesInfo(SalesInfo SalesInfo);
     }
 }

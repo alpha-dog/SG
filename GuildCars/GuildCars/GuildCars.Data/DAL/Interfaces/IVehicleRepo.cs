@@ -14,9 +14,10 @@ namespace GuildCars.Data.DAL
         Vehicle GetVehicle(int vehicleId);
 
         // bools for inserts, deletes, and updates so we can see if they worked
-        bool InsertVehicle(Vehicle vehicle);
-        bool DeleteVehicle(int vehicleId);
-        bool UpdateVehicle(Vehicle vehicle);
+        void AddVehicle(Vehicle vehicle);
+        void EditVehicle(Vehicle vehicle);
+        void DeleteVehicle(int vehicleId);
+        
 
 
     }

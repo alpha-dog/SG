@@ -11,19 +11,6 @@ begin
 	select VehicleId, Make, Model, [Year]
 	from Vehicle
 end
-go
-
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'CustomersSelectAll')
-	drop procedure CustomersSelectAll
-go
-
-create proc CustomersSelectAll as 
-begin
-	select CustomerId, FirstName, LastName
-	from Customer
-end
-
 go 
 
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
@@ -40,65 +27,86 @@ end
 go 
 
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'CustomerAdd')
-	drop procedure CustomerAdd
+	where ROUTINE_NAME = 'AddVehicles')
+	drop procedure AddVehicles
 go
 
-create proc CustomerAdd
+create proc AddVehicles
 (
-	@CustomerId int, @FirstName nvarchar(20), @LastName nvarchar(20)
+	@VehicleId int, 
+	@Make varchar(20),
+	@Model varchar(20),
+	@TypeId int,
+	@BodyStyleId int,
+	@Year varchar(4),
+	@TransmissionId int,
+	@ColorId int,
+	@InteriorId int,
+	@Mileage int,
+	@VIN varchar(17),
+	@MSRP money,
+	@SalePrice money,
+	@Description varchar(500),
+	@PictureFilePath nvarchar(100)
 ) as 
 begin
-	insert into Customer (FirstName, LastName)
-	values (@FirstName, @LastName)
-	set @CustomerId = SCOPE_IDENTITY();
+	insert into Vehicle 
+	(Make, Model, TypeId, BodyStyleId, [Year], TransmissionId, 
+		ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], 
+		PictureFilePath)
+
+	values (@Make, @Model, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
+		@ColorId, @InteriorId, @Mileage, @VIN, @MSRP, @SalePrice, @Description, 
+		@PictureFilePath)
+
+	set @VehicleId = SCOPE_IDENTITY();
 end
 
 go
 
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'CustomerSelectById')
-	drop procedure CustomerSelectById
+	where ROUTINE_NAME = 'SalesInfoSelectById')
+	drop procedure SalesInfoSelectById
 go
 
-create proc CustomerSelectById
+create proc SalesInfoSelectById
 (
-	@CustomerId int
+	@SalesInfoId int
 ) as 
 begin
-	select CustomerId, FirstName, LastName
-	from Customer
-	where CustomerId = @CustomerId
+	select SalesInfoId, FirstName, LastName
+	from SalesInfo
+	where SalesInfoId = @SalesInfoId
 end
 go
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'CustomerUpdate')
-      DROP PROCEDURE CustomerUpdate
+   WHERE ROUTINE_NAME = 'SalesInfoUpdate')
+      DROP PROCEDURE SalesInfoUpdate
 GO
 
-CREATE PROCEDURE CustomerUpdate (
-	@CustomerId int,
+CREATE PROCEDURE SalesInfoUpdate (
+	@SalesInfoId int,
 	@FirstName nvarchar(20),
 	@LastName nvarchar(20)
 ) As
 BEGIN
-	UPDATE Customer SET 
+	UPDATE SalesInfo SET 
 		FirstName = @FirstName,
 		LastName = @LastName
-	WHERE CustomerId = @CustomerId
+	WHERE SalesInfoId = @SalesInfoId
 END
 GO
 if EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'CustomerDelete')
-      DROP PROCEDURE CustomerDelete
+   WHERE ROUTINE_NAME = 'SalesInfoDelete')
+      DROP PROCEDURE SalesInfoDelete
 GO
 
-CREATE PROCEDURE CustomerDelete (
-	@CustomerId int
+CREATE PROCEDURE SalesInfoDelete (
+	@SalesInfoId int
 ) AS
 BEGIN
 	BEGIN TRANSACTION
-	DELETE FROM Customer WHERE CustomerId = @CustomerId;
+	DELETE FROM SalesInfo WHERE SalesInfoId = @SalesInfoId;
 	COMMIT TRANSACTION
 END

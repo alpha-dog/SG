@@ -29,7 +29,7 @@ namespace GuildCars.Data.DAL.Repos
             
         }
 
-        public Customer GetSalesPerson(int SalesPersonId)
+        public SalesInfo GetSalesPerson(int SalesPersonId)
         {
             throw new NotImplementedException();
         }

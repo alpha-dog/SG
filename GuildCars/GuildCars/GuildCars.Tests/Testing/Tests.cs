@@ -41,18 +41,18 @@ namespace GuildCars.Tests.Testing
         }
 
         [Test]
-        public void CanLoadCustomers()
+        public void CanLoadSalesInfos()
         {
-            var repo = new CustomerRepo();
-            var customers = repo.GetCustomers().ToList();
+            var repo = new SalesInfoRepo();
+            var SalesInfos = repo.GetSalesInfos().ToList();
 
-            Assert.AreEqual(2, customers.Count);
-            Assert.AreEqual("Marshawn", customers[0].FirstName);
-            Assert.AreEqual("David", customers[1].LastName);
+            Assert.AreEqual(2, SalesInfos.Count);
+            Assert.AreEqual("Marshawn", SalesInfos[0].FirstName);
+            Assert.AreEqual("David", SalesInfos[1].LastName);
         }
 
         [Test]
-        public void CanGetSalesPeople()
+        public void Can()
         {
             var repo = new SalesPersonRepo();
             var SalesPeople = repo.GetSalesPeople().ToList();
