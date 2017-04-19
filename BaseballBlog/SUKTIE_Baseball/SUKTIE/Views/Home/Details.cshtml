@@ -1,0 +1,28 @@
+﻿﻿@model SUKTIE.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="jumbotron" style="text-align:center">
+    <h1>SUKTIE Baseball Blog</h1>
+    <p class="lead">We cover baseball and that's it. Knot enthusiuasts and invertebrate fans look elsewhere.</p>
+    <p><a href="http://mlb.com">#baseball</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <h3>@Model.Post.PostName </h3>
+        @foreach (var hashtag in Model.Hashtags)
+        {
+            <p><a href="@Url.Action("Search", "Home", new { id = @hashtag.HashtagId })">@hashtag.HashtagName</a></p>
+        }
+        @Html.Raw(Model.Post.PostText)
+        
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+

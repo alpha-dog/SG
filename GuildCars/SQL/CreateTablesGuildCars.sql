@@ -45,6 +45,15 @@ if exists(select * from sys.tables where name='PurchaseType')
 drop table PurchaseType
 go
 
+if exists(select * from sys.tables where name='Make')
+drop table Make
+go 
+
+create table Make
+(
+	MakeId int identity primary key,
+	MakeName varchar(20) not null
+)
 create table PurchaseType
 (
 	PurchaseTypeId int identity primary key,
@@ -84,7 +93,7 @@ create table Color
 create table Vehicle
 (
 	VehicleId int identity primary key,
-	Make varchar(15) not null,
+	MakeId int foreign key references Make(MakeId) not null,
 	Model varchar(15) not null,
 	TypeId int foreign key references [Type](TypeId) not null,
 	BodyStyleId int foreign key references BodyStyle(BodyStyleId) not null,

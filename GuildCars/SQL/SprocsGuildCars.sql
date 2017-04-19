@@ -8,7 +8,7 @@ go
 
 create procedure VehiclesSelectAll as
 begin
-	select VehicleId, Make, Model, [Year]
+	select VehicleId, MakeId, Model, [Year]
 	from Vehicle
 end
 go 
@@ -34,7 +34,7 @@ go
 create proc AddVehicles
 (
 	@VehicleId int, 
-	@Make varchar(20),
+	@MakeId int,
 	@Model varchar(20),
 	@TypeId int,
 	@BodyStyleId int,
@@ -51,11 +51,11 @@ create proc AddVehicles
 ) as 
 begin
 	insert into Vehicle 
-	(Make, Model, TypeId, BodyStyleId, [Year], TransmissionId, 
+	(MakeId, Model, TypeId, BodyStyleId, [Year], TransmissionId, 
 		ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], 
 		PictureFilePath)
 
-	values (@Make, @Model, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
+	values (@MakeId, @Model, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
 		@ColorId, @InteriorId, @Mileage, @VIN, @MSRP, @SalePrice, @Description, 
 		@PictureFilePath)
 

@@ -1,0 +1,11 @@
+﻿@model SUKTIE.Models.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+@foreach (var post in Model.Posts)
+{
+    <p><a href="@Url.Action("Details", "Home", new { id = @post.PostId })">@post.PostName</a></p>
+}
+

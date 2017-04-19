@@ -1,0 +1,31 @@
+﻿@model SUKTIE.Models.StaticPageViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<head>
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script>
+  tinymce.init({
+    selector: '#blogBody'
+  });
+    </script>
+</head>
+
+<h2>Static Page Editor</h2>
+<hr />
+@using (Html.BeginForm("Create", "StaticPage", FormMethod.Post, new { enctype = "multipart/form-data", id = "UsedForJavascriptInShackUpExample" }))
+{
+    <div class="form-group">
+        <label>Static Page Title</label>
+        @Html.TextBoxFor(t => t.StaticPage.StaticPageName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Static Text</label>
+        @Html.TextAreaFor(t => t.StaticPage.StaticPageBody, new { @class = "form-control", id = "blogBody" })
+    </div>
+    <div>
+        <button type="submit" class="btn btn-danger">save</button>
+    </div>
+}
+

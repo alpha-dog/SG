@@ -1,0 +1,18 @@
+﻿@model SUKTIE.Models.StaticPageViewModel
+@{
+    ViewBag.Title = "View";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h3>@Model.StaticPage.StaticPageName </h3>
+        
+        @Html.Raw(Model.StaticPage.StaticPageBody)
+
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+

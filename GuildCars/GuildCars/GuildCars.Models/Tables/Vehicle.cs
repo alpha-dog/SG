@@ -14,11 +14,11 @@ namespace GuildCars.Models.Tables
         //When building models based on your database objects be sure to pay attention to what 
         //can and cannot be null or you will inevitably run into the dreaded NullReferenceException.
         public int VehicleId { get; set; }
-        public string Make { get; set; }
+        public int MakeId { get; set; }
         public string Model { get; set; }
         public int TypeId { get; set; }
         public int BodyStyleId { get; set; }    
-        public String Year { get; set; }
+        public string Year { get; set; }
         public int TransmissionId { get; set; }
         public int ColorId { get; set; }
         public int InteriorId { get; set; }

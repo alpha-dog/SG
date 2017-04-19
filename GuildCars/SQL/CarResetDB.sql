@@ -36,7 +36,7 @@ begin
 		values (1, 'Convertible'), (2, 'Coupe'), (3, 'Hatchback')
 
 	set identity_insert BodyStyle off;
-
+	
 	set identity_insert Transmission on;
 
 		insert into Transmission (TransmissionId, TransmissionType)
@@ -61,10 +61,17 @@ begin
 
 	set identity_insert PurchaseType off;
 
+	set identity_insert Make on;
+
+		insert into Make (MakeId, MakeName)
+		values (1, 'VW'), (2, 'Ford'), (3, 'Geo')
+
+	set identity_insert Make off;
+
 	set identity_insert Vehicle on;
 	
-		insert into Vehicle (VehicleId, Make, Model, TypeId, BodyStyleId, [Year], TransmissionId, ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], PictureFilePath)
-		values (1, 'VW', 'Cabriolet', 2, 1, '1988', 2, 3, 3, 3333, 1, 5000, 3500, 'super cute', 'cabbiePic.jpg')
+		insert into Vehicle (VehicleId, MakeId, Model, TypeId, BodyStyleId, [Year], TransmissionId, ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], PictureFilePath)
+		values (1, 1, 'Cabriolet', 2, 1, '1988', 2, 3, 3, 3333, 1, 5000, 3500, 'super cute', 'cabbiePic.jpg')
 	
 
 	set identity_insert Vehicle off;

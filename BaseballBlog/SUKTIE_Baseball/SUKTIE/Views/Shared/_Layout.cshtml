@@ -1,0 +1,106 @@
+﻿@model SUKTIE.Models.BaseViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+</head>
+<body>
+    
+    
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="row">
+            @Html.ActionLink("Home", "Index", "Home")
+        </div>
+        <div class="row">
+            @Html.ActionLink("Archives", "Archives", "Home")
+        </div>
+            @foreach (var s in Model.StaticPages)
+            {
+                <div class="row">
+                    <a href="/StaticPage/View/@s.StaticPageId" class="col-lg-9">@s.StaticPageName</a>
+                    <a href="/StaticPage/Edit/@s.StaticPageId" class="col-lg-3" style="font-size:10px;padding-top:20px;color:red">edit</a>
+                </div>
+
+
+            }
+            
+        <div class="row">
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div class="row">
+            <a href="/StaticPage/Create">Create Static Page</a>
+        </div>
+        <div class="row">
+            @Html.ActionLink("Blog Editor", "Create", "Post")
+        </div>
+        </div>
+
+
+
+    <div class="row">
+
+        <div  class="col-xs-2" style="font-size:30px;cursor:pointer" onclick="openNav()"><i class="ionicons ion-ios-baseball-outline"></i> Menu</div>
+
+        <div class="container body-content col-xs-8">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+            
+        <div class="col-xs-2">
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddListing" }))
+            {
+                @Html.ValidationSummary()
+                <div class="form-group" style="text-align:center;width:200px">
+                    <label>Hashtag Search</label>
+                    @Html.TextBoxFor(m => m.Hashtag, new {@class="form-control"})
+                    <button style="margin-top:10px"class="btn btn-primary" >Search</button>
+                    <hr style="width:200px" />
+                </div>
+                
+            }
+            
+            <div class="form-group" style="text-align:center;width:200px">
+                <h4>Recent SUKTIE Action</h4>
+                @if (Model.Recent15 != null)
+                {
+                    foreach (var post in Model.Recent15)
+                    {
+
+                        <p><a href="@Url.Action("Details", "Home", new { id = @post.PostId })">@post.PostName</a></p>
+                    }
+                }
+                
+            </div>
+                
+            
+            
+
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    
+
+</body>
+</html>

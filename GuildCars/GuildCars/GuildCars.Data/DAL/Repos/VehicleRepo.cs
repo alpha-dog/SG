@@ -41,7 +41,7 @@ namespace GuildCars.Data.DAL.Repos
             //this seems too repetitive to be correct
             var p = new DynamicParameters();
             p.Add("VehicleId", vehicle.VehicleId);
-            p.Add("Make", vehicle.Make);
+            p.Add("MakeId", vehicle.MakeId);
             p.Add("Model", vehicle.Model);
             p.Add("TypeId", vehicle.TypeId);
             p.Add("BodyStyleId", vehicle.BodyStyleId);
