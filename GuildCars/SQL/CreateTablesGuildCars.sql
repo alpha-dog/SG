@@ -49,6 +49,18 @@ if exists(select * from sys.tables where name='Make')
 drop table Make
 go 
 
+if exists(select * from sys.tables where name = 'Specials')
+drop table Specials
+go
+
+create table Specials
+(
+	SpecialId int identity primary key,
+	SpecialName varchar(20) not null,
+	SpecialDetails varchar(200) not null
+)
+
+
 create table Make
 (
 	MakeId int identity primary key,

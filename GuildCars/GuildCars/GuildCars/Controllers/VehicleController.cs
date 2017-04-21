@@ -50,7 +50,7 @@ namespace GuildCars.Controllers
         }
 
         // DELETE: api/Vehicle/5
-        //[Route("Vehicle/{id}")]
+        [Route("Vehicle/{id}")]
         [HttpDelete]
         public void Delete(int id)
         {

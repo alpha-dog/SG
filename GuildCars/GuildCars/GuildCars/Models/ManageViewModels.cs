@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using GuildCars.Models.Tables;
 
 namespace GuildCars.Models
 {
@@ -12,6 +13,9 @@ namespace GuildCars.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        //public IEnumerable<Vehicle> Vehicle { get; set; }
+    
     }
 
     public class ManageLoginsViewModel

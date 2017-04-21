@@ -108,4 +108,20 @@ begin
 	commit transaction
 end
 
+go
+if exists(select * from INFORMATION_SCHEMA.ROUTINEs	
+	where routine_name = 'SpecialAdd')
+	drop proc SpecialAdd
+go
 
+create proc SpecialAdd
+(
+	@SpecialId int,
+	@SpecialName varchar(20),
+	@SpecialDetails varchar(200) 
+)as
+begin 
+	insert into Specials (SpecialName, SpecialDetails)
+	values (@SpecialName, @SpecialDetails)
+	set @SpecialId = SCOPE_IDENTITY();
+end
