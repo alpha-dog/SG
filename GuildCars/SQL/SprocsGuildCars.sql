@@ -92,4 +92,20 @@ begin
 	where VehicleId = @VehicleId
 end
 
+go 
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'VehicleDelete')
+		drop proc VehicleDelete
+go
+
+create proc VehicleDelete 
+(
+	@VehicleId int
+)as
+begin 
+	begin transaction 
+	delete from Vehicle where VehicleId = @VehicleId;
+	commit transaction
+end
+
 

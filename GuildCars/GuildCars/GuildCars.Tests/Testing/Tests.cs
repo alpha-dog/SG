@@ -37,7 +37,7 @@ namespace GuildCars.Tests.Testing
 
             Assert.AreEqual(2, vehicles.Count);
 
-            Assert.AreEqual("VW", vehicles[0].Make);
+            Assert.AreEqual("VW", vehicles[0].MakeId);
         }
 
         [Test]

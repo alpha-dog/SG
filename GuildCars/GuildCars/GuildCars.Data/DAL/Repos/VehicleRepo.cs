@@ -86,7 +86,10 @@ namespace GuildCars.Data.DAL.Repos
         }
         public void DeleteVehicle(int vehicleId)
         {
-            throw new NotImplementedException();
+            var p = new DynamicParameters();
+            p.Add("@VehicleId", vehicleId);
+
+            _db.Query<Vehicle>("VehicleDelete", p, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -215,6 +215,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Images\defaultVehiclePic.jpg" />
     <Content Include="Images\prizmPic2.jpg" />
     <Content Include="Images\SmallerCabbyPic.jpg" />
     <Content Include="Images\SmallerF150pic.jpg" />
