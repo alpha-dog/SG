@@ -1,31 +1,18 @@
 use GuildCars
 go
 
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'VehiclesSelectAll')
-		drop procedure VehiclesSelectAll
+if exists(select * from information_schema.routines
+	where routine_name = 'VehiclesGetAll')
+	drop proc VehiclesGetAll
 go
 
-create procedure VehiclesSelectAll as
+create proc VehiclesGetAll as
 begin
-	select VehicleId, MakeId, Model, [Year]
-	from Vehicle
+	select * from Vehicle
 end
-go 
 
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'SalesPersonSelectAll')
-	drop procedure SalesPersonSelectAll
+
 go
-
-create proc SalesPersonSelectAll as 
-begin
-	select EmployeeId, FirstName, LastName
-	from SalesPerson
-end
-
-go 
-
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
 	where ROUTINE_NAME = 'AddVehicles')
 	drop procedure AddVehicles
@@ -61,52 +48,48 @@ begin
 
 	set @VehicleId = SCOPE_IDENTITY();
 end
-
 go
 
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'SalesInfoSelectById')
-	drop procedure SalesInfoSelectById
-go
+	where ROUTINE_NAME = 'VehicleUpdate')
+	drop proc VehicleUpdate
+go 
 
-create proc SalesInfoSelectById
+create proc VehicleUpdate
 (
-	@SalesInfoId int
-) as 
-begin
-	select SalesInfoId, FirstName, LastName
-	from SalesInfo
-	where SalesInfoId = @SalesInfoId
+	@VehicleId int, 
+	@MakeId int,
+	@Model varchar(20),
+	@TypeId int,
+	@BodyStyleId int,
+	@Year varchar(4),
+	@TransmissionId int,
+	@ColorId int,
+	@InteriorId int,
+	@Mileage int,
+	@VIN varchar(17),
+	@MSRP money,
+	@SalePrice money,
+	@Description varchar(500),
+	@PictureFilePath nvarchar(100)
+)as
+begin 
+	update Vehicle set
+		MakeId = @MakeId,
+		Model = @Model,
+		TypeId = @TypeId,
+		BodyStyleId = @BodyStyleId,
+		[Year] = @Year,
+		TransmissionId = @TransmissionId,
+		ColorId = @ColorId,
+		InteriorId = @InteriorId,
+		Mileage = @Mileage,
+		VIN = @VIN,
+		MSRP = @MSRP,
+		SalePrice = @SalePrice,
+		[Description] = @Description,
+		PictureFilePath = @PictureFilePath
+	where VehicleId = @VehicleId
 end
-go
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'SalesInfoUpdate')
-      DROP PROCEDURE SalesInfoUpdate
-GO
 
-CREATE PROCEDURE SalesInfoUpdate (
-	@SalesInfoId int,
-	@FirstName nvarchar(20),
-	@LastName nvarchar(20)
-) As
-BEGIN
-	UPDATE SalesInfo SET 
-		FirstName = @FirstName,
-		LastName = @LastName
-	WHERE SalesInfoId = @SalesInfoId
-END
-GO
-if EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'SalesInfoDelete')
-      DROP PROCEDURE SalesInfoDelete
-GO
-
-CREATE PROCEDURE SalesInfoDelete (
-	@SalesInfoId int
-) AS
-BEGIN
-	BEGIN TRANSACTION
-	DELETE FROM SalesInfo WHERE SalesInfoId = @SalesInfoId;
-	COMMIT TRANSACTION
-END

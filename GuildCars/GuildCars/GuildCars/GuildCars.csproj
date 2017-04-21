@@ -216,6 +216,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\prizmPic2.jpg" />
+    <Content Include="Images\SmallerCabbyPic.jpg" />
+    <Content Include="Images\SmallerF150pic.jpg" />
+    <Content Include="Images\SmallerThing.jpg" />
+    <Content Include="Images\SmallerTyphoon.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />

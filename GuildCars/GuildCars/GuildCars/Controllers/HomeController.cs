@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuildCars.Data.DAL.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace GuildCars.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
-            return View();
+            var _repo = new VehicleRepo();
+            var model = _repo.GetVehicles();
+            return View(model);
         }
 
         public ActionResult About()

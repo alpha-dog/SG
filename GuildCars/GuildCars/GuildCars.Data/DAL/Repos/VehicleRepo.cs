@@ -19,6 +19,7 @@ namespace GuildCars.Data.DAL.Repos
         {
             _db = new SqlConnection(ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString);
         }
+
         //the commented out code below is based off the recommendations from the dapper-web-api tutorial i found: https://www.jeremymorgan.com/blog/programming/how-to-dapper-web-api/
         //private VehicleRepo _secretVehicleRepo = new VehicleRepo();
 
@@ -33,7 +34,7 @@ namespace GuildCars.Data.DAL.Repos
             {
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
 
-                return conn.Query<Vehicle>("VehiclesSelectAll", commandType: CommandType.StoredProcedure);
+                return conn.Query<Vehicle>("VehiclesGetAll", commandType: CommandType.StoredProcedure);
             }
         }
         public void AddVehicle(Vehicle vehicle)
@@ -63,7 +64,25 @@ namespace GuildCars.Data.DAL.Repos
 
         public void EditVehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            var p = new DynamicParameters();
+            p.Add("VehicleId", vehicle.VehicleId);
+            p.Add("MakeId", vehicle.MakeId);
+            p.Add("Model", vehicle.Model);
+            p.Add("TypeId", vehicle.TypeId);
+            p.Add("BodyStyleId", vehicle.BodyStyleId);
+            p.Add("Year", vehicle.Year);
+            p.Add("TransmissionId", vehicle.TransmissionId);
+            p.Add("ColorId", vehicle.ColorId);
+            p.Add("InteriorId", vehicle.InteriorId);
+            p.Add("Mileage", vehicle.Mileage);
+            p.Add("VIN", vehicle.VIN);
+            p.Add("MSRP", vehicle.MSRP);
+            p.Add("SalePrice", vehicle.SalePrice);
+            p.Add("Description", vehicle.Description);
+            p.Add("PictureFilePath", vehicle.PictureFilePath);
+
+            //I'm doing a terrible job of following naming conventions VS and SQL but I'm tired and don't care right now. ToDo update naming conventions later to be consistent
+            _db.Query<Vehicle>("VehicleUpdate", p, commandType: CommandType.StoredProcedure);
         }
         public void DeleteVehicle(int vehicleId)
         {

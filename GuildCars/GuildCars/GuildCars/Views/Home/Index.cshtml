@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<GuildCars.Models.Tables.Vehicle>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,71 +10,29 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 <div class="container">
-    <h2>Featured Vehicles</h2>
     <div class="row">
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-            <p>
-                <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
-            </p>
-            <h4>Geo Prizm</h4>
-            <p>$800</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
+        <h2>Featured Vehicles</h2>
+        @foreach (var vehicle in Model)
+        {
+            <div class="col-md-3">
+                <p class="featured"><img src="@Url.Content(vehicle.PictureFilePath)" alt="Alternate Text" /></p>
+                <p class="featured">@vehicle.Year @vehicle.Model</p>
+                <p class="featured">$@vehicle.MSRP</p>
+                <p class="featured">@vehicle.Description</p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Bad Link &raquo;</a></p>
+            </div>
+        }
+        @*<div class="row">
+                <div class="col-md-3">
+                    <p>
+                        <img src="@Url.Content("~/Images/prizmPic2.jpg")" />
+                    </p>
+                    <h4>Geo Prizm</h4>
+                    <p>$800</p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Bad Link &raquo;</a></p>
+                </div>
+
+
+            </div>*@
     </div>
 </div>

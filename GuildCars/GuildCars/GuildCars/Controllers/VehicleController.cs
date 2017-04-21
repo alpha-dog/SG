@@ -40,8 +40,13 @@ namespace GuildCars.Controllers
         }
 
         // PUT: api/Vehicle/5
-        public void Edit(int id, [FromBody]string value)
+        [Route("Vehicle/{id}")]
+        [HttpPut]
+        [AcceptVerbs("PUT")]
+        public void Edit([FromBody]Vehicle vehicle)
         {
+            //vehicle = _vehicleRepo.GetVehicle(vehicle.VehicleId);
+            _vehicleRepo.EditVehicle(vehicle);   
         }
 
         // DELETE: api/Vehicle/5
