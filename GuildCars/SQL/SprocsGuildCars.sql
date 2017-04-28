@@ -1,3 +1,6 @@
+
+--due to time, I used * in some of the sprocs instead of writing out everything
+
 use GuildCars
 go
 
@@ -11,6 +14,23 @@ begin
 	select * from Vehicle
 end
 
+go
+
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'VehicleSelectById')
+	drop procedure VehicleSelectById
+go
+
+create proc VehicleSelectById
+(
+	@VehicleId int
+) as 
+begin
+	select *
+	from Vehicle
+	where VehicleId = @VehicleId
+end
+go
 
 go
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
@@ -34,17 +54,18 @@ create proc AddVehicles
 	@MSRP money,
 	@SalePrice money,
 	@Description varchar(500),
-	@PictureFilePath nvarchar(100)
+	@PictureFilePath nvarchar(100),
+	@IsFeature bit
 ) as 
 begin
 	insert into Vehicle 
 	(MakeId, Model, TypeId, BodyStyleId, [Year], TransmissionId, 
 		ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], 
-		PictureFilePath)
+		PictureFilePath, IsFeature)
 
 	values (@MakeId, @Model, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
 		@ColorId, @InteriorId, @Mileage, @VIN, @MSRP, @SalePrice, @Description, 
-		@PictureFilePath)
+		@PictureFilePath, @IsFeature)
 
 	set @VehicleId = SCOPE_IDENTITY();
 end
@@ -71,7 +92,8 @@ create proc VehicleUpdate
 	@MSRP money,
 	@SalePrice money,
 	@Description varchar(500),
-	@PictureFilePath nvarchar(100)
+	@PictureFilePath nvarchar(100),
+	@IsFeature bit
 )as
 begin 
 	update Vehicle set
@@ -88,7 +110,8 @@ begin
 		MSRP = @MSRP,
 		SalePrice = @SalePrice,
 		[Description] = @Description,
-		PictureFilePath = @PictureFilePath
+		PictureFilePath = @PictureFilePath,
+		IsFeature = @IsFeature
 	where VehicleId = @VehicleId
 end
 
@@ -97,7 +120,6 @@ if exists(select * from INFORMATION_SCHEMA.ROUTINES
 	where ROUTINE_NAME = 'VehicleDelete')
 		drop proc VehicleDelete
 go
-
 create proc VehicleDelete 
 (
 	@VehicleId int
@@ -113,7 +135,6 @@ if exists(select * from INFORMATION_SCHEMA.ROUTINEs
 	where routine_name = 'SpecialAdd')
 	drop proc SpecialAdd
 go
-
 create proc SpecialAdd
 (
 	@SpecialId int,
@@ -125,3 +146,174 @@ begin
 	values (@SpecialName, @SpecialDetails)
 	set @SpecialId = SCOPE_IDENTITY();
 end
+
+go
+if exists(select * from information_schema.routines
+	where routine_name = 'SpecialsGetAll')
+	drop proc SpecialsGetAll
+go
+create proc SpecialsGetAll as
+begin
+	select * from Specials
+end
+
+go
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'SpecialSelectById')
+	drop procedure SpecialSelectById
+go
+
+create proc SpecialSelectById
+(
+	@SpecialId int
+) as 
+begin
+	select SpecialId, SpecialName, SpecialDetails
+	from Specials
+	where SpecialId = @SpecialId
+end
+
+go 
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'SpecialDelete')
+		drop proc SpecialDelete
+go
+create proc SpecialDelete 
+(
+	@SpecialId int
+)as
+begin 
+	begin transaction 
+	delete from Specials where SpecialId = @SpecialId;
+	commit transaction
+end
+
+go 
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'VehicleSearch')
+		drop proc VehicleSearch
+go
+create proc VehicleSearch 
+(
+	@SearchVal varchar(50)
+)as
+begin 
+	select VehicleId, 
+	Make.MakeName,
+	Model, 
+	[Type].TypeId, 
+	BodyStyle.BodyStyle, 
+	[Year], 
+	Transmission.TransmissionType, 
+	Color.Color,
+	--interior color,
+	Mileage,
+	VIN,
+	MSRP,
+	SalePrice,
+	[Description],
+	PictureFilePath,
+	IsFeature
+		 
+from Vehicle
+
+	join Make
+		on Vehicle.MakeId = make.MakeId
+	join [Type]
+		on Vehicle.TypeId = [Type].TypeId
+	join BodyStyle
+		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+	join Transmission
+		on Vehicle.TransmissionId = Transmission.TransmissionId
+	join Color  
+		on Vehicle.ColorId = Color.ColorId
+	where Model like @SearchVal + '%' OR 
+		[Year] like @SearchVal + '%' OR 
+		Make.MakeName like @SearchVal + '%';
+end
+
+go
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'VehicleSelectWithJoins')
+	drop proc VehicleSelectWithJoins
+
+go
+create proc VehicleSelectWithJoins
+(
+	@VehicleId int
+)as
+begin
+select VehicleId, 
+	Make.MakeName,
+	Model, 
+	[Type].TypeId, 
+	BodyStyle.BodyStyle, 
+	[Year], 
+	Transmission.TransmissionType, 
+	Color.Color,
+	--interior color,
+	Mileage,
+	VIN,
+	MSRP,
+	SalePrice,
+	[Description],
+	PictureFilePath,
+	IsFeature
+		 
+from Vehicle
+
+	join Make
+		on Vehicle.MakeId = make.MakeId
+	join [Type]
+		on Vehicle.TypeId = [Type].TypeId
+	join BodyStyle
+		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+	join Transmission
+		on Vehicle.TransmissionId = Transmission.TransmissionId
+	join Color  
+		on Vehicle.ColorId = Color.ColorId
+	--need to add interior color
+	
+	where VehicleId = @VehicleId
+end
+
+if exists(select * from information_schema.routines
+	where routine_name = 'VehicleGetAllWithJoins')
+	drop proc VehicleGetAllWithJoins
+go
+
+create proc VehicleGetAllWithJoins as
+begin
+	select VehicleId, 
+	Make.MakeName,
+	Model, 
+	[Type].TypeId, 
+	BodyStyle.BodyStyle, 
+	[Year], 
+	Transmission.TransmissionType, 
+	Color.Color,
+	--interior color,
+	Mileage,
+	VIN,
+	MSRP,
+	SalePrice,
+	[Description],
+	PictureFilePath,
+	IsFeature
+		 
+from Vehicle
+
+	join Make
+		on Vehicle.MakeId = make.MakeId
+	join [Type]
+		on Vehicle.TypeId = [Type].TypeId
+	join BodyStyle
+		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+	join Transmission
+		on Vehicle.TransmissionId = Transmission.TransmissionId
+	join Color  
+		on Vehicle.ColorId = Color.ColorId
+	--need to add interior color
+end
+
+

@@ -125,9 +125,11 @@
     <Compile Include="DAL\Interfaces\ISalesInfoRepo.cs" />
     <Compile Include="DAL\Interfaces\ISalesPersonRepo.cs" />
     <Compile Include="DAL\Interfaces\IVehicleRepo.cs" />
+    <Compile Include="DAL\Interfaces\IVehiclesJoinedRepo.cs" />
     <Compile Include="DAL\Repos\SalesInfoRepo.cs" />
     <Compile Include="DAL\Repos\SalesPersonRepo.cs" />
     <Compile Include="DAL\Repos\VehicleRepo.cs" />
+    <Compile Include="DAL\Repos\VehiclesJoinedRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

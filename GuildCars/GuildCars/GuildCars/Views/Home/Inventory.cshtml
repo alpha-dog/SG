@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GuildCars.Models.Tables.Vehicle>
+@{
+    ViewBag.Title = "Inventory";
+}
+<head>
+    <style>
+        .row {
+            border: 1px solid;
+        }
+
+            .row + .row {
+                border-top: .5px solid;
+            }
+    </style>
+</head>
+<h1>@ViewBag.Title. Here's all the cars.</h1>
+<h3>@ViewBag.Message</h3>
+
+<div style="background-color:transparent">
+    
+
+        @foreach (var vehicle in Model)
+            {
+            @*<div class="panel panel-default">*@
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="box">
+                        <p>@vehicle.Year @vehicle.MakeId @vehicle.Model</p>
+                        @if (vehicle.PictureFilePath != null)
+                        {
+                            <img src="@Url.Content("~/Images/" + vehicle.PictureFilePath)" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")" />
+                        }
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <ul class="box">
+
+                        <li>Body Style: @vehicle.BodyStyleId</li>
+                        <li>Trans: @vehicle.TransmissionId</li>
+                        <li>Color: @vehicle.ColorId</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+
+                    <ul class="box">
+                        <li>Interior: @vehicle.InteriorId</li>
+                        <li>Mileage: @vehicle.Mileage</li>
+                        <li>VIN #: @vehicle.VIN</li>
+                    </ul>
+
+                </div>
+                <div class="col-md-3">
+                    <ul class="box">
+                        <li>Sale Price: $@vehicle.SalePrice</li>
+                        <li>MSRP: $@vehicle.MSRP</li>
+                    </ul>
+                    <a class="btn btn-primary" href="~/Views/Home/Index.cshtml">details</a>
+                </div>
+                <hr />
+                </div>
+                }
+            
+</div>

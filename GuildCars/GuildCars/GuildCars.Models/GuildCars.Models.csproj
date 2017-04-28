@@ -71,9 +71,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\ExampleClassView.cs" />
+    <Compile Include="Queries\VehiclesJoined.cs" />
     <Compile Include="Tables\SalesInfo.cs" />
     <Compile Include="Tables\PurchaseLog.cs" />
     <Compile Include="Tables\SalesPerson.cs" />
+    <Compile Include="Tables\Specials.cs" />
     <Compile Include="Tables\Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>

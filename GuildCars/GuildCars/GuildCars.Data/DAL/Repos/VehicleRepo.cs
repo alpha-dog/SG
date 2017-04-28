@@ -20,13 +20,53 @@ namespace GuildCars.Data.DAL.Repos
             _db = new SqlConnection(ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString);
         }
 
+        public IEnumerable<Specials> GetSpecials()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<Specials>("SpecialsGetAll", commandType: CommandType.StoredProcedure);
+            }
+        }
+        public IEnumerable<Specials> GetSpecial(int specialId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@SpecialId", specialId);
+            using (_db)
+            {
+                return _db.Query<Specials>("SpecialSelectById", p, commandType: CommandType.StoredProcedure);
+            }
+        }
         //the commented out code below is based off the recommendations from the dapper-web-api tutorial i found: https://www.jeremymorgan.com/blog/programming/how-to-dapper-web-api/
         //private VehicleRepo _secretVehicleRepo = new VehicleRepo();
 
-        public Vehicle GetVehicle(int vehicleId)
+        public void AddSpecial(Specials special)
         {
-            throw new NotImplementedException();
+            var p = new DynamicParameters();
+
+            p.Add("SpecialId", special.SpecialId);
+            p.Add("SpecialName", special.SpecialName);
+            p.Add("SpecialDetails", special.SpecialDetails);
+
+            using (_db)
+            {
+                _db.Query<Specials>("SpecialAdd", p, commandType: CommandType.StoredProcedure);
+            }
         }
+
+        public void DeleteSpecial(int specialId)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("SpecialId", specialId);
+
+            using (_db)
+            {
+                _db.Query<Specials>("SpecialDelete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
 
         public IEnumerable<Vehicle> GetVehicles()
         {
@@ -35,6 +75,26 @@ namespace GuildCars.Data.DAL.Repos
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
 
                 return conn.Query<Vehicle>("VehiclesGetAll", commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<Vehicle> GetVehicle(int vehicleId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@VehicleId", vehicleId);
+            using (_db)
+            {
+                return _db.Query<Vehicle>("VehicleSelectById", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public IEnumerable<Vehicle> SearchVehicles(string searchVal)
+        {
+            var p = new DynamicParameters();
+            p.Add("@SearchVal", searchVal);
+            using (_db)
+            {
+                return _db.Query<Vehicle>("SelectVehicle", p, commandType: CommandType.StoredProcedure);
             }
         }
         public void AddVehicle(Vehicle vehicle)
@@ -56,6 +116,7 @@ namespace GuildCars.Data.DAL.Repos
             p.Add("SalePrice", vehicle.SalePrice);
             p.Add("Description", vehicle.Description);
             p.Add("PictureFilePath", vehicle.PictureFilePath);
+            p.Add("IsFeature", vehicle.IsFeature);
 
 
             //_db.Execute(@"INSERT SalesInfo([FirstName],[LastName]) values (@FirstName, @LastName)", new {FirstName = SalesInfo.FirstName, LastName = SalesInfo.LastName});
@@ -80,6 +141,8 @@ namespace GuildCars.Data.DAL.Repos
             p.Add("SalePrice", vehicle.SalePrice);
             p.Add("Description", vehicle.Description);
             p.Add("PictureFilePath", vehicle.PictureFilePath);
+            p.Add("IsFeature", vehicle.IsFeature);
+
 
             //I'm doing a terrible job of following naming conventions VS and SQL but I'm tired and don't care right now. ToDo update naming conventions later to be consistent
             _db.Query<Vehicle>("VehicleUpdate", p, commandType: CommandType.StoredProcedure);

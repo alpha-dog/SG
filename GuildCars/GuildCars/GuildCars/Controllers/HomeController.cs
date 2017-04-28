@@ -1,4 +1,7 @@
 ﻿using GuildCars.Data.DAL.Repos;
+using GuildCars.Models;
+using GuildCars.Models.Queries;
+using GuildCars.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +15,32 @@ namespace GuildCars.Controllers
         
         public ActionResult Index()
         {
-            var _repo = new VehicleRepo();
-            var model = _repo.GetVehicles();
+            var repo = new VehicleRepo();
+            var model = new HomeViewModel();
+            model.vehicles = repo.GetVehicles();
+            model.specials = repo.GetSpecials(); 
+
             return View(model);
         }
 
-        public ActionResult About()
+        public ActionResult Inventory()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Viewbags example text blah blah blah";
 
-            return View();
+            var repo = new VehicleRepo();
+            var model = repo.GetVehicles();
+            
+            return View(model);
+        }
+
+        public ActionResult Specials()
+        {
+            ViewBag.Message = "SPECIALS!!!!!";
+            var repo = new VehicleRepo();
+            var model = new HomeViewModel();
+            model.specials = repo.GetSpecials().ToList();
+
+            return View(model);
         }
 
         public ActionResult Contact()

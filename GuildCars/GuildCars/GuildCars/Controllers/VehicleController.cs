@@ -26,9 +26,10 @@ namespace GuildCars.Controllers
         }
 
         // GET: api/Vehicle/5
-        public string Get(int id)
+        [Route("Vehicle/{id}")]
+        public IEnumerable<Vehicle> Get(int id)
         {
-            return "value";
+            return _vehicleRepo.GetVehicle(id);
         }
 
         // POST: api/Vehicle
@@ -55,6 +56,13 @@ namespace GuildCars.Controllers
         public void Delete(int id)
         {
             _vehicleRepo.DeleteVehicle(id);
+        }
+
+        // GET: api/Vehicle/string submitted by user
+        [Route("Home/Inventory/{searchVal}")]
+        public IEnumerable<Vehicle> Search(string searchVal)
+        {
+            return _vehicleRepo.SearchVehicles(searchVal);
         }
     }
 }

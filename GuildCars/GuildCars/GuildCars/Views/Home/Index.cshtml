@@ -1,56 +1,86 @@
-﻿@model IEnumerable<GuildCars.Models.Tables.Vehicle>
-
+﻿@model GuildCars.Models.HomeViewModel
 @{
     ViewBag.Title = "Home Page";
 }
+<head>
+    <style>
+        #map {
+            height: 200px;
+            width: 40%;
+        }
 
-<div class="jumbotron">
-    <h1>Guild Cars</h1>
-    <p class="lead">Trust us! We are honest! We will sell you a reliable vehicle!</p>
-    <div class="container">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        .btn-lg {
+            background-color:darkseagreen;
+            border:solid;
+            border-color:darkgreen;
+            display:inline-block;
+
+        }
+    </style>
+</head>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        @foreach (var special in  Model.specials)
+        {
+                @:$('<div class="item"><h3>@special.SpecialName</h3><p><a class="btn btn-info" href="Home/Specials">check it!</a></p><div class="carousel"></div> </div>').appendTo('.carousel-inner');
+                        }
+        $('.item').first().addClass('active');
+        $('#carousel-example-generic').carousel();
+    });
+</script>
+
+<div class="container">
+    <h2 style="text-align:center"><strong>Guild Cars</strong></h2>
+    <div style="background-color:darkseagreen" class="jumbotron">
+        <div id="carousel-specials" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <h3>Special No1</h3>
-                    @*<img class="d-block img-fluid" src="..." alt="First slide">*@
-                    @*the line above was provided in the official bootstrap example for every 'item' div but I don't think I'll need it*@ 
-                </div>
-                <div class="item">
-                    <h3>Special No2</h3>
-                    
-                </div>
-                <div class="item">
-                    <h3>Special No3</h3>
-                    
-                </div>
+                <!--listbox is for accessibility people-->
+                <!--javascript takes care of this div-->
             </div>
         </div>
     </div>
-    <br />
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="container">
-    <div class="row">
+    <div style="background-color:none">
         <h2>Featured Vehicles</h2>
-        @foreach (var vehicle in Model)
-        {
-            <div class="col-md-3">
-                <p class="featured">
-                    @if (vehicle.PictureFilePath != null)
-                    { 
-                        <img src="@Url.Content(vehicle.PictureFilePath)"/> 
-                    }
-                    else
-                    {
-                        <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")"/>
-                    }
-                </p>
-                <p class="featured">@vehicle.Year @vehicle.Model</p>
-                <p class="featured">$@vehicle.MSRP</p>
-                <p class="featured">@vehicle.Description</p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Bad Link &raquo;</a></p>
-            </div>
-        }
+        <div class="row">
+            @foreach (var vehicle in Model.vehicles)
+            {
+                if (vehicle.IsFeature)
+                {
+                    <button class="btn btn-lg col-md-3">
+
+                        @if (vehicle.PictureFilePath != null)
+                        {
+                            <img src="@Url.Content("~/Images/" + vehicle.PictureFilePath)" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")" />
+                        }
+                        <p class="featured">@vehicle.Year @vehicle.Model</p>
+                        <p class="featured">$@vehicle.MSRP</p>
+                    </button>
+                }
+            }
+        </div>
     </div>
+    <hr />
+    <div id="map"></div>
 </div>
+<script>
+    function initMap() {
+        var uluru = { lat: 45.007397, lng: -93.260735 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgHW-2mFhqnVv4g94ktGnTSQqpJ6kaHg0&callback=initMap">
+</script>
 

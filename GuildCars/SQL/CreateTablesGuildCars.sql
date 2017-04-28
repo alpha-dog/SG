@@ -53,6 +53,7 @@ if exists(select * from sys.tables where name = 'Specials')
 drop table Specials
 go
 
+
 create table Specials
 (
 	SpecialId int identity primary key,
@@ -118,7 +119,8 @@ create table Vehicle
 	MSRP money not null,
 	SalePrice money not null,
 	[Description] varchar(500) not null,
-	PictureFilePath nvarchar(100) null
+	PictureFilePath nvarchar(100) null,
+	IsFeature bit not null
 )
 
 create table SalesInfo

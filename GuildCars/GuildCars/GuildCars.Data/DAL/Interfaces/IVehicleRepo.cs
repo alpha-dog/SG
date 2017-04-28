@@ -11,7 +11,7 @@ namespace GuildCars.Data.DAL
     {
         //CRUD methods go in here
         IEnumerable<Vehicle> GetVehicles();
-        Vehicle GetVehicle(int vehicleId);
+        IEnumerable<Vehicle> GetVehicle(int vehicleId);
 
         // bools for inserts, deletes, and updates so we can see if they worked
         void AddVehicle(Vehicle vehicle);

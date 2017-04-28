@@ -28,5 +28,6 @@ namespace GuildCars.Models.Tables
         public decimal SalePrice { get; set; }
         public string Description { get; set; }
         public string PictureFilePath { get; set; }
+        public bool IsFeature { get; set; }
     }
 }
