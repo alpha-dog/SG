@@ -19,7 +19,7 @@ namespace GuildCars.Controllers
             _SalesInfoRepo = new SalesInfoRepo();
         }
         // GET: api/SalesInfo
-        [Route("SalesInfos")]
+        [Route("SalesInfo")]
         public IEnumerable<SalesInfo> Get()
         {
             return _SalesInfoRepo.GetSalesInfos();

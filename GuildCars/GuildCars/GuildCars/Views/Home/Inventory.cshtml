@@ -3,7 +3,8 @@
     ViewBag.Title = "Inventory";
 }
 <head>
-    <style>
+    <!--THIS WAS HERE TO ADD NICE BORDERS TO THE LIST OF VEHICLES THAT WAS ORIGINALLY LOADED INTO THIS VIEW IN THE COMMENTED OUT CODE AT THE BOTTOM-->
+    @*<style>
         .row {
             border: 1px solid;
         }
@@ -11,17 +12,89 @@
             .row + .row {
                 border-top: .5px solid;
             }
-    </style>
+    </style>*@
 </head>
-<h1>@ViewBag.Title. Here's all the cars.</h1>
+<h1>@ViewBag.Title. Browse our expansive inventory .</h1>
 <h3>@ViewBag.Message</h3>
 
-<div style="background-color:transparent">
+<div class="row">
+    <div class="col-xs-12">
+        <form id="searchForm" class="form-inline">
+            <div class="form-group">
+                <label for="city">Quick Search</label>
+                <input type="text" class="form-control" id="carSearch" placeholder="make, model, or year">
+            </div>
+            <div class="form-group">
+                <label for="Price">Min Price</label>
+                @Html.DropDownList("min$", new SelectList(Model,  "SalePrice"), "Any", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="SalePrice">Max Price</label>
+                @Html.DropDownList("max$", new SelectList(Model, "SalePrice"), "Any", new { @class = "form-control" })
+            </div>
+            <button id="btnSearch" class="btn btn-default">Search</button>
+        </form>
+      </div>  
+</div>
+    <div id="searchResults" class="col-xs-12"></div>
+
+@section Scripts
+{
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+            var params = 'searchVal=' + $('#carSearch').val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:50929/Vehicle/search?' + params,
+                success: function (results) {
+                    $('#searchResults').empty();
+
+                    $.each(results, function (index, vehicle) {
+                        var html = '<p>' + vehicle.Model + '</p>';
+
+                        $('#searchResults').append(html.toString());
+                    });
+
+                },
+                error: function () {
+                    alert('Error performing search, try again later!')
+                }
+            });
+        }
+    </script>    
+}
+    @*<script>
+        $("#Search").click(function find() {
+            var searchVal = $('#carSearch').val();
+            $.getJSON('Vehicle/' + searchVal)
+                .done(function (data) {
+                    $('#searchResult').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#searchResult').text('Error: ' + err);
+                });
+        });
+    </script>*@
+
+    
+
+
+
+<!--THE CODE BELOW DISPLAYS ALL THE VEHICLES, WHICH I DID INITIALLY FOR SOME REASON-->
+@*<div style="background-color:transparent">
     
 
         @foreach (var vehicle in Model)
             {
-            @*<div class="panel panel-default">*@
             <div class="row">
                 <div class="col-md-3">
                     <div class="box">
@@ -64,4 +137,4 @@
                 </div>
                 }
             
-</div>
+</div>*@

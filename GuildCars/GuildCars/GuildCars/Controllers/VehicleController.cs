@@ -12,10 +12,12 @@ namespace GuildCars.Controllers
     public class VehicleController : ApiController
     {
         private VehicleRepo _vehicleRepo;
+        private VehiclesJoinedRepo _joinRepo;
 
         public VehicleController()//I can overload this method if i want to get back a specific number or sort it in some dumb way
         {
-            _vehicleRepo = new VehicleRepo(); 
+            _vehicleRepo = new VehicleRepo();
+            _joinRepo = new VehiclesJoinedRepo();
         }
 
         // GET: api/Vehicle
@@ -58,11 +60,28 @@ namespace GuildCars.Controllers
             _vehicleRepo.DeleteVehicle(id);
         }
 
-        // GET: api/Vehicle/string submitted by user
-        [Route("Home/Inventory/{searchVal}")]
-        public IEnumerable<Vehicle> Search(string searchVal)
+        //// GET: api/Vehicle/string submitted by user
+        //[Route("Vehicle/{searchVal}")]
+        //public IEnumerable<Vehicle> Search(string searchVal)
+        //{
+        //    return _vehicleRepo.SearchVehicles(searchVal);
+        //}
+
+        [Route("Vehicle/search")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult Search(string searchVal)
         {
-            return _vehicleRepo.SearchVehicles(searchVal);
+            try
+            { 
+            
+                var result = _vehicleRepo.SearchVehicles(searchVal);
+                var result2 = _joinRepo.SearchVehiclesWithLINQ(searchVal);
+                return Ok(result2);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

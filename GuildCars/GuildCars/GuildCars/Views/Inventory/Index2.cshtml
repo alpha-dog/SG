@@ -1,0 +1,71 @@
+﻿@model IEnumerable<GuildCars.Models.Tables.Vehicle>
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h1>Browse our expansive inventory.</h1>
+<h6>@ViewBag.Message</h6>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form id="searchForm" class="form-inline">
+            <div class="form-group">
+                <label for="city">Quick Search</label>
+                <input type="text" class="form-control" id="carSearch" placeholder="make, model, or year">
+            </div>
+            <div class="form-group">
+                <label for="Price">Min Price</label>
+                @Html.DropDownList("min$", new SelectList(Model, "SalePrice"), "Any", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="SalePrice">Max Price</label>
+                @Html.DropDownList("max$", new SelectList(Model, "SalePrice"), "Any", new { @class = "form-control" })
+            </div>
+            <button id="btnSearch" class="btn btn-default">Search</button>
+        </form>
+    </div>
+</div>
+<hr />
+<div id="yearMakeAndModel"></div>
+
+
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+            var params = 'searchVal=' + $('#carSearch').val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:50929/Vehicle/search?' + params,
+                success: function (results) {
+                    $('#yearMakeAndModel').empty();
+
+                    $.each(results, function (index, vehicle) {
+                        var html = `<p>
+                                        ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
+                                    </p>`
+                        $('#yearMakeAndModel').append(html.toString());
+                    });
+
+                },
+                error: function () {
+                    alert('Error performing search, contact I.T. hahaha.')
+                }
+            });
+        }
+    </script>
+}
+
+
+
+  

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuildCars.Data.DAL.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +7,16 @@ using System.Web.Mvc;
 
 namespace GuildCars.Controllers
 {
-    public class TestMVCController : Controller
+    public class InventoryController : Controller
     {
-        // GET: TestMVC
-        public ActionResult Index()
+        public ActionResult Index2()
         {
-            return View();
+            ViewBag.Message = "Viewbags example text blah blah blah";
+
+            var repo = new VehicleRepo();
+            var model = repo.GetVehicles();
+
+            return View(model);
         }
 
         // GET: TestMVC/Details/5

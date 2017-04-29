@@ -41,5 +41,30 @@ namespace GuildCars.Data.DAL.Repos
                 return _db.Query<VehiclesJoined>("VehicleSearch", p, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<VehiclesJoined> SearchVehiclesWithLINQ (string searchVal)
+        {
+            var carList = GetAllVehiclesJoined();
+            var searchResults = carList.Where(v => v.Model.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
+            return searchResults;                            
+        }
+
+        /*
+		from Vehicle
+
+		join Make
+			on Vehicle.MakeId = make.MakeId
+		join [Type]
+			on Vehicle.TypeId = [Type].TypeId
+		join BodyStyle
+			on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+		join Transmission
+			on Vehicle.TransmissionId = Transmission.TransmissionId
+		join Color  
+			on Vehicle.ColorId = Color.ColorId
+		where Model like @SearchVal + '%' OR 
+			[Year] like @SearchVal + '%' OR 
+			Make.MakeName like @SearchVal + '%';
+		 */
     }
 }
