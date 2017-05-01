@@ -5,3 +5,133 @@
 
 <h2>Details</h2>
 
+<div class="container">
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            @if (Model.PictureFilePath != null)
+            {
+                <img src="@Url.Content("~/Images/" + Model.PictureFilePath)"/>
+            }
+            else
+            {
+                <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")"/>
+            }
+        </div>
+        <dl class="dl-horizontal dl col-md-3">
+            <dt>
+                @Html.DisplayNameFor(model => model.BodyStyle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BodyStyle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TransmissionType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TransmissionType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Color)
+            </dd>
+
+        </dl>
+        <dl class="dl-horizontal dl col-md-3">
+            <dt>
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Color)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mileage)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mileage)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VIN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VIN)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal dl col-md-3">
+            <dt>
+                @Html.DisplayNameFor(model => model.SalePrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SalePrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MSRP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MSRP)
+            </dd>
+        </dl>
+    </div>
+    <br/>
+    <div class="col-md-3"></div> 
+        <dl class="dl-horizontal dl col-md-9">
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+</div>
+@section Scripts
+{
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+            var params = 'searchVal=' + $('#carSearch').val();
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:50929/Vehicle/search?' ,
+                success: function (results) {
+                    $('#yearMakeAndModel').empty();
+
+                    $.each(results, function (index, vehicle) {
+                        var html = `<p>
+                                        ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
+                                    </p>
+                                    <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>`
+                        $('#yearMakeAndModel').append(html.toString());
+                    });
+
+                },
+                error: function () {
+                    alert('Error performing search, contact I.T. hahaha.')
+                }
+            });
+        }
+    </script>
+}
+

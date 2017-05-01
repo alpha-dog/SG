@@ -22,7 +22,9 @@ namespace GuildCars.Controllers
         // GET: TestMVC/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var repo = new VehiclesJoinedRepo();
+            var model = repo.GetVehicleJoined(id).SingleOrDefault(); 
+            return View(model);
         }
 
         // GET: TestMVC/Create

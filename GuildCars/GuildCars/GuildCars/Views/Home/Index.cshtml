@@ -4,17 +4,11 @@
 }
 <head>
     <style>
-        #map {
-            height: 200px;
-            width: 40%;
-        }
-
         .btn-lg {
             background-color:darkseagreen;
             border:solid;
             border-color:white;
             display:inline-block;
-
         }
     </style>
 </head>
@@ -47,40 +41,24 @@
             {
                 if (vehicle.IsFeature)
                 {
-                    <button class="btn btn-lg col-md-3">
+                    <a class="btn btn-lg col-md-3" href="Inventory/Details/@vehicle.VehicleId">
 
-                        @if (vehicle.PictureFilePath != null)
-                        {
-                            <img src="@Url.Content("~/Images/" + vehicle.PictureFilePath)" />
-                        }
-                        else
-                        {
-                            <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")" />
-                        }
-                        <p class="featured">@vehicle.Year @vehicle.Model</p>
-                        <p class="featured">$@vehicle.MSRP</p>
-                    </button>
+                            @if (vehicle.PictureFilePath != null)
+                            {
+                                <img src="@Url.Content("~/Images/" + vehicle.PictureFilePath)" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Images/defaultVehiclePic.jpg")" />
+                            }
+                            <p class="featured">@vehicle.Year @vehicle.Model</p>
+                            <p class="featured">$@vehicle.MSRP</p>
+                        </a>
                 }
             }
         </div>
     </div>
     <hr />
-    <div id="map"></div>
 </div>
-<script>
-    function initMap() {
-        var uluru = { lat: 45.007397, lng: -93.260735 };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgHW-2mFhqnVv4g94ktGnTSQqpJ6kaHg0&callback=initMap">
-</script>
+
 

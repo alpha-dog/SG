@@ -21,6 +21,16 @@ namespace GuildCars.Data.DAL.Repos
             _db = new SqlConnection(ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString);
         }
 
+        public IEnumerable<VehiclesJoined> GetVehicleJoined(int vehicleId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@VehicleId", vehicleId);
+            using (_db)
+            {
+                return _db.Query<VehiclesJoined>("VehicleSelectWithJoins", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public IEnumerable<VehiclesJoined> GetAllVehiclesJoined()
         {
             using (var conn = new SqlConnection())

@@ -1,17 +1,44 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
+<head>
+    <style>
+        #map {
+            height: 200px;
+            width: 40%;
+        }
+    </style>
+</head>
+
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h3>Guild Cars</h3>
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
+    Guild Cars<br />
+    NE Minneapolis <br />
     <abbr title="Phone">P:</abbr>
-    425.555.0100
+    (555) 555-5555
 </address>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    <strong>Support:</strong>   <a href="mailto:me@example.com">me@example.com</a><br />
 </address>
+
+<div id="map"></div>
+
+<script>
+    function initMap() {
+        var uluru = { lat: 45.007397, lng: -93.260735 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgHW-2mFhqnVv4g94ktGnTSQqpJ6kaHg0&callback=initMap">
+</script>

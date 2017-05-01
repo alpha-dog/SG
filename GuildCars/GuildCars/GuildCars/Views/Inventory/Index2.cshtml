@@ -60,8 +60,81 @@
                         var html = `<p>
                                         ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
                                     </p>
-                                    <a class ="btn btn-info" href="Inventory/Details">`
-                        $('#yearMakeAndModel').append(html.toString());
+                                    <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>
+                                    `
+                        var testHtml = `<div class="row">
+                                            <div class="col-md-3">PUT PICTURE LINK HERE</div>
+                                            <dl class="dl-horizontal dl col-md-3">
+                                                <dt>
+                                                    BodyStyle
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.BodyStyle}
+                                                </dd>
+
+                                                <dt>
+                                                    Transmission
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.TransmissionType}
+                                                </dd>
+
+                                                <dt>
+                                                    Color
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.Color}
+                                                </dd>
+
+                                            </dl>
+                                            <dl class="dl-horizontal dl col-md-3">
+                                                <dt>
+                                                    Color
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.Color}
+                                                </dd>
+
+                                                <dt>
+                                                    Mileage
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.Mileage}
+                                                </dd>
+
+                                                <dt>
+                                                    VIN
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.VIN}
+                                                </dd>
+                                            </dl>
+                                            <dl class="dl-horizontal dl col-md-3">
+                                                <dt>
+                                                    SalePrice
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.SalePrice}
+                                                </dd>
+
+                                                <dt>
+                                                    MSRP
+                                                </dt>
+
+                                                <dd>
+                                                    ${vehicle.MSRP}
+                                                </dd>
+                                                <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>
+                                            </dl>
+                                        </div>`
+                        $('#yearMakeAndModel').append(testHtml.toString());
                     });
 
                 },

@@ -14,7 +14,7 @@ namespace GuildCars.Models.Queries
         public int TypeId { get; set; }
         public string BodyStyle { get; set; }
         public string Year { get; set; }
-        public string Transmission { get; set; }
+        public string TransmissionType { get; set; }
         public string Color { get; set; }
         //public int InteriorId { get; set; }
         public int Mileage { get; set; }

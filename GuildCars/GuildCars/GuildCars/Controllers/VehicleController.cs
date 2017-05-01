@@ -22,6 +22,7 @@ namespace GuildCars.Controllers
 
         // GET: api/Vehicle
         [Route("Vehicles")]
+        [AcceptVerbs("GET")]
         public IEnumerable<Vehicle> GetAll()
         {
             return _vehicleRepo.GetVehicles();
@@ -73,8 +74,7 @@ namespace GuildCars.Controllers
         {
             try
             { 
-            
-                var result = _vehicleRepo.SearchVehicles(searchVal);
+                //var result = _vehicleRepo.SearchVehicles(searchVal);
                 var result2 = _joinRepo.SearchVehiclesWithLINQ(searchVal);
                 return Ok(result2);
             }

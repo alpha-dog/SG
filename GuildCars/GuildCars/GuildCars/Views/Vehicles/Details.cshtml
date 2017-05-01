@@ -1,4 +1,4 @@
-﻿@model GuildCars.Models.Tables.Vehicle
+﻿@model GuildCars.Models.Queries.VehiclesJoined
 
 @{
     ViewBag.Title = "Details";
@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Make)
+            @Html.DisplayNameFor(model => model.MakeId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Make)
+            @Html.DisplayFor(model => model.MakeId)
         </dd>
 
         <dt>
