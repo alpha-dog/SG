@@ -13,8 +13,8 @@ namespace GuildCars.Controllers
         {
             ViewBag.Message = "Viewbags example text blah blah blah";
 
-            var repo = new VehicleRepo();
-            var model = repo.GetVehicles();
+            var repo = new VehiclesJoinedRepo();
+            var model = repo.GetAllVehiclesJoined();
 
             return View(model);
         }

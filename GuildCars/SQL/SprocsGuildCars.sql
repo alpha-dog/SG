@@ -199,7 +199,7 @@ create proc VehicleSearch
 )as
 begin 
 	select VehicleId, 
-	Make.MakeName,
+	Make.Make,
 	Model, 
 	[Type].TypeId, 
 	BodyStyle.BodyStyle, 
@@ -229,7 +229,7 @@ from Vehicle
 		on Vehicle.ColorId = Color.ColorId
 	where Model like @SearchVal + '%' OR 
 		[Year] like @SearchVal + '%' OR 
-		Make.MakeName like @SearchVal + '%';
+		Make.Make like @SearchVal + '%';
 end
 
 go
@@ -244,7 +244,7 @@ create proc VehicleSelectWithJoins
 )as
 begin
 select VehicleId, 
-	Make.MakeName,
+	Make.Make,
 	Model, 
 	[Type].TypeId, 
 	BodyStyle.BodyStyle, 
@@ -277,15 +277,15 @@ from Vehicle
 	where VehicleId = @VehicleId
 end
 
+go
 if exists(select * from information_schema.routines
 	where routine_name = 'VehicleGetAllWithJoins')
 	drop proc VehicleGetAllWithJoins
 go
-
 create proc VehicleGetAllWithJoins as
 begin
 	select VehicleId, 
-	Make.MakeName,
+	Make.Make,
 	Model, 
 	[Type].TypeId, 
 	BodyStyle.BodyStyle, 

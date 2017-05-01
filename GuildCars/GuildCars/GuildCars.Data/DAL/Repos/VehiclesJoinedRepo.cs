@@ -50,21 +50,21 @@ namespace GuildCars.Data.DAL.Repos
         }
 
         /*
-		from Vehicle
+        from Vehicle
 
-		join Make
-			on Vehicle.MakeId = make.MakeId
-		join [Type]
-			on Vehicle.TypeId = [Type].TypeId
-		join BodyStyle
-			on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
-		join Transmission
-			on Vehicle.TransmissionId = Transmission.TransmissionId
-		join Color  
-			on Vehicle.ColorId = Color.ColorId
-		where Model like @SearchVal + '%' OR 
-			[Year] like @SearchVal + '%' OR 
-			Make.MakeName like @SearchVal + '%';
-		 */
+        join Make
+            on Vehicle.MakeId = make.MakeId
+        join [Type]
+            on Vehicle.TypeId = [Type].TypeId
+        join BodyStyle
+            on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+        join Transmission
+            on Vehicle.TransmissionId = Transmission.TransmissionId
+        join Color  
+            on Vehicle.ColorId = Color.ColorId
+        where Model like @SearchVal + '%' OR 
+            [Year] like @SearchVal + '%' OR 
+            Make.MakeName like @SearchVal + '%';
+         */
     }
 }

@@ -1,10 +1,6 @@
 use GuildCars
 go
 
---special vehicles(in jumbotron), featured vehicles (below jumbotron), vehicles (new/used),
---purchaseLog, customer, salesperson, 
-
-
 if exists(select * from sys.tables where name='PurchaseLog')
 drop table PurchaseLog 
 go
@@ -65,19 +61,20 @@ create table Specials
 create table Make
 (
 	MakeId int identity primary key,
-	MakeName varchar(20) not null
-)
-create table PurchaseType
-(
-	PurchaseTypeId int identity primary key,
-	PurchaseType varchar(20) not null
+	Make varchar(20) not null
 )
 
-create table [State]
-(
-	StateId varchar(2) primary key,
-	StateName varchar(20) not null
-)
+--create table PurchaseType
+--(
+--	PurchaseTypeId int identity primary key,
+--	PurchaseType varchar(20) not null
+--)
+
+--create table [State]
+--(
+--	StateId varchar(2) primary key,
+--	StateName varchar(20) not null
+--)
 
 create table [Type]
 (
@@ -123,33 +120,33 @@ create table Vehicle
 	IsFeature bit not null
 )
 
-create table SalesInfo
-(
-	SalesInfoId int identity primary key,
-	FirstName nvarchar(20) not null,
-	LastName nvarchar(20) not null,
-	Phone varchar(20) not null,
-	Email nvarchar(40) null,
-	Street1 nvarchar(40) null,
-	Street2 nvarchar(40) null,
-	City nvarchar(40) null,
-	[State] varchar(2) foreign key references [State](StateId) null,
-	Zip varchar(5) null,
-	PurchasePrice money not null,
-	PurchaseTypeId int foreign key references PurchaseType(PurchaseTypeId)
-)
+--create table SalesInfo
+--(
+--	SalesInfoId int identity primary key,
+--	FirstName nvarchar(20) not null,
+--	LastName nvarchar(20) not null,
+--	Phone varchar(20) not null,
+--	Email nvarchar(40) null,
+--	Street1 nvarchar(40) null,
+--	Street2 nvarchar(40) null,
+--	City nvarchar(40) null,
+--	[State] varchar(2) foreign key references [State](StateId) null,
+--	Zip varchar(5) null,
+--	PurchasePrice money not null,
+--	PurchaseTypeId int foreign key references PurchaseType(PurchaseTypeId)
+--)
 
-create table SalesPerson
-(
-	EmployeeId int identity primary key,
-	FirstName nvarchar(20) not null,
-	LastName nvarchar(20) not null
-)
+--create table SalesPerson
+--(
+--	EmployeeId int identity primary key,
+--	FirstName nvarchar(20) not null,
+--	LastName nvarchar(20) not null
+--)
 
-create table PurchaseLog
-(
-	PurchaseId int identity primary key,
-	SalesInfoId int foreign key references SalesInfo(SalesInfoId),
-	EmployeeId int foreign key references SalesPerson(EmployeeId),
-	VehicleId int foreign key references Vehicle(VehicleId)	
-)
+--create table PurchaseLog
+--(
+--	PurchaseId int identity primary key,
+--	SalesInfoId int foreign key references SalesInfo(SalesInfoId),
+--	EmployeeId int foreign key references SalesPerson(EmployeeId),
+--	VehicleId int foreign key references Vehicle(VehicleId)	
+--)

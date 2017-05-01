@@ -9,21 +9,21 @@ go
 create procedure CarResetDB as 
 begin
 	delete from Vehicle;
-	delete from SalesInfo;
-	delete from SalesPerson;
-	delete from PurchaseLog;
+	--delete from SalesInfo;
+	--delete from SalesPerson;
+	--delete from PurchaseLog;
 	delete from Color;
 	delete from BodyStyle;
-	delete from [State];
+	--delete from [State];
 	delete from Transmission;
 	delete from [Type];
-	delete from PurchaseType;
+	--delete from PurchaseType;
 	delete from Specials;
 	
 
 
-	dbcc checkident ('SalesInfo', reseed, 1)
-	--dbcc checkident ('Vehicle', reseed, 1)
+	--dbcc checkident ('SalesInfo', reseed, 1)
+	dbcc checkident ('Vehicle', reseed, 1)
 
 	set identity_insert Specials on;
 		insert into Specials (SpecialId, SpecialName ,SpecialDetails)
@@ -63,7 +63,7 @@ begin
 
 	set identity_insert Make on;
 
-		insert into Make (MakeId, MakeName)
+		insert into Make (MakeId, Make)
 		values (1, 'VW'), (2, 'Ford'), (3, 'Geo'),(4, 'GMC')
 
 	set identity_insert Make off;
@@ -81,30 +81,30 @@ begin
 
 	set identity_insert Vehicle off;
 
-	set identity_insert SalesInfo on;
+	--set identity_insert SalesInfo on;
 	
-		insert into SalesInfo (SalesInfoId, FirstName, LastName, Phone, Email, Street1, Street2, City, [State], Zip, PurchasePrice, PurchaseTypeId)
-		values (1, 'Marshawn', 'JerMichael', '612-555-5555', 'marchMan@test.com', null, null, null, null, null, 3000, 1)
+	--	insert into SalesInfo (SalesInfoId, FirstName, LastName, Phone, Email, Street1, Street2, City, [State], Zip, PurchasePrice, PurchaseTypeId)
+	--	values (1, 'Marshawn', 'JerMichael', '612-555-5555', 'marchMan@test.com', null, null, null, null, null, 3000, 1)
 
-	set identity_insert SalesInfo off;
+	--set identity_insert SalesInfo off;
 
-	set identity_insert SalesPerson on;
+	--set identity_insert SalesPerson on;
 
-		insert into SalesPerson (EmployeeId, FirstName, LastName)
-		values (1, 'Joby', 'Dowd')
+	--	insert into SalesPerson (EmployeeId, FirstName, LastName)
+	--	values (1, 'Joby', 'Dowd')
 
 
-	set identity_insert SalesPerson off;
+	--set identity_insert SalesPerson off;
 
-	insert into [State] (StateId, StateName)
-		values ('MN', 'Minnesota'), ('FL', 'Florida')
+	--insert into [State] (StateId, StateName)
+	--	values ('MN', 'Minnesota'), ('FL', 'Florida')
 
-	set identity_insert PurchaseType on;
+	--set identity_insert PurchaseType on;
 
-		insert into PurchaseType (PurchaseTypeId, PurchaseType)
-		values (1, 'Cash'), (2, 'Credit')
+	--	insert into PurchaseType (PurchaseTypeId, PurchaseType)
+	--	values (1, 'Cash'), (2, 'Credit')
 
-	set identity_insert PurchaseType off;
+	--set identity_insert PurchaseType off;
 
-	exec CarResetDB
+	
 end

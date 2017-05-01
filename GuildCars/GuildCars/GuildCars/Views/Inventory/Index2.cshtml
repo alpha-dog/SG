@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GuildCars.Models.Tables.Vehicle>
+﻿@model IEnumerable<GuildCars.Models.Queries.VehiclesJoined>
 @{
     ViewBag.Title = "Inventory";
 }
@@ -13,9 +13,15 @@
                 <label for="city">Quick Search</label>
                 <input type="text" class="form-control" id="carSearch" placeholder="make, model, or year">
             </div>
+            <!--come back to this when you're brain is working better-->
+            @*<div class="form-group">
+                <label for="Price">Min Price</label>
+                @Html.DropDownList("min$", Model.Select(decimal s => s.SalePrice.ToString().OrderByDescending);
+            </div>*@
+
             <div class="form-group">
                 <label for="Price">Min Price</label>
-                @Html.DropDownList("min$", new SelectList(Model, "SalePrice"), "Any", new { @class = "form-control" })
+                @Html.DropDownList("min$", new SelectList(Model,  "SalePrice"), "Any", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label for="SalePrice">Max Price</label>
@@ -53,7 +59,8 @@
                     $.each(results, function (index, vehicle) {
                         var html = `<p>
                                         ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
-                                    </p>`
+                                    </p>
+                                    <a class ="btn btn-info" href="Inventory/Details">`
                         $('#yearMakeAndModel').append(html.toString());
                     });
 

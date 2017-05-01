@@ -9,13 +9,13 @@ namespace GuildCars.Models.Queries
     public class VehiclesJoined
     {
         public int VehicleId { get; set; }
-        public int Make { get; set; }
+        public string Make { get; set; }
         public string Model { get; set; }
-        public int Type { get; set; }
-        public int BodyStyle { get; set; }
+        public int TypeId { get; set; }
+        public string BodyStyle { get; set; }
         public string Year { get; set; }
-        public int Transmission { get; set; }
-        public int Color { get; set; }
+        public string Transmission { get; set; }
+        public string Color { get; set; }
         //public int InteriorId { get; set; }
         public int Mileage { get; set; }
         public string VIN { get; set; }
