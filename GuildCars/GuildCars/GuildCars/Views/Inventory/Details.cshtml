@@ -9,6 +9,7 @@
     <hr />
     <div class="row">
         <div class="col-md-3">
+            <strong>@Model.Year @Model.Make @Model.Model</strong>
             @if (Model.PictureFilePath != null)
             {
                 <img src="@Url.Content("~/Images/" + Model.PictureFilePath)"/>

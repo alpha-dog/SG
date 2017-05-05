@@ -52,11 +52,34 @@ namespace GuildCars.Data.DAL.Repos
             }
         }
 
-        public IEnumerable<VehiclesJoined> SearchVehiclesWithLINQ (string searchVal)
+        public IEnumerable<VehiclesJoined> SearchVehiclesWithLINQ (string searchVal, string minPrice, string maxPrice, string intMinYear, string maxYear)
         {
             var carList = GetAllVehiclesJoined();
-            var searchResults = carList.Where(v => v.Model.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
-            return searchResults;                            
+            if (!string.IsNullOrWhiteSpace(searchVal))
+            {
+                carList = carList.Where(v => v.Model.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
+            }
+            if (!string.IsNullOrWhiteSpace(minPrice))
+            {
+                string noDollarMinPrice = minPrice.Remove(0, 1);
+                decimal decMinPrice = decimal.Parse(noDollarMinPrice);
+                carList = carList.Where(p => p.SalePrice >= decMinPrice);
+            }
+            if (!string.IsNullOrWhiteSpace(maxPrice))
+            {
+                string noDollarMaxPrice = maxPrice.Remove(0, 1);
+                decimal decMaxPrice = decimal.Parse(noDollarMaxPrice);
+                carList = carList.Where(p => p.SalePrice <= decMaxPrice);
+            }
+            if (!string.IsNullOrWhiteSpace(intMinYear))
+            {
+                int intMinYear = int.Parse(intMinYear);
+                carList = carList.Where(y => y.Year <= intMinYear);
+            }
+
+
+            return carList;
+            //return searchResults;                            
         }
 
         /*

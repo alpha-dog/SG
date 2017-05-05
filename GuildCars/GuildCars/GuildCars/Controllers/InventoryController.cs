@@ -1,4 +1,6 @@
 ﻿using GuildCars.Data.DAL.Repos;
+using GuildCars.Models;
+using GuildCars.Models.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,17 @@ namespace GuildCars.Controllers
         {
             ViewBag.Message = "Viewbags example text blah blah blah";
 
+            var model = new InventoryViewModel();
+
             var repo = new VehiclesJoinedRepo();
-            var model = repo.GetAllVehiclesJoined();
+            model.VehiclesJoined = repo.GetAllVehiclesJoined();
+
+            model.SalesRange = model.VehiclesJoined.OrderBy(s => s.SalePrice).Select(s => s.SalePrice.ToString("c")).Distinct();
+            model.YearRange = model.VehiclesJoined.OrderBy(y => y.Year).Select(y => y.Year.ToString()).Distinct();
+
+            //var repo2 = new VehicleRepo();
+            //model.Vehicles = repo2.GetVehicles();
+            
 
             return View(model);
         }
@@ -28,10 +39,25 @@ namespace GuildCars.Controllers
         }
 
         // GET: TestMVC/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
-            return View();
+            var model = new VehiclesJoined();
+            return View(model);
         }
+        //public ActionResult Add()
+        //{
+        //    var model = new ListingAddViewModel();
+
+        //    var statesRepo = StatesRepositoryFactory.GetRepository();
+        //    var bathroomRepo = BathroomTypesRepositoryFactory.GetRepository();
+
+        //    model.States = new SelectList(statesRepo.GetAll(), "StateId", "StateId");
+        //    model.BathroomTypes = new SelectList(bathroomRepo.GetAll(), "BathroomTypeId", "BathroomTypeName");
+        //    model.Listing = new Listing();
+
+        //    return View(model);
+        //}
+
 
         // POST: TestMVC/Create
         [HttpPost]

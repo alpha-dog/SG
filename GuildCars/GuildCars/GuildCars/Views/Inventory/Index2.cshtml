@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GuildCars.Models.Queries.VehiclesJoined>
+﻿@model GuildCars.Models.InventoryViewModel
 @{
     ViewBag.Title = "Inventory";
 }
@@ -18,14 +18,22 @@
                 <label for="Price">Min Price</label>
                 @Html.DropDownList("min$", Model.Select(decimal s => s.SalePrice.ToString().OrderByDescending);
             </div>*@
-
+            
             <div class="form-group">
                 <label for="Price">Min Price</label>
-                @Html.DropDownList("min$", new SelectList(Model,  "SalePrice"), "Any", new { @class = "form-control" })
+                @Html.DropDownList("min$", new SelectList(Model.SalesRange), new { @class = "form-control", id="minPrice" })
             </div>
             <div class="form-group">
                 <label for="SalePrice">Max Price</label>
-                @Html.DropDownList("max$", new SelectList(Model, "SalePrice"), "Any", new { @class = "form-control" })
+                @Html.DropDownList("max$", new SelectList(Model.SalesRange), new { @class = "form-control", id = "maxPrice" })
+            </div>
+            <div class="form-group">
+                <label for="Price">Min Year</label>
+                @Html.DropDownList("min$", new SelectList(Model.YearRange), new { @class = "form-control", id = "minYear" })
+            </div>
+            <div class="form-group">
+                <label for="SalePrice">Max Year</label>
+                @Html.DropDownList("max$", new SelectList(Model.YearRange), new { @class = "form-control", id = "maxYear" })
             </div>
             <button id="btnSearch" class="btn btn-default">Search</button>
         </form>
@@ -49,6 +57,10 @@
 
         function search() {
             var params = 'searchVal=' + $('#carSearch').val();
+            params += `&minPrice=${$('#minPrice').val()}`;
+            params += `&maxPrice=${$('#maxPrice').val()}`;
+            params += `&minYear=${$('#minYear').val()}`;
+            params += `&maxYear=${$('#maxYear').val()}`;
 
             $.ajax({
                 type: 'GET',
@@ -57,16 +69,19 @@
                     $('#yearMakeAndModel').empty();
 
                     $.each(results, function (index, vehicle) {
-                        var html = `<p>
-                                        ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
-                                    </p>
-                                    <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>
-                                    `
+                        //var html = `<p>
+                        //                ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}
+                        //            </p>
+                        //            <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>
+                        //            `
                         var testHtml = `<div class="row">
-                                            <div class="col-md-3">PUT PICTURE LINK HERE</div>
+                                            <div class ="col-md-3">
+                                                <strong>${vehicle.Year} ${vehicle.Make} ${vehicle.Model}</strong>
+                                                <img src="/Images/${vehicle.PictureFilePath}"/>
+                                            </div>
                                             <dl class="dl-horizontal dl col-md-3">
                                                 <dt>
-                                                    BodyStyle
+                                                    BodyStyle:
                                                 </dt>
 
                                                 <dd>
@@ -74,7 +89,7 @@
                                                 </dd>
 
                                                 <dt>
-                                                    Transmission
+                                                    Transmission:
                                                 </dt>
 
                                                 <dd>
@@ -82,7 +97,7 @@
                                                 </dd>
 
                                                 <dt>
-                                                    Color
+                                                    Color:
                                                 </dt>
 
                                                 <dd>
@@ -92,7 +107,7 @@
                                             </dl>
                                             <dl class="dl-horizontal dl col-md-3">
                                                 <dt>
-                                                    Color
+                                                    Color:
                                                 </dt>
 
                                                 <dd>
@@ -100,7 +115,7 @@
                                                 </dd>
 
                                                 <dt>
-                                                    Mileage
+                                                    Mileage:
                                                 </dt>
 
                                                 <dd>
@@ -108,7 +123,7 @@
                                                 </dd>
 
                                                 <dt>
-                                                    VIN
+                                                    VIN:
                                                 </dt>
 
                                                 <dd>
@@ -117,7 +132,7 @@
                                             </dl>
                                             <dl class="dl-horizontal dl col-md-3">
                                                 <dt>
-                                                    SalePrice
+                                                    SalePrice:
                                                 </dt>
 
                                                 <dd>
@@ -125,13 +140,15 @@
                                                 </dd>
 
                                                 <dt>
-                                                    MSRP
+                                                    MSRP:
                                                 </dt>
 
                                                 <dd>
                                                     ${vehicle.MSRP}
                                                 </dd>
-                                                <a class ="btn btn-info" href="Details/${vehicle.VehicleId}">details</a>
+                                                <dd>
+                                                <a class ="btn btn-info" href="Details/${vehicle.VehicleId}" style="text-align:center;">details</a>
+                                                </dd>
                                             </dl>
                                         </div>`
                         $('#yearMakeAndModel').append(testHtml.toString());

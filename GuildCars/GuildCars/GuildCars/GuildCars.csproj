@@ -209,6 +209,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InventoryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -296,6 +297,7 @@
     <Content Include="Views\Home\Specials.cshtml" />
     <Content Include="Views\Inventory\Index2.cshtml" />
     <Content Include="Views\Inventory\Details.cshtml" />
+    <Content Include="Views\Inventory\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

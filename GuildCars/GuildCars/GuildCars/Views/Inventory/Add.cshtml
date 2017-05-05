@@ -1,0 +1,21 @@
+﻿@model GuildCars.Models.Queries.VehiclesJoined
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+<div class="row">
+    
+    <form id="searchForm" class="form-inline">
+        <div class="form-group">
+            <label for="city">Quick Search</label>
+            <input type="text" class="form-control" id="make" placeholder="make">
+        </div>
+        @*<div class="form-group">
+            @Html.DropDownListFor()
+        </div>*@
+        <button id="btnSearch" class="btn btn-default">Search</button>
+    </form>
+    
+</div>

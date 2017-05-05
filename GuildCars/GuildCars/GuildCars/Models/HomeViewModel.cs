@@ -13,8 +13,4 @@ namespace GuildCars.Models
 
     }
 
-    public class InventoryViewModel
-    {
-
-    }
 }

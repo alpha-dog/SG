@@ -70,12 +70,12 @@ namespace GuildCars.Controllers
 
         [Route("Vehicle/search")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult Search(string searchVal)
+        public IHttpActionResult Search(string searchVal, string minPrice, string maxPrice, string minYear, string maxYear)
         {
             try
             { 
                 //var result = _vehicleRepo.SearchVehicles(searchVal);
-                var result2 = _joinRepo.SearchVehiclesWithLINQ(searchVal);
+                var result2 = _joinRepo.SearchVehiclesWithLINQ(searchVal, minPrice, maxPrice, minYear, maxYear);
                 return Ok(result2);
             }
             catch (Exception ex)
