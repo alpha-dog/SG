@@ -15,7 +15,7 @@ namespace GuildCars.Models.Tables
         //can and cannot be null or you will inevitably run into the dreaded NullReferenceException.
         public int VehicleId { get; set; }
         public int MakeId { get; set; }
-        public string Model { get; set; }
+        public string ModelId { get; set; }
         public int TypeId { get; set; }
         public int BodyStyleId { get; set; }    
         public string Year { get; set; }

@@ -81,6 +81,7 @@
     <Compile Include="Tables\SalesPerson.cs" />
     <Compile Include="Tables\Specials.cs" />
     <Compile Include="Tables\Vehicle.cs" />
+    <Compile Include="Tables\VehicleModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

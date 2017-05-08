@@ -9,7 +9,7 @@
     <hr />
     <div class="row">
         <div class="col-md-3">
-            <strong>@Model.Year @Model.Make @Model.Model</strong>
+            <strong>@Model.Year @Model.Make @Model.ModelName</strong>
             @if (Model.PictureFilePath != null)
             {
                 <img src="@Url.Content("~/Images/" + Model.PictureFilePath)"/>
@@ -37,21 +37,21 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.ExtColor)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Color)
+                @Html.DisplayFor(model => model.ExtColor)
             </dd>
 
         </dl>
         <dl class="dl-horizontal dl col-md-3">
             <dt>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.IntColor)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Color)
+                @Html.DisplayFor(model => model.IntColor)
             </dd>
 
             <dt>

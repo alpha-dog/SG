@@ -15,9 +15,12 @@ namespace GuildCars.Controllers
         
         public ActionResult Index()
         {
+            var jepo = new VehiclesJoinedRepo();
             var repo = new VehicleRepo();
+
             var model = new HomeViewModel();
-            model.vehicles = repo.GetVehicles();
+
+            model.vehicles = jepo.GetAllVehiclesJoined();
             model.specials = repo.GetSpecials(); 
 
             return View(model);

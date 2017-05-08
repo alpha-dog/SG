@@ -1,21 +1,105 @@
-﻿@model GuildCars.Models.Queries.VehiclesJoined
+﻿@model GuildCars.Models.InventoryAddViewModel
 @{
     ViewBag.Title = "Add";
 }
+<head>
+    <style>
+        h2 {
+            color: blueviolet;
+        }
 
+        label {
+            color: forestgreen;
+        }
+        textarea {
+            max-width: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
 <h2>Add</h2>
 
-<div class="row">
-    
-    <form id="searchForm" class="form-inline">
-        <div class="form-group">
-            <label for="city">Quick Search</label>
-            <input type="text" class="form-control" id="make" placeholder="make">
-        </div>
-        @*<div class="form-group">
-            @Html.DropDownListFor()
-        </div>*@
-        <button id="btnSearch" class="btn btn-default">Search</button>
-    </form>
-    
-</div>
+
+@using (Html.BeginForm("Add", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddListing" }))
+{
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="make">Make</label>
+                    @Html.DropDownListFor(m => m.SelectedModelId, Model.Models, new { @class="form-control" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" id="model" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="year">Year</label>
+                    <input type="text" class="form-control" id="year" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="transmission">Transmission</label>
+                    <input type="text" class="form-control" id="transmission" />
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="color">Color</label>
+                    <input type="text" class="form-control" id="color" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="interior">Interior</label>
+                    <input type="text" class="form-control" id="interior" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="mileage">Mileage</label>
+                    <input type="text" class="form-control" id="mileage" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="VIN">VIN #</label>
+                    <input type="text" class="form-control" id="VIN" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="MSRP">MSRP</label>
+                    <input type="text" class="form-control" id="MSRP" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="saleprice">Sale Price</label>
+                    <input type="text" class="form-control" id="saleprice" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="picture">Picture File Path</label>
+                    <input type="text" class="form-control" id="picture" />
+                </div>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Mark as Featured</label>
+            </div>
+
+            <button id="btnSearch" class="btn btn-default">Save</button>
+
+        </form>
+    </div>
+}
+
+
+

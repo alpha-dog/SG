@@ -1,4 +1,5 @@
-﻿using GuildCars.Models.Tables;
+﻿using GuildCars.Models.Queries;
+using GuildCars.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace GuildCars.Models
 {
     public class HomeViewModel
     {
-        public IEnumerable<Vehicle> vehicles { get; set; }
+        public IEnumerable<VehiclesJoined> vehicles { get; set; }
         public IEnumerable<Specials> specials { get; set; }
 
     }

@@ -1,6 +1,7 @@
 ﻿using GuildCars.Data.DAL.Repos;
 using GuildCars.Models;
 using GuildCars.Models.Queries;
+using GuildCars.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +40,18 @@ namespace GuildCars.Controllers
         }
 
         // GET: TestMVC/Create
+        
         public ActionResult Add()
         {
-            var model = new VehiclesJoined();
+            var model = new InventoryAddViewModel();
+
+            var jrepo = new VehiclesJoinedRepo();
+
+            model.Models = new SelectList(jrepo.GetAllModels(), "ModelId", "ModelName");
+
+            
+            model.Vehicle = new Vehicle();
+
             return View(model);
         }
         //public ActionResult Add()

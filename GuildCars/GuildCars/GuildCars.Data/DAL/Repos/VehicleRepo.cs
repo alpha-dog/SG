@@ -104,7 +104,7 @@ namespace GuildCars.Data.DAL.Repos
 			var p = new DynamicParameters();
 			p.Add("VehicleId", vehicle.VehicleId);
 			p.Add("MakeId", vehicle.MakeId);
-			p.Add("Model", vehicle.Model);
+			p.Add("ModelId", vehicle.ModelId);
 			p.Add("TypeId", vehicle.TypeId);
 			p.Add("BodyStyleId", vehicle.BodyStyleId);
 			p.Add("Year", vehicle.Year);
@@ -129,7 +129,7 @@ namespace GuildCars.Data.DAL.Repos
 			var p = new DynamicParameters();
 			p.Add("VehicleId", vehicle.VehicleId);
 			p.Add("MakeId", vehicle.MakeId);
-			p.Add("Model", vehicle.Model);
+			p.Add("ModelId", vehicle.ModelId);
 			p.Add("TypeId", vehicle.TypeId);
 			p.Add("BodyStyleId", vehicle.BodyStyleId);
 			p.Add("Year", vehicle.Year);
@@ -155,5 +155,5 @@ namespace GuildCars.Data.DAL.Repos
 
 			_db.Query<Vehicle>("VehicleDelete", p, commandType: CommandType.StoredProcedure);
 		}
-	}
+    }
 }

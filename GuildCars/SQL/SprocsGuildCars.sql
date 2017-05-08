@@ -42,7 +42,7 @@ create proc AddVehicles
 (
 	@VehicleId int, 
 	@MakeId int,
-	@Model varchar(20),
+	@ModelId varchar(20),
 	@TypeId int,
 	@BodyStyleId int,
 	@Year varchar(4),
@@ -59,11 +59,11 @@ create proc AddVehicles
 ) as 
 begin
 	insert into Vehicle 
-	(MakeId, Model, TypeId, BodyStyleId, [Year], TransmissionId, 
+	(MakeId, ModelId, TypeId, BodyStyleId, [Year], TransmissionId, 
 		ColorId, InteriorId, Mileage, VIN, MSRP, SalePrice, [Description], 
 		PictureFilePath, IsFeature)
 
-	values (@MakeId, @Model, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
+	values (@MakeId, @ModelId, @TypeId, @BodyStyleId, @Year, @TransmissionId, 
 		@ColorId, @InteriorId, @Mileage, @VIN, @MSRP, @SalePrice, @Description, 
 		@PictureFilePath, @IsFeature)
 
@@ -80,7 +80,7 @@ create proc VehicleUpdate
 (
 	@VehicleId int, 
 	@MakeId int,
-	@Model varchar(20),
+	@ModelId int,
 	@TypeId int,
 	@BodyStyleId int,
 	@Year varchar(4),
@@ -98,7 +98,7 @@ create proc VehicleUpdate
 begin 
 	update Vehicle set
 		MakeId = @MakeId,
-		Model = @Model,
+		ModelId = @ModelId,
 		TypeId = @TypeId,
 		BodyStyleId = @BodyStyleId,
 		[Year] = @Year,
@@ -188,49 +188,7 @@ begin
 	commit transaction
 end
 
-go 
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'VehicleSearch')
-		drop proc VehicleSearch
-go
-create proc VehicleSearch 
-(
-	@SearchVal varchar(50)
-)as
-begin 
-	select VehicleId, 
-	Make.Make,
-	Model, 
-	[Type].TypeId, 
-	BodyStyle.BodyStyle, 
-	[Year], 
-	Transmission.TransmissionType, 
-	Color.Color,
-	--interior color,
-	Mileage,
-	VIN,
-	MSRP,
-	SalePrice,
-	[Description],
-	PictureFilePath,
-	IsFeature
-		 
-from Vehicle
 
-	join Make
-		on Vehicle.MakeId = make.MakeId
-	join [Type]
-		on Vehicle.TypeId = [Type].TypeId
-	join BodyStyle
-		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
-	join Transmission
-		on Vehicle.TransmissionId = Transmission.TransmissionId
-	join Color  
-		on Vehicle.ColorId = Color.ColorId
-	where Model like @SearchVal + '%' OR 
-		[Year] like @SearchVal + '%' OR 
-		Make.Make like @SearchVal + '%';
-end
 
 go
 if exists(select * from INFORMATION_SCHEMA.ROUTINES
@@ -244,35 +202,45 @@ create proc VehicleSelectWithJoins
 )as
 begin
 select VehicleId, 
-	Make.Make,
-	Model, 
-	[Type].TypeId, 
-	BodyStyle.BodyStyle, 
-	[Year], 
-	Transmission.TransmissionType, 
-	Color.Color,
-	--interior color,
-	Mileage,
-	VIN,
-	MSRP,
-	SalePrice,
-	[Description],
-	PictureFilePath,
-	IsFeature
+		Vehicle.MakeId,
+		Make.Make,
+		Vehicle.ModelId,
+		Model.ModelName,
+		Vehicle.TypeId,
+		[Type].NewOrUsed, 
+		Vehicle.BodyStyleId,
+		BodyStyle.BodyStyle, 
+		[Year], 
+		Vehicle.TransmissionId,
+		Transmission.TransmissionType,
+		Vehicle.ColorId,
+		ExtColor.Color,
+		Vehicle.InteriorId,
+		IntColor.Color,
+		Mileage,
+		VIN,
+		MSRP,
+		SalePrice,
+		[Description],
+		PictureFilePath,
+		IsFeature
 		 
 from Vehicle
 
-	join Make
-		on Vehicle.MakeId = make.MakeId
-	join [Type]
-		on Vehicle.TypeId = [Type].TypeId
-	join BodyStyle
-		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
-	join Transmission
-		on Vehicle.TransmissionId = Transmission.TransmissionId
-	join Color  
-		on Vehicle.ColorId = Color.ColorId
-	--need to add interior color
+join Make
+	on Vehicle.MakeId = Make.MakeId
+join Model
+	on Vehicle.ModelId = Model.ModelId
+join [Type]
+	on Vehicle.TypeId = [Type].TypeId
+join BodyStyle
+	on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+join Transmission
+	on Vehicle.TransmissionId = Transmission.TransmissionId
+join Color as ExtColor
+	on Vehicle.ColorId = ExtColor.ColorId
+join Color as IntColor
+	on Vehicle.InteriorId = IntColor.ColorId
 	
 	where VehicleId = @VehicleId
 end
@@ -285,35 +253,92 @@ go
 create proc VehicleGetAllWithJoins as
 begin
 	select VehicleId, 
-	Make.Make,
-	Model, 
-	[Type].TypeId, 
-	BodyStyle.BodyStyle, 
-	[Year], 
-	Transmission.TransmissionType, 
-	Color.Color,
-	--interior color,
-	Mileage,
-	VIN,
-	MSRP,
-	SalePrice,
-	[Description],
-	PictureFilePath,
-	IsFeature
+		Vehicle.MakeId,
+		Make.Make,
+		Vehicle.ModelId,
+		Model.ModelName, 
+		Vehicle.TypeId,
+		[Type].NewOrUsed, 
+		BodyStyle.BodyStyle,
+		Vehicle.BodyStyleId, 
+		[Year], 
+		Vehicle.TransmissionId,
+		Transmission.TransmissionType,
+		Vehicle.ColorId,
+		ExtColor.Color,
+		Vehicle.InteriorId,
+		IntColor.Color,
+		--Vehicle.ColorId,
+		--Vehicle.InteriorId,
+		Mileage,
+		VIN,
+		MSRP,
+		SalePrice,
+		[Description],
+		PictureFilePath,
+		IsFeature
 		 
 from Vehicle
 
-	join Make
-		on Vehicle.MakeId = make.MakeId
-	join [Type]
-		on Vehicle.TypeId = [Type].TypeId
-	join BodyStyle
-		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
-	join Transmission
-		on Vehicle.TransmissionId = Transmission.TransmissionId
-	join Color  
-		on Vehicle.ColorId = Color.ColorId
-	--need to add interior color
+join Make
+	on Vehicle.MakeId = make.MakeId
+join Model
+	on Vehicle.ModelId = Model.ModelId
+join [Type]
+	on Vehicle.TypeId = [Type].TypeId
+join BodyStyle
+	on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+join Transmission
+	on Vehicle.TransmissionId = Transmission.TransmissionId
+join Color as ExtColor
+	on Vehicle.ColorId = ExtColor.ColorId
+join Color as IntColor
+	on Vehicle.InteriorId = IntColor.ColorId
 end
+
+go 
+--if exists(select * from INFORMATION_SCHEMA.ROUTINES
+--	where ROUTINE_NAME = 'VehicleSearch')
+--		drop proc VehicleSearch
+--go
+--create proc VehicleSearch 
+--(
+--	@SearchVal varchar(50)
+--)as
+--begin 
+--	select VehicleId, 
+--	Make.Make,
+--	Model, 
+--	[Type].TypeId, 
+--	BodyStyle.BodyStyle, 
+--	[Year], 
+--	Transmission.TransmissionType,
+--	Color.ColorId, 
+--	Color.Color,
+--	--interior color,
+--	Mileage,
+--	VIN,
+--	MSRP,
+--	SalePrice,
+--	[Description],
+--	PictureFilePath,
+--	IsFeature
+		 
+--from Vehicle
+
+--	join Make
+--		on Vehicle.MakeId = make.MakeId
+--	join [Type]
+--		on Vehicle.TypeId = [Type].TypeId
+--	join BodyStyle
+--		on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
+--	join Transmission
+--		on Vehicle.TransmissionId = Transmission.TransmissionId
+--	join Color  
+--		on Vehicle.ColorId = Color.ColorId
+--	where Model like @SearchVal + '%' OR 
+--		[Year] like @SearchVal + '%' OR 
+--		Make.Make like @SearchVal + '%';
+--end
 
 

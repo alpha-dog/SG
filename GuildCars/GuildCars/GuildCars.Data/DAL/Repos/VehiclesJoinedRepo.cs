@@ -9,6 +9,7 @@ using Dapper;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using GuildCars.Models.Tables;
 
 namespace GuildCars.Data.DAL.Repos
 {
@@ -52,12 +53,12 @@ namespace GuildCars.Data.DAL.Repos
             }
         }
 
-        public IEnumerable<VehiclesJoined> SearchVehiclesWithLINQ (string searchVal, string minPrice, string maxPrice, string intMinYear, string maxYear)
+        public IEnumerable<VehiclesJoined> SearchVehiclesWithLINQ (string searchVal, string minPrice, string maxPrice, string minYear, string maxYear)
         {
             var carList = GetAllVehiclesJoined();
             if (!string.IsNullOrWhiteSpace(searchVal))
             {
-                carList = carList.Where(v => v.Model.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
+                carList = carList.Where(v => v.ModelName.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
             }
             if (!string.IsNullOrWhiteSpace(minPrice))
             {
@@ -71,33 +72,28 @@ namespace GuildCars.Data.DAL.Repos
                 decimal decMaxPrice = decimal.Parse(noDollarMaxPrice);
                 carList = carList.Where(p => p.SalePrice <= decMaxPrice);
             }
-            if (!string.IsNullOrWhiteSpace(intMinYear))
+            if (!string.IsNullOrWhiteSpace(minYear))
             {
-                int intMinYear = int.Parse(intMinYear);
-                carList = carList.Where(y => y.Year <= intMinYear);
+                int intMinYear = int.Parse(minYear);
+                carList = carList.Where(y => int.Parse(y.Year) >= intMinYear);
             }
-
+            if (!string.IsNullOrWhiteSpace(maxYear))
+            {
+                int intMaxYear = int.Parse(maxYear);
+                carList = carList.Where(y => int.Parse(y.Year) <= intMaxYear);
+            }
 
             return carList;
             //return searchResults;                            
         }
+        public IEnumerable<VehicleModels> GetAllModels()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
 
-        /*
-        from Vehicle
-
-        join Make
-            on Vehicle.MakeId = make.MakeId
-        join [Type]
-            on Vehicle.TypeId = [Type].TypeId
-        join BodyStyle
-            on Vehicle.BodyStyleId = BodyStyle.BodyStyleId
-        join Transmission
-            on Vehicle.TransmissionId = Transmission.TransmissionId
-        join Color  
-            on Vehicle.ColorId = Color.ColorId
-        where Model like @SearchVal + '%' OR 
-            [Year] like @SearchVal + '%' OR 
-            Make.MakeName like @SearchVal + '%';
-         */
+                return conn.Query<VehicleModels>("GetAllModels", commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
