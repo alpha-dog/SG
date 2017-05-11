@@ -58,7 +58,7 @@ namespace GuildCars.Data.DAL.Repos
             var carList = GetAllVehiclesJoined();
             if (!string.IsNullOrWhiteSpace(searchVal))
             {
-                carList = carList.Where(v => v.ModelName.StartsWith(searchVal) || v.Year.StartsWith(searchVal) || v.Make.ToString().StartsWith(searchVal));
+                carList = carList.Where(v => v.ModelName.ToUpper().StartsWith(searchVal.ToUpper()) || v.Year.StartsWith(searchVal) || v.Make.ToString().ToUpper().StartsWith(searchVal.ToUpper()));
             }
             if (!string.IsNullOrWhiteSpace(minPrice))
             {
@@ -84,7 +84,7 @@ namespace GuildCars.Data.DAL.Repos
             }
 
             return carList;
-            //return searchResults;                            
+                                        
         }
         public IEnumerable<VehicleModels> GetAllModels()
         {
@@ -95,5 +95,55 @@ namespace GuildCars.Data.DAL.Repos
                 return conn.Query<VehicleModels>("GetAllModels", commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<VehicleMake> GetAllMakes()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<VehicleMake>("select * from Make", commandType: CommandType.Text);
+            }
+        }
+
+        public IEnumerable<VehicleBodyStyle> GetAllBodyStyles()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<VehicleBodyStyle>("select * from BodyStyle", commandType: CommandType.Text);
+            }
+        }
+        public IEnumerable<VehicleColor> GetAllColors()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<VehicleColor>("select * from Color", commandType: CommandType.Text);
+            }
+        }
+
+        public IEnumerable<VehicleTransmission> GetAllTransmissions()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<VehicleTransmission>("select * from Transmission", commandType: CommandType.Text);
+            }
+        }
+
+        public IEnumerable<VehicleType> GetAllTypes()
+        {
+            using (var conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["GuildCars"].ConnectionString;
+
+                return conn.Query<VehicleType>("select * from Type", commandType: CommandType.Text);
+            }
+        }
+
     }
 }

@@ -47,48 +47,36 @@ namespace GuildCars.Controllers
 
             var jrepo = new VehiclesJoinedRepo();
 
+            model.Makes = new SelectList(jrepo.GetAllMakes(), "MakeId", "Make");
             model.Models = new SelectList(jrepo.GetAllModels(), "ModelId", "ModelName");
-
+            model.Types = new SelectList(jrepo.GetAllTypes(), "TypeId", "NewOrUsed");
+            model.BodyStyles = new SelectList(jrepo.GetAllBodyStyles(), "BodyStyleId", "BodyStyle");
+            model.Transmissions = new SelectList(jrepo.GetAllTransmissions(), "TransmissionId", "TransmissionType");
+            model.Colors = new SelectList(jrepo.GetAllColors(), "ColorId", "Color");
             
             model.Vehicle = new Vehicle();
 
             return View(model);
         }
-        //public ActionResult Add()
-        //{
-        //    var model = new ListingAddViewModel();
-
-        //    var statesRepo = StatesRepositoryFactory.GetRepository();
-        //    var bathroomRepo = BathroomTypesRepositoryFactory.GetRepository();
-
-        //    model.States = new SelectList(statesRepo.GetAll(), "StateId", "StateId");
-        //    model.BathroomTypes = new SelectList(bathroomRepo.GetAll(), "BathroomTypeId", "BathroomTypeName");
-        //    model.Listing = new Listing();
-
-        //    return View(model);
-        //}
-
-
-        // POST: TestMVC/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: TestMVC/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new InventoryAddViewModel();
+
+            var jrepo = new VehiclesJoinedRepo();
+
+            model.Makes = new SelectList(jrepo.GetAllMakes(), "MakeId", "Make");
+            model.Models = new SelectList(jrepo.GetAllModels(), "ModelId", "ModelName");
+            model.Types = new SelectList(jrepo.GetAllTypes(), "TypeId", "NewOrUsed");
+            model.BodyStyles = new SelectList(jrepo.GetAllBodyStyles(), "BodyStyleId", "BodyStyle");
+            model.Transmissions = new SelectList(jrepo.GetAllTransmissions(), "TransmissionId", "TransmissionType");
+            model.Colors = new SelectList(jrepo.GetAllColors(), "ColorId", "Color");
+
+            var repo = new VehicleRepo();
+            model.Vehicle = repo.GetVehicle(id).SingleOrDefault();
+
+            return View(model);
         }
 
         // POST: TestMVC/Edit/5

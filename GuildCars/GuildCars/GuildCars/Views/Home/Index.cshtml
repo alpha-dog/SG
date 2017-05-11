@@ -10,6 +10,10 @@
             border-color:white;
             display:inline-block;
         }
+        
+        .featured{
+            color:black;
+        }
     </style>
 </head>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
@@ -20,7 +24,10 @@
                 @:$('<div class="item"><h3>@special.SpecialName</h3><p><a class="btn btn-info" href="Home/Specials">check it!</a></p><div class="carousel"></div> </div>').appendTo('.carousel-inner');
                         }
         $('.item').first().addClass('active');
-        $('#carousel-example-generic').carousel();
+        //$('#carousel-example-generic').carousel();
+    });
+    $('.carousel').carousel({
+        interval: 100
     });
 </script>
 

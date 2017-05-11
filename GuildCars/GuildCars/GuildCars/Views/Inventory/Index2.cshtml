@@ -4,7 +4,12 @@
 }
 
 <h1>Browse our expansive inventory.</h1>
-<h6>@ViewBag.Message</h6>
+<div class="secretClass">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h6>@Html.ActionLink("Add Vehicle", "Add")</h6>
+    }  
+</div>
 
 <div class="row">
     <div class="col-xs-12">
@@ -13,12 +18,6 @@
                 <label for="city">Quick Search</label>
                 <input type="text" class="form-control" id="carSearch" placeholder="make, model, or year">
             </div>
-            <!--come back to this when you're brain is working better-->
-            @*<div class="form-group">
-                <label for="Price">Min Price</label>
-                @Html.DropDownList("min$", Model.Select(decimal s => s.SalePrice.ToString().OrderByDescending);
-            </div>*@
-            
             <div class="form-group">
                 <label for="Price">Min Price</label>
                 @Html.DropDownList("min$", new SelectList(Model.SalesRange, Model.SalesRange.Min(p => decimal.Parse(p.Remove(0,1))).ToString("c")), new { @class = "form-control", id="minPrice" })
@@ -35,11 +34,12 @@
                 <label for="SalePrice">Max Year</label>
                 @Html.DropDownList("max$", new SelectList(Model.YearRange, Model.YearRange.Max()), new { @class = "form-control", id = "maxYear" })
             </div>
-            <button id="btnSearch" class="btn btn-default">Search</button>
+            <button id="btnSearch" class="btn btn-primary">Search</button>
         </form>
     </div>
 </div>
 <hr />
+
 <div id="yearMakeAndModel"></div>
 
 
@@ -70,9 +70,9 @@
 
                     $.each(results, function (index, vehicle) {
                         
-                        var testHtml = `<div class="row">
+                        var Html = `<div class="row">
                                             <div class ="col-md-3">
-                                                <strong>${vehicle.Year} ${vehicle.Make} ${vehicle.Model}</strong>
+                                                <strong>${vehicle.Year} ${vehicle.Make} ${vehicle.ModelName}</strong>
                                                 <img src="/Images/${vehicle.PictureFilePath}"/>
                                             </div>
                                             <dl class="dl-horizontal dl col-md-3">
@@ -97,7 +97,7 @@
                                                 </dt>
 
                                                 <dd>
-                                                    ${vehicle.Color}
+                                                    ${vehicle.ExtColor} <p class="text-danger">"vehicle.ExtColor"</p>
                                                 </dd>
 
                                             </dl>
@@ -107,7 +107,7 @@
                                                 </dt>
 
                                                 <dd>
-                                                    ${vehicle.Color}
+                                                    ${vehicle.Color} <p class ="text-danger">"vehicle.Color"</p>
                                                 </dd>
 
                                                 <dt>
@@ -142,12 +142,19 @@
                                                 <dd>
                                                     ${vehicle.MSRP}
                                                 </dd>
-                                                <dd>
-                                                <a class ="btn btn-info" href="Details/${vehicle.VehicleId}" style="text-align:center;">details</a>
-                                                </dd>
+                                                <dt>
+                                                <a class ="btn btn-sm" href="Details/${vehicle.VehicleId}" style="text-align:center;">details</a>
+                                                </dt>
+                                               @if (User.Identity.IsAuthenticated)
+                                                {
+                                                   <dd>
+                                                    <a class ="btn btn-sm" href="Edit/${vehicle.VehicleId}" style="text-align:center;">edit</a>
+                                                   </dd>
+                                                }
+                                               
                                             </dl>
                                         </div>`
-                        $('#yearMakeAndModel').append(testHtml.toString());
+                        $('#yearMakeAndModel').append(Html.toString());
                     });
 
                 },

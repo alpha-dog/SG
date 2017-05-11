@@ -36,6 +36,7 @@ namespace GuildCars.Controllers
         }
 
         // POST: api/Vehicle
+        [Authorize]
         [Route("Vehicle")]
         [HttpPost]
         public void Add([FromBody]Vehicle vehicle)
@@ -44,29 +45,23 @@ namespace GuildCars.Controllers
         }
 
         // PUT: api/Vehicle/5
+        [Authorize]
         [Route("Vehicle/{id}")]
         [HttpPut]
         [AcceptVerbs("PUT")]
         public void Edit([FromBody]Vehicle vehicle)
         {
-            //vehicle = _vehicleRepo.GetVehicle(vehicle.VehicleId);
             _vehicleRepo.EditVehicle(vehicle);   
         }
 
         // DELETE: api/Vehicle/5
+        [Authorize]
         [Route("Vehicle/{id}")]
         [HttpDelete]
         public void Delete(int id)
         {
             _vehicleRepo.DeleteVehicle(id);
         }
-
-        //// GET: api/Vehicle/string submitted by user
-        //[Route("Vehicle/{searchVal}")]
-        //public IEnumerable<Vehicle> Search(string searchVal)
-        //{
-        //    return _vehicleRepo.SearchVehicles(searchVal);
-        //}
 
         [Route("Vehicle/search")]
         [AcceptVerbs("GET")]

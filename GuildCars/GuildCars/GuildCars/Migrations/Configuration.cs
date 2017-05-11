@@ -1,5 +1,8 @@
 namespace GuildCars.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +17,28 @@ namespace GuildCars.Migrations
 
         protected override void Seed(GuildCars.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            // Load the user and role managers with our custom models
+            var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //var roleMgr = new RoleManager<AppRole>(new RoleStore<AppRole>(context));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            // have we loaded roles already?
+            //if (roleMgr.RoleExists("admin"))
+               // return;
+
+            // create the admin role
+           // roleMgr.Create(new AppRole() { Name = "admin" });
+
+            // create the default user
+            var user = new ApplicationUser()
+            {
+                UserName = "admin"
+            };
+
+            // create the user with the manager class
+            userMgr.Create(user, "testing123");
+
+            // add the user to the admin role
+            userMgr.AddToRole(user.Id, "admin");
         }
     }
 }

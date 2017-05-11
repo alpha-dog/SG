@@ -296,7 +296,23 @@ join Color as IntColor
 	on Vehicle.InteriorId = IntColor.ColorId
 end
 
-go 
+if exists(select * from information_schema.routines
+	where routine_name = 'GetAllModels')
+	drop proc GetAllModels
+go
+
+create proc GetAllModels as
+begin
+	select Model.ModelId, 
+	Model.ModelName,
+	Model.MakeId,
+	Make.Make
+
+from Model		 
+
+join Make
+	on Model.MakeId = Make.MakeId
+end
 --if exists(select * from INFORMATION_SCHEMA.ROUTINES
 --	where ROUTINE_NAME = 'VehicleSearch')
 --		drop proc VehicleSearch

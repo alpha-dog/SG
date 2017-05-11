@@ -18,13 +18,18 @@ namespace GuildCars.Models
         public int SelectedMakeId { get; set; }
         public SelectList Models { get; set; }
         public int SelectedModelId { get; set; }
-        public IEnumerable<SelectListItem> Model { get; set; }
-        public IEnumerable<SelectListItem> Type { get; set; }
-        public IEnumerable<SelectListItem> BodyStyle { get; set; }
-        public IEnumerable<SelectListItem> Transmission { get; set; }
-        public IEnumerable<SelectListItem> Color { get; set; }
-        public IEnumerable<SelectListItem> Interior { get; set; }
-        public IEnumerable<SelectListItem> JoinedVehicle { get; set; }
+        public SelectList Types { get; set; }
+        public int SelectedTypeId { get; set; }
+        public SelectList BodyStyles { get; set; }
+        public int SelectedBodyStyleId { get; set; }
+        public SelectList Transmissions { get; set; }
+        public int SelectedTransmissionId { get; set; }
+        public SelectList Colors { get; set; }
+        public int SelectedColorId { get; set; }
+        public SelectList Interiors { get; set; }
+        public int SelectedInteriorId { get; set; }
+        public SelectList JoinedVehicle { get; set; }
+        public bool IsFeature { get; set; }
         public Vehicle Vehicle { get; set; }
     }
 }

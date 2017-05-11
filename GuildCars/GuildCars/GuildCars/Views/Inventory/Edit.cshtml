@@ -1,0 +1,212 @@
+﻿@model GuildCars.Models.InventoryAddViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Inventory"))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <form id="editForm">
+            @Html.HiddenFor(m => m.Vehicle.VehicleId, new { @id = "vehicleId"})
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="make">Make</label>
+                    @Html.DropDownListFor(m => m.Vehicle.MakeId, Model.Makes, new { @class = "form-control", @id = "make" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="model">Model</label>
+                    @Html.DropDownListFor(m => m.Vehicle.ModelId, Model.Models, new { @class = "form-control", @id = "model" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="type">Type</label>
+                    @Html.DropDownListFor(m => m.Vehicle.TypeId, Model.Types, new { @class = "form-control", @id = "type" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="bodystyle">Body Style</label>
+                    @Html.DropDownListFor(m => m.Vehicle.BodyStyleId, Model.BodyStyles, new { @class = "form-control", @id = "bodystyle" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="year">Year</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", id = "year"})
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="transmission">Transmission</label>
+                    @Html.DropDownListFor(m => m.SelectedTransmissionId, Model.Transmissions, new { @class = "form-control", @id = "transmission" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="color">Color</label>
+                    @Html.DropDownListFor(m => m.SelectedColorId, Model.Colors, new { @class = "form-control", @id = "color" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="interior">Interior</label>
+                    @Html.TextBoxFor(m => m.Vehicle.InteriorId, new { @class = "form-control", id = "interior" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="mileage">Mileage</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Mileage, new { @class = "form-control", id = "mileage" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="VIN">VIN #</label>
+                    @Html.TextBoxFor(m => m.Vehicle.VIN, new { @class = "form-control", id = "VIN" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="MSRP">MSRP</label>
+                    @Html.TextBoxFor(m => m.Vehicle.MSRP, new { @class = "form-control", id = "MSRP" })
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="saleprice">Sale Price</label>
+                    @Html.TextBoxFor(m => m.Vehicle.SalePrice, new { @class = "form-control", id = "saleprice" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="description">Description</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Description, new { @class = "form-control", id = "description" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="picture">Picture File Path</label>
+                    @Html.TextBoxFor(m => m.Vehicle.PictureFilePath, new { @class = "form-control", id = "picture" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.CheckBoxFor(m => m.Vehicle.IsFeature, new { @id = "feature" })
+                <label>Mark as Featured</label>
+            </div>
+
+            <a id="save" class="btn btn-primary">Save</a>
+            <a id="cancel" class="btn btn-default" href="Index2">Cancel</a>
+            <a id="delete" class="btn btn-danger">Delete</a>
+        </form>
+    </div>
+    @*<div class="container">
+        <form class="form-horizontal">
+            <div class="row">
+
+
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.VehicleId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MakeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MakeId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MakeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ModelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ModelId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ModelId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>*@
+    
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index2")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+        $(document).ready(function () {
+            $("#save").click(function () {
+                search();
+                return false;
+            });
+            $('#delete').click(function () {
+                destroy();
+                return false;
+            });
+        });
+
+        function search() {
+            var params = 'VehicleId=' + $('#vehicleId').val();
+            params += `&MakeId=${$('#make').val()}`;
+            params += `&ModelId=${$('#model').val()}`;
+            params += `&TypeId=${$('#type').val()}`;
+            params += `&BodyStyleId=${$('#bodystyle').val()}`;
+            params += `&Year=${$('#year').val()}`;
+            params += `&TransmissionId=${$('#transmission').val()}`;
+            params += `&ColorId=${$('#color').val()}`;
+            params += `&InteriorId=${$('#interior').val()}`;
+            params += `&maxMileageYear=${$('#mileage').val()}`;
+            params += `&VIN=${$('#VIN').val()}`;
+            params += `&MSRP=${$('#MSRP').val()}`;
+            params += `&SalePrice=${$('#saleprice').val()}`;
+            params += `&Description=${$('#description').val()}`;
+            params += `&PictureFilePath=${$('#picture').val()}`;
+            params += `&IsFeature=${$('#feature').val()}`;
+
+
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:50929/Vehicle/' + $('#vehicleId').val(),
+                data: params,
+                success: function () {
+                    alert('seems to have worked')
+                    //$('#editForm').each(function () {
+                    //    this.reset();
+                    //});
+                },
+                error: function () {
+                    alert('it didnt work')
+                }
+            });
+        }
+        function destroy() {
+            var vehicleId = $('#vehicleId').val();
+
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:50929/Vehicle/' + $('#vehicleId').val(),
+                data: vehicleId,
+                success: function () {
+                    alert('KAPLOW')
+                },
+                error: function () {
+                    alert('that didnt work')
+                }
+            });
+        }
+</script>
+}
+}
